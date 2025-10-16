@@ -38,12 +38,12 @@ const Home = () => {
       >
         <div className="absolute inset-0 bg-black/20" />
         <h1 
-          className="text-[12rem] md:text-[18rem] font-bold leading-none text-transparent-bg z-10"
+          className="text-[10rem] md:text-[16rem] font-serif font-bold leading-none text-transparent-bg z-10"
           style={{ backgroundImage: `url(${heroImage})` }}
         >
           ko-sa.
         </h1>
-        <p className="text-white text-2xl md:text-3xl tracking-[0.3em] uppercase z-10 mt-8">
+        <p className="text-white text-2xl md:text-3xl font-sans tracking-[0.3em] uppercase z-10 mt-8">
           Breathe and Reconnect
         </p>
       </section>
@@ -54,11 +54,11 @@ const Home = () => {
         className="py-32 px-4 scroll-reveal"
       >
         <div className="container mx-auto max-w-4xl text-center">
-          <p className="text-sm tracking-[0.2em] uppercase text-muted-foreground mb-4">Welcome</p>
-          <h2 className="text-5xl md:text-6xl font-light mb-6 text-foreground">
+          <p className="text-sm font-sans tracking-[0.2em] uppercase text-muted-foreground mb-4">Welcome</p>
+          <h2 className="text-5xl md:text-6xl font-serif font-light mb-6 text-foreground">
             Luxury in the Wilderness
           </h2>
-          <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl mx-auto">
+          <p className="text-lg font-sans text-muted-foreground leading-relaxed max-w-3xl mx-auto">
             Nestled on the pristine shores of Elmina, KO-SA Beach Resort offers an
             unparalleled escape from the everyday. Immerse yourself in luxury, embrace
             the rhythm of the ocean, and reconnect with what truly matters.

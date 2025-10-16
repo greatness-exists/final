@@ -95,7 +95,7 @@ const Activities = () => {
 
       {/* Wellness Section with Fixed Background */}
       <section
-        ref={(el) => (revealRefs.current[1] = el)}
+        ref={(el) => { revealRefs.current[1] = el; }}
         className="relative h-screen flex items-center justify-center bg-fixed-section scroll-reveal"
         style={{ backgroundImage: `url(${poolImage})` }}
       >
