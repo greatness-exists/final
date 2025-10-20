@@ -1,21 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "./ui/button";
 import logo from "@/assets/logo.png";
 
 const Navbar = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   const navLinks = [
     { to: "/", label: "Home" },
@@ -26,66 +17,69 @@ const Navbar = () => {
   ];
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-background/95 backdrop-blur-md shadow-md" : "bg-transparent"
-      }`}
-    >
-      <div className="container mx-auto px-4">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm border-b border-border">
+      <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-20">
-          <Link to="/" className="flex items-center">
-            <img src={logo} alt="KO-SA Beach Resort" className="h-12 w-auto" />
+          {/* Logo */}
+          <Link to="/" className="flex items-center hover:opacity-80 transition-opacity">
+            <img src={logo} alt="KO-SA Beach Resort" className="h-14 w-auto" />
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center gap-3">
             {navLinks.map((link) => (
               <Link
                 key={link.to}
                 to={link.to}
-                className={`text-sm font-medium transition-colors hover:text-primary ${
+                className={`relative px-3 py-2 text-sm font-medium transition-colors ${
                   location.pathname === link.to
                     ? "text-primary"
-                    : "text-foreground/80"
+                    : "text-foreground hover:text-primary"
                 }`}
               >
                 {link.label}
+                {location.pathname === link.to && (
+                  <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary rounded-full" />
+                )}
               </Link>
             ))}
-            <Button size="sm" className="ml-4">
+            <Button size="default" className="ml-2 bg-primary hover:bg-primary/90 text-white font-semibold px-5 shadow-lg hover:shadow-xl transition-all">
               Book Now
             </Button>
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-foreground"
+            className="lg:hidden text-foreground hover:text-primary transition-colors p-2"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle menu"
           >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
         </div>
 
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
-          <div className="md:hidden pb-6 animate-fade-in">
-            {navLinks.map((link) => (
-              <Link
-                key={link.to}
-                to={link.to}
-                className={`block py-3 text-sm font-medium transition-colors hover:text-primary ${
-                  location.pathname === link.to
-                    ? "text-primary"
-                    : "text-foreground/80"
-                }`}
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {link.label}
-              </Link>
-            ))}
-            <Button size="sm" className="mt-4 w-full">
-              Book Now
-            </Button>
+          <div className="lg:hidden pb-6 pt-2 border-t border-border animate-fade-in">
+            <div className="flex flex-col space-y-1">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  className={`py-3 px-4 text-base font-medium rounded-lg transition-colors ${
+                    location.pathname === link.to
+                      ? "text-primary bg-primary/10"
+                      : "text-foreground hover:text-primary hover:bg-muted"
+                  }`}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              ))}
+              <Button size="lg" className="mt-4 w-full bg-primary hover:bg-primary/90 text-white font-semibold shadow-lg">
+                Book Now
+              </Button>
+            </div>
           </div>
         )}
       </div>

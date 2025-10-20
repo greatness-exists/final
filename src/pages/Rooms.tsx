@@ -5,24 +5,57 @@ import roomImage from "@/assets/room-ocean-view.jpg";
 const rooms = [
   {
     id: 1,
-    name: "Ocean View Suite",
-    description: "Spacious suite with panoramic ocean views, king-size bed, and private balcony.",
-    price: "$250",
-    amenities: ["Ocean View", "King Bed", "Private Balcony", "Mini Bar"],
+    name: "Deluxe Double Room with Sea View",
+    description: "Luxurious double room featuring stunning panoramic views of the Atlantic Ocean.",
+    amenities: ["Sea View", "Double Bed", "Private Bathroom", "Air Conditioning", "WiFi"],
   },
   {
     id: 2,
-    name: "Deluxe Beach Room",
-    description: "Modern comfort with direct beach access and contemporary African decor.",
-    price: "$180",
-    amenities: ["Beach Access", "Queen Bed", "Air Conditioning", "WiFi"],
+    name: "Luxury Double Room with Sea View",
+    description: "Premium comfort with breathtaking ocean vistas and elegant furnishings.",
+    amenities: ["Sea View", "Double Bed", "Private Bathroom", "Mini Bar", "Balcony"],
   },
   {
     id: 3,
-    name: "Family Villa",
-    description: "Perfect for families with two bedrooms, living area, and ocean-facing terrace.",
-    price: "$400",
-    amenities: ["2 Bedrooms", "Living Room", "Kitchen", "Ocean View"],
+    name: "Family Room with Private Bathroom",
+    description: "Spacious accommodation perfect for families, with comfortable sleeping arrangements.",
+    amenities: ["Private Bathroom", "Multiple Beds", "Air Conditioning", "WiFi", "Extra Space"],
+  },
+  {
+    id: 4,
+    name: "Double Room with Garden View",
+    description: "Peaceful retreat overlooking our lush tropical gardens and resort grounds.",
+    amenities: ["Garden View", "Double Bed", "Private Bathroom", "Air Conditioning", "WiFi"],
+  },
+  {
+    id: 5,
+    name: "Triple Room with Private Bathroom",
+    description: "Comfortable room designed for three guests with modern amenities.",
+    amenities: ["Private Bathroom", "Three Beds", "Air Conditioning", "WiFi", "Spacious"],
+  },
+  {
+    id: 6,
+    name: "Deluxe Twin Room with Sea View",
+    description: "Elegant twin-bedded room with spectacular ocean views and premium comfort.",
+    amenities: ["Sea View", "Twin Beds", "Private Bathroom", "Balcony", "WiFi"],
+  },
+  {
+    id: 7,
+    name: "Twin Room with Garden View",
+    description: "Serene twin room overlooking the resort's beautiful tropical gardens.",
+    amenities: ["Garden View", "Twin Beds", "Private Bathroom", "Air Conditioning", "WiFi"],
+  },
+  {
+    id: 8,
+    name: "Standard Twin Room with Shared Bathroom",
+    description: "Comfortable and affordable twin room with access to shared bathroom facilities.",
+    amenities: ["Twin Beds", "Shared Bathroom", "Air Conditioning", "WiFi", "Value Option"],
+  },
+  {
+    id: 9,
+    name: "Standard Double Room with Shared Bathroom",
+    description: "Cozy double room offering great value with shared bathroom facilities.",
+    amenities: ["Double Bed", "Shared Bathroom", "Air Conditioning", "WiFi", "Budget Friendly"],
   },
 ];
 
@@ -44,6 +77,14 @@ const Rooms = () => {
       {/* Rooms Grid */}
       <section className="py-20 px-4">
         <div className="container mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold mb-4 text-foreground">Accommodation Options</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Choose from our range of comfortable rooms, each designed to make your stay memorable. 
+              From stunning sea views to peaceful garden vistas.
+            </p>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {rooms.map((room) => (
               <Card key={room.id} className="overflow-hidden hover-scale transition-all">
@@ -65,13 +106,7 @@ const Rooms = () => {
                       </span>
                     ))}
                   </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-2xl font-bold text-primary">
-                      {room.price}
-                      <span className="text-sm text-muted-foreground">/night</span>
-                    </span>
-                    <Button>Book Now</Button>
-                  </div>
+                  <Button className="w-full">Book Now</Button>
                 </CardContent>
               </Card>
             ))}
