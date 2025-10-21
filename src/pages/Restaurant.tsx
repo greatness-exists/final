@@ -342,6 +342,7 @@ const Restaurant = () => {
   const koOkiCocktails = [
     {
       title: "KO-OKI BAR COCKTAILS",
+      image : "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Drinks2.JPG",
       dishes: [
         { name: "Malibu Beach", description: "Malibu, soda, pineapple juice" },
         { name: "Red Dream", description: "Gin, lime cordial, sugar, bissap" },

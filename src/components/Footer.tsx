@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { Mail, Phone, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
+import { Mail, Phone, MapPin, Facebook, Instagram } from "lucide-react";
+import { FaTiktok } from "react-icons/fa";
 
 const Footer = () => {
   return (
@@ -44,15 +45,15 @@ const Footer = () => {
             <ul className="space-y-2">
               <li className="flex items-center text-muted-foreground text-sm">
                 <MapPin size={16} className="mr-2 text-primary" />
-                Elmina Beach, Ghana
+                Beach Road No.1, Ampenyi, Elmina, Ghana
               </li>
               <li className="flex items-center text-muted-foreground text-sm">
                 <Phone size={16} className="mr-2 text-primary" />
-                +233 XX XXX XXXX
+                +233 24 437 5432
               </li>
               <li className="flex items-center text-muted-foreground text-sm">
                 <Mail size={16} className="mr-2 text-primary" />
-                info@kosaresort.com
+                info@ko-sa.com
               </li>
             </ul>
           </div>
@@ -60,15 +61,20 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold mb-4 text-foreground">Follow Us</h4>
             <div className="flex space-x-4">
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+              <a href="https://www.facebook.com/share/1BByAxnkQg/?mibextid=wwXIfr" className="text-muted-foreground hover:text-primary transition-colors">
                 <Facebook size={20} />
               </a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+              <a href="https://www.instagram.com/kosabeachresort?igsh=MXQyMWRiMWYyc2Z4dg==" className="text-muted-foreground hover:text-primary transition-colors">
                 <Instagram size={20} />
               </a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
-                <Twitter size={20} />
-              </a>
+              <a
+              href="https://www.tiktok.com/@kosa.beach.resort?_t=ZM-90iCtuqxjbw&_r=1"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-primary transition-colors"
+              >
+    <FaTiktok size={20} />
+  </a>
             </div>
           </div>
         </div>

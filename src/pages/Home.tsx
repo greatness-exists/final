@@ -10,6 +10,7 @@ const heroImage = "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/pu
 
 const Home = () => {
   const revealRefs = useRef<(HTMLElement | null)[]>([]);
+  const bookingUrl = "https://us2.cloudbeds.com/reservation/65CAqa";
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -65,7 +66,7 @@ const Home = () => {
             the rhythm of the ocean, and reconnect with what truly matters.
           </p>
           <Button variant="outline" size="lg" className="mt-8 border-2 hover:bg-primary hover:text-primary-foreground">
-            <Link to="/about">Learn More</Link>
+            <Link to="/contact">Learn More</Link>
           </Button>
         </div>
       </section>
@@ -84,9 +85,13 @@ const Home = () => {
           <p className="text-lg mb-8 max-w-2xl mx-auto drop-shadow">
             Book your stay at KO-SA and experience the golden shores of Elmina.
           </p>
-          <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-white">
-            <Link to="/rooms">Book Now</Link>
-          </Button>
+          <button
+  className="bg-white text-black hover:bg-white/90 font-semibold py-2 px-4 rounded"
+  onClick={() => window.open(bookingUrl, '_blank')}
+>
+  Book Now
+</button>
+
         </div>
       </section>
 
@@ -187,9 +192,12 @@ const Home = () => {
           <p className="text-xl mb-12 max-w-2xl mx-auto text-muted-foreground">
             Book your stay at KO-SA Beach Resort and discover your slice of paradise.
           </p>
-          <Button size="lg" className="text-lg px-12 bg-primary hover:bg-primary/90">
-            <Link to="/contact">Book Your Stay</Link>
-          </Button>
+          <button
+  className="bg-white text-black hover:bg-white/90 font-semibold py-2 px-4 rounded"
+  onClick={() => window.open(bookingUrl, '_blank')}
+>
+  Book Now
+</button>
         </div>
       </section>
     </div>

@@ -14,6 +14,7 @@ const Navbar = () => {
     { to: "/restaurant", label: "Restaurant" },
     { to: "/activities", label: "Activities" },
     { to: "/contact", label: "Contact" },
+    {to:"https://us2.cloudbeds.com/reservation/65CAqa", label : "Book Now" }
   ];
 
   return (
@@ -43,9 +44,7 @@ const Navbar = () => {
                 )}
               </Link>
             ))}
-            <Button size="default" className="ml-2 bg-primary hover:bg-primary/90 text-white font-semibold px-5 shadow-lg hover:shadow-xl transition-all">
-              Book Now
-            </Button>
+            
           </div>
 
           {/* Mobile Menu Button */}
@@ -76,9 +75,6 @@ const Navbar = () => {
                   {link.label}
                 </Link>
               ))}
-              <Button size="lg" className="mt-4 w-full bg-primary hover:bg-primary/90 text-white font-semibold shadow-lg">
-                Book Now
-              </Button>
             </div>
           </div>
         )}

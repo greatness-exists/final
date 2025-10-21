@@ -54,9 +54,10 @@ const Contact = () => {
                   <div>
                     <h3 className="font-semibold mb-1 text-foreground">Address</h3>
                     <p className="text-muted-foreground">
-                      Elmina Beach Road<br />
-                      Elmina, Central Region<br />
-                      Ghana
+                                      Beach Road No.1<br />
+                                      Ampenyi<br />
+                                      Elmina, Central Region<br />
+                                      Ghana                   
                     </p>
                   </div>
                 </CardContent>
@@ -67,8 +68,7 @@ const Contact = () => {
                   <Phone className="text-primary mt-1" size={24} />
                   <div>
                     <h3 className="font-semibold mb-1 text-foreground">Phone</h3>
-                    <p className="text-muted-foreground">+233 XX XXX XXXX</p>
-                    <p className="text-muted-foreground">+233 XX XXX XXXX</p>
+                    <p className="text-muted-foreground">+233 24 437 5432</p>
                   </div>
                 </CardContent>
               </Card>
@@ -78,8 +78,7 @@ const Contact = () => {
                   <Mail className="text-primary mt-1" size={24} />
                   <div>
                     <h3 className="font-semibold mb-1 text-foreground">Email</h3>
-                    <p className="text-muted-foreground">info@kosaresort.com</p>
-                    <p className="text-muted-foreground">reservations@kosaresort.com</p>
+                    <p className="text-muted-foreground">info@ko-sa.com</p>
                   </div>
                 </CardContent>
               </Card>
