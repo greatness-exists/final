@@ -1,16 +1,29 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { useEffect, useRef } from "react";
-import roomImage from "@/assets/room-ocean-view.jpg";
-import restaurantImage from "@/assets/restaurant.jpg";
-import yogaImage from "@/assets/yoga-beach.jpg";
+import { useEffect, useRef, useState } from "react";
 import poolImage from "@/assets/pool.jpg";
 
 const heroImage = "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/ILoveKOSA-1760668254089.JPG";
 
+const roomImages = [
+  "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Room3.JPG",
+  "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Room2.JPG",
+  "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Room1.JPG",
+  "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/772A2074.JPG"
+];
+const restaurantImage = "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Food5.JPG";
+
+const activitiesImages = [
+  "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/772A2245.JPG",
+  "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/772A2174.JPG",
+  "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/772A2130.JPG"
+];
+
 const Home = () => {
   const revealRefs = useRef<(HTMLElement | null)[]>([]);
   const bookingUrl = "https://us2.cloudbeds.com/reservation/65CAqa";
+  const [currentRoomImage, setCurrentRoomImage] = useState(0);
+  const [currentActivityImage, setCurrentActivityImage] = useState(0);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -29,6 +42,22 @@ const Home = () => {
     });
 
     return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentRoomImage((prev) => (prev + 1) % roomImages.length);
+    }, 5000); // Change image every 5 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentActivityImage((prev) => (prev + 1) % activitiesImages.length);
+    }, 4500); // Change image every 4.5 seconds (different timing)
+
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -74,10 +103,21 @@ const Home = () => {
       {/* Rooms Section with Fixed Background */}
       <section
                 ref={(el) => { revealRefs.current[1] = el; }}
-        className="relative h-screen flex flex-col items-center justify-center bg-fixed-section scroll-reveal"
-        style={{ backgroundImage: `url(${roomImage})` }}
+        className="relative h-screen flex flex-col items-center justify-center overflow-hidden scroll-reveal"
       >
-        <div className="absolute inset-0 bg-black/40" />
+        {/* Slideshow Background */}
+        {roomImages.map((image, index) => (
+          <div
+            key={image}
+            className="absolute inset-0 bg-fixed-section transition-opacity duration-1000"
+            style={{
+              backgroundImage: `url(${image})`,
+              opacity: currentRoomImage === index ? 1 : 0,
+              zIndex: currentRoomImage === index ? 1 : 0
+            }}
+          />
+        ))}
+        <div className="absolute inset-0 bg-black/40 z-[2]" />
         <div className="relative z-10 text-center text-white px-4">
           <p className="text-sm tracking-[0.2em] uppercase mb-4 font-semibold">Rooms</p>
           <h2 className="text-5xl md:text-7xl font-serif font-light mb-6 drop-shadow-lg">Stay With Us</h2>
@@ -129,17 +169,28 @@ const Home = () => {
       {/* Activities Section with Fixed Background */}
       <section
         ref={(el) => { revealRefs.current[3] = el; }}
-        className="relative h-screen flex flex-col items-center justify-center bg-fixed-section scroll-reveal"
-        style={{ backgroundImage: `url(${yogaImage})` }}
+        className="relative h-screen flex flex-col items-center justify-center overflow-hidden scroll-reveal"
       >
-        <div className="absolute inset-0 bg-black/40" />
+        {/* Slideshow Background with Slide Animation */}
+        {activitiesImages.map((image, index) => (
+          <div
+            key={image}
+            className="absolute inset-0 bg-fixed-section transition-transform duration-1000 ease-in-out"
+            style={{
+              backgroundImage: `url(${image})`,
+              transform: `translateX(${(index - currentActivityImage) * 100}%)`,
+              zIndex: currentActivityImage === index ? 1 : 0
+            }}
+          />
+        ))}
+        <div className="absolute inset-0 bg-black/40 z-[2]" />
         <div className="relative z-10 text-center text-white px-4">
           <p className="text-sm tracking-[0.2em] uppercase mb-4 font-semibold">Wellness</p>
           <h2 className="text-5xl md:text-7xl font-serif font-light mb-6 drop-shadow-lg">Activities</h2>
           <p className="text-lg mb-8 max-w-2xl mx-auto drop-shadow">
             Beach yoga, water sports, spa treatments, and cultural experiences.
           </p>
-          <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
+          <Button className="bg-white text-black hover:bg-white/90 font-semibold py-2 px-4 rounded">
             <Link to="/activities">See Activities</Link>
           </Button>
         </div>

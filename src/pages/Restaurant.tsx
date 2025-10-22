@@ -417,11 +417,11 @@ const Restaurant = () => {
           </h2>
           
           {category.image && (
-            <div className="relative h-64 rounded-lg overflow-hidden mb-6">
+            <div className="relative h-80 rounded-lg overflow-hidden mb-6 bg-muted/20">
               <img
                 src={category.image}
                 alt={category.title}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain"
               />
             </div>
           )}

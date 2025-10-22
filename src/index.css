@@ -5,6 +5,10 @@
 @theme {
   --font-family-serif: 'Cormorant Garamond', serif;
   --font-family-sans: 'Inter', sans-serif;
+   /* Fluid typography sizes */
+  --text-hero: clamp(3rem, 6vw, 6rem);
+  --text-subtitle: clamp(1rem, 2vw, 1.5rem);
+  --text-label: clamp(0.9rem, 1.5vw, 1.2rem);
   
   --background: hsl(45 35% 96%);
   --foreground: hsl(25 35% 15%);

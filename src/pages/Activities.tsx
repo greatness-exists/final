@@ -1,6 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { useEffect, useRef } from "react";
-import yogaImage from "@/assets/yoga-beach.jpg";
+import { useEffect, useRef, useState } from "react";
 import poolImage from "@/assets/pool.jpg";
 
 const activities = [
@@ -10,9 +9,9 @@ const activities = [
     icon: "🧘",
   },
   {
-    title: "Water Sports",
-    description: "Kayaking, paddleboarding, and jet skiing available",
-    icon: "🏄",
+    title: "Beach Games",
+    description: "Beach soccer, volleyball, and other fun beach sports",
+    icon: "⚽",
   },
   {
     title: "Spa & Wellness",
@@ -36,8 +35,16 @@ const activities = [
   },
 ];
 
+const wellnessImages = [
+  "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Environment/ENV.JPG",
+  "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Environment/ENV2.JPG",
+  "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Environment/ENV3.JPG",
+  "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Environment/ENV4.JPG",
+];
+
 const Activities = () => {
   const revealRefs = useRef<(HTMLElement | null)[]>([]);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -58,12 +65,21 @@ const Activities = () => {
     return () => observer.disconnect();
   }, []);
 
+  // Slideshow effect
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % wellnessImages.length);
+    }, 5000); // Change image every 5 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="min-h-screen pt-20">
       {/* Hero with Fixed Background */}
       <section
         className="relative h-screen flex items-center justify-center bg-fixed-section"
-        style={{ backgroundImage: `url(${yogaImage})` }}
+        style={{ backgroundImage: `url(https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/772A2174-fotor-2025102214251.jpg)` }}
       >
         <div className="absolute inset-0 bg-black/30" />
         <div className="relative z-10 text-center text-white px-4">
@@ -93,12 +109,26 @@ const Activities = () => {
         </div>
       </section>
 
-      {/* Wellness Section with Fixed Background */}
+      {/* Wellness Section with Slideshow Background */}
       <section
         ref={(el) => { revealRefs.current[1] = el; }}
-        className="relative h-screen flex items-center justify-center bg-fixed-section scroll-reveal"
-        style={{ backgroundImage: `url(${poolImage})` }}
+        className="relative h-screen flex items-center justify-center overflow-hidden scroll-reveal"
       >
+        {/* Slideshow Background */}
+        {wellnessImages.map((image, index) => (
+          <div
+            key={image}
+            className="absolute inset-0 transition-opacity duration-2000"
+            style={{
+              backgroundImage: `url(${image})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              opacity: currentImageIndex === index ? 1 : 0,
+              animation: currentImageIndex === index ? 'kenBurns 20s ease-out infinite' : 'none',
+            }}
+          />
+        ))}
+        
         <div className="absolute inset-0 bg-black/40" />
         <div className="relative z-10 max-w-3xl mx-auto text-center text-white px-4">
           <p className="text-sm tracking-[0.2em] uppercase mb-4">Experience</p>
@@ -127,6 +157,14 @@ const Activities = () => {
             </div>
           </div>
         </div>
+
+        <style>{`
+          @keyframes kenBurns {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+          }
+        `}</style>
       </section>
     </div>
   );
