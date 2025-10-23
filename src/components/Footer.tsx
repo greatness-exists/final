@@ -14,7 +14,7 @@ const Footer = () => {
             </p>
           </div>
 
-          <div>
+          <div className="hidden md:block">
             <h4 className="font-semibold mb-4 text-foreground">Quick Links</h4>
             <ul className="space-y-2">
               <li>

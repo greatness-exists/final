@@ -1,9 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
-import poolImage from "@/assets/pool.jpg";
 
 const heroImage = "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/ILoveKOSA-1760668254089.JPG";
+const heroVideo = "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/KOSA%20video.MOV";
 
 const roomImages = [
   "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Room3.JPG",
@@ -11,7 +11,6 @@ const roomImages = [
   "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Room1.JPG",
   "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/772A2074.JPG"
 ];
-const restaurantImage = "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Food5.JPG";
 
 const activitiesImages = [
   "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/772A2245.JPG",
@@ -47,7 +46,7 @@ const Home = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentRoomImage((prev) => (prev + 1) % roomImages.length);
-    }, 5000); // Change image every 5 seconds
+    }, 5000);
 
     return () => clearInterval(interval);
   }, []);
@@ -55,26 +54,42 @@ const Home = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentActivityImage((prev) => (prev + 1) % activitiesImages.length);
-    }, 4500); // Change image every 4.5 seconds (different timing)
+    }, 4500);
 
     return () => clearInterval(interval);
   }, []);
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section with I ❤ KOSA Beach Background */}
+      {/* Hero Section with Fixed Video Background */}
       <section
-        className="relative h-screen flex flex-col items-center justify-center bg-fixed-section"
-        style={{ backgroundImage: `url(${heroImage})` }}
+        className="relative h-screen flex flex-col items-center justify-center overflow-hidden"
       >
-        <div className="absolute inset-0 bg-black/30" />
+        {/* Video Background - Only in hero section */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          className="absolute inset-0 w-full h-full object-cover z-0"
+          onEnded={(e) => {
+            const video = e.currentTarget;
+            video.currentTime = 0;
+            video.play();
+          }}
+        >
+          <source src={heroVideo} type="video/quicktime" />
+          <source src={heroVideo} type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-black/30 z-[1]" />
         <h1 
-          className="text-[10rem] md:text-[16rem] font-serif font-bold leading-none text-transparent-bg z-10"
+          className="text-6xl sm:text-8xl md:text-[12rem] lg:text-[16rem] font-serif font-bold leading-none text-transparent-bg z-10 px-4 text-center relative"
           style={{ backgroundImage: `url(${heroImage})` }}
         >
           ko-sa.
         </h1>
-        <p className="text-white text-2xl md:text-3xl font-sans tracking-[0.3em] uppercase z-10 mt-8 drop-shadow-lg">
+        <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-sans tracking-[0.2em] md:tracking-[0.3em] uppercase z-10 mt-8 drop-shadow-lg px-4 text-center text-white relative">
           Breathe and Reconnect
         </p>
       </section>
@@ -82,7 +97,7 @@ const Home = () => {
       {/* About Section */}
       <section 
          ref={(el) => { revealRefs.current[0] = el; }}
-        className="py-32 px-4 scroll-reveal bg-gradient-to-b from-background to-muted"
+        className="py-32 px-4 scroll-reveal bg-gradient-to-b from-background to-muted relative z-20"
       >
         <div className="container mx-auto max-w-4xl text-center">
           <p className="text-sm font-sans tracking-[0.2em] uppercase text-primary mb-4 font-semibold">Welcome</p>
@@ -109,7 +124,7 @@ const Home = () => {
         {roomImages.map((image, index) => (
           <div
             key={image}
-            className="absolute inset-0 bg-fixed-section transition-opacity duration-1000"
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000"
             style={{
               backgroundImage: `url(${image})`,
               opacity: currentRoomImage === index ? 1 : 0,
@@ -144,7 +159,7 @@ const Home = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
             <div className="relative h-96 md:h-[600px] overflow-hidden rounded-lg shadow-2xl">
               <img
-                src={restaurantImage}
+                src={"https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Food5.JPG"}
                 alt="Restaurant"
                 className="w-full h-full object-cover"
               />
@@ -175,7 +190,7 @@ const Home = () => {
         {activitiesImages.map((image, index) => (
           <div
             key={image}
-            className="absolute inset-0 bg-fixed-section transition-transform duration-1000 ease-in-out"
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-1000 ease-in-out"
             style={{
               backgroundImage: `url(${image})`,
               transform: `translateX(${(index - currentActivityImage) * 100}%)`,
@@ -190,52 +205,15 @@ const Home = () => {
           <p className="text-lg mb-8 max-w-2xl mx-auto drop-shadow">
             Beach yoga, water sports, spa treatments, and cultural experiences.
           </p>
-          <Button className="bg-white text-black hover:bg-white/90 font-semibold py-2 px-4 rounded">
+          <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
             <Link to="/activities">See Activities</Link>
           </Button>
         </div>
       </section>
 
-      {/* Facilities Section */}
-      <section
-        ref={(el) => { revealRefs.current[4] = el; }}
-        className="py-32 px-4 scroll-reveal bg-gradient-to-b from-background to-muted"
-      >
-        <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-16">
-            <p className="text-sm tracking-[0.2em] uppercase text-primary mb-4 font-semibold">Facilities</p>
-            <h2 className="text-4xl md:text-5xl font-serif font-light text-foreground">
-              World-Class Amenities
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="relative h-96 overflow-hidden rounded-lg group shadow-xl">
-              <img
-                src={poolImage}
-                alt="Infinity Pool"
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-8">
-                <h3 className="text-white text-3xl font-serif font-light drop-shadow">Infinity Pool</h3>
-              </div>
-            </div>
-            <div className="relative h-96 overflow-hidden rounded-lg group shadow-xl">
-              <img
-                src={heroImage}
-                alt="Private Beach"
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-8">
-                <h3 className="text-white text-3xl font-serif font-light drop-shadow">Private Beach Access</h3>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* CTA Section */}
       <section
-        ref={(el) => { revealRefs.current[5] = el; }}
+        ref={(el) => { revealRefs.current[4] = el; }}
         className="py-32 px-4 scroll-reveal bg-gradient-to-b from-muted to-primary/10"
       >
         <div className="container mx-auto text-center">

@@ -1,6 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import restaurantImage from "@/assets/restaurant.jpg";
 
 const Restaurant = () => {
   // All menu data organized by section
@@ -83,7 +82,6 @@ const Restaurant = () => {
   const mainDishesMenu = [
     {
       title: "BIG SALADS",
-      image: "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Food4.JPG",
       dishes: [
         { name: "Mixed Salad", description: "Tomato, cucumber, olives, onion, lettuce and when available avocado with toast" },
         { name: "Chicken Salad", description: "With toast" }
@@ -99,7 +97,6 @@ const Restaurant = () => {
     },
     {
       title: "CHICKEN",
-      image: "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Food3.JPG",
       dishes: [
         { name: "Grilled or Fried Chicken" },
         { name: "Chicken Kebab", description: "2 pieces with peanut sauce" },
@@ -121,7 +118,6 @@ const Restaurant = () => {
     },
     {
       title: "PASTA",
-      image: "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Food5.JPG",
       dishes: [
         { name: "Noodle's or Spaghetti with Tomato Garlic Sauce" },
         { name: "Noodle's or Spaghetti with Vegetable-Olive-Oil-Garlic" },
@@ -157,7 +153,6 @@ const Restaurant = () => {
     },
     {
       title: "KO-SA SPECIALS",
-      image: "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Food1.JPG",
       dishes: [
         { name: "Grilled Lobster" },
         { name: "Grilled Prawns" },
@@ -168,7 +163,6 @@ const Restaurant = () => {
     },
     {
       title: "SEAFOOD",
-      image: "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Food2.JPG",
       dishes: [
         { name: "Grilled or Fried Snapper" },
         { name: "Grilled Fish Ko-Sa Style", description: "With sliced vegetables" },
@@ -297,7 +291,6 @@ const Restaurant = () => {
     },
     {
       title: "COCKTAILS",
-      image: "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Drinks1.JPG",
       dishes: [
         { name: "Gin Tonic", description: "2 shots" },
         { name: "Fresh Pineapple Juice with Gin", description: "2 shots" },
@@ -342,7 +335,6 @@ const Restaurant = () => {
   const koOkiCocktails = [
     {
       title: "KO-OKI BAR COCKTAILS",
-      image : "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Drinks2.JPG",
       dishes: [
         { name: "Malibu Beach", description: "Malibu, soda, pineapple juice" },
         { name: "Red Dream", description: "Gin, lime cordial, sugar, bissap" },
@@ -458,7 +450,7 @@ const Restaurant = () => {
       {/* Hero */}
       <section
         className="relative h-96 flex items-center justify-center bg-cover bg-center"
-        style={{ backgroundImage: `url(${restaurantImage})` }}
+        style={{ backgroundImage: `url(https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/772A2416.JPG)` }}
       >
         <div className="absolute inset-0 bg-black/50" />
         <div className="relative z-10 text-center text-white px-4">
@@ -472,31 +464,55 @@ const Restaurant = () => {
         <div className="container mx-auto max-w-6xl">
           <h2 className="text-4xl font-bold text-center mb-12">Dining Options</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card className="hover:shadow-xl transition-shadow">
-              <CardContent className="p-8 text-center">
-                <h3 className="text-2xl font-bold mb-3">Breakfast</h3>
-                <p className="text-lg font-semibold text-primary mb-4">7:00 AM - 11:00 AM</p>
-                <p className="text-muted-foreground">
+            <Card className="hover:shadow-xl transition-shadow relative overflow-hidden">
+              <div 
+                className="absolute inset-0 bg-cover bg-center"
+                style={{ 
+                  backgroundImage: `url(https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Food5.JPG)`,
+                  filter: 'blur(2px)'
+                }}
+              />
+              <div className="absolute inset-0 bg-black/40" />
+              <CardContent className="p-8 text-center relative z-10">
+                <h3 className="text-2xl font-bold mb-3 text-white">Breakfast</h3>
+                <p className="text-lg font-semibold text-white mb-4">7:00 AM - 11:00 AM</p>
+                <p className="text-white">
                   Continental and traditional Ghanaian breakfast options
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="hover:shadow-xl transition-shadow">
-              <CardContent className="p-8 text-center">
-                <h3 className="text-2xl font-bold mb-3">Lunch</h3>
-                <p className="text-lg font-semibold text-primary mb-4">12:00 PM - 4:00 PM</p>
-                <p className="text-muted-foreground">
+            <Card className="hover:shadow-xl transition-shadow relative overflow-hidden">
+              <div 
+                className="absolute inset-0 bg-cover bg-center"
+                style={{ 
+                  backgroundImage: `url(https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Food2.JPG)`,
+                  filter: 'blur(2px)'
+                }}
+              />
+              <div className="absolute inset-0 bg-black/40" />
+              <CardContent className="p-8 text-center relative z-10">
+                <h3 className="text-2xl font-bold mb-3 text-white">Lunch</h3>
+                <p className="text-lg font-semibold text-white mb-4">12:00 PM - 4:00 PM</p>
+                <p className="text-white">
                   Light bites, salads, and fresh seafood specialties
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="hover:shadow-xl transition-shadow">
-              <CardContent className="p-8 text-center">
-                <h3 className="text-2xl font-bold mb-3">Dinner</h3>
-                <p className="text-lg font-semibold text-primary mb-4">6:00 PM - 10:00 PM</p>
-                <p className="text-muted-foreground">
+            <Card className="hover:shadow-xl transition-shadow relative overflow-hidden">
+              <div 
+                className="absolute inset-0 bg-cover bg-center"
+                style={{ 
+                  backgroundImage: `url(https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Food1.JPG)`,
+                  filter: 'blur(2px)'
+                }}
+              />
+              <div className="absolute inset-0 bg-black/40" />
+              <CardContent className="p-8 text-center relative z-10">
+                <h3 className="text-2xl font-bold mb-3 text-white">Dinner</h3>
+                <p className="text-lg font-semibold text-white mb-4">6:00 PM - 10:00 PM</p>
+                <p className="text-white">
                   Fine dining with local and international cuisine
                 </p>
               </CardContent>
