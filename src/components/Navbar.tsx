@@ -9,20 +9,23 @@ const Navbar = () => {
 
   const navLinks = [
     { to: "/", label: "Home" },
+    { to: "/about", label: "About" },
     { to: "/rooms", label: "Rooms" },
-    { to: "/restaurant", label: "Restaurant" },
+    { to: "/dining", label: "Dining" },
     { to: "/activities", label: "Activities" },
+    { to: "/wellness", label: "Wellness" },
+    { to: "/gallery", label: "Gallery" },
     { to: "/contact", label: "Contact" },
     {to:"https://us2.cloudbeds.com/reservation/65CAqa", label : "Book Now" }
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm border-b border-border">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/20 backdrop-blur-lg shadow-sm border-b border-white/5">
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center hover:opacity-80 transition-opacity">
-            <img src={logo} alt="KO-SA Beach Resort" className="h-14 w-auto" />
+            <img src={logo} alt="KO-SA Beach Resort" className="h-14 w-auto drop-shadow-md" />
           </Link>
 
           {/* Desktop Navigation */}
@@ -31,16 +34,13 @@ const Navbar = () => {
               <Link
                 key={link.to}
                 to={link.to}
-                className={`relative px-3 py-2 text-sm font-medium transition-colors ${
+                className={`relative px-4 py-2 text-sm font-medium transition-all rounded-lg bg-white/90 backdrop-blur-sm shadow-sm hover:shadow-md ${
                   location.pathname === link.to
-                    ? "text-primary"
-                    : "text-foreground hover:text-primary"
+                    ? "text-primary border border-primary/20"
+                    : "text-foreground hover:text-primary border border-transparent hover:border-primary/10"
                 }`}
               >
                 {link.label}
-                {location.pathname === link.to && (
-                  <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary rounded-full" />
-                )}
               </Link>
             ))}
             
@@ -48,7 +48,7 @@ const Navbar = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className="lg:hidden text-foreground hover:text-primary transition-colors p-2"
+            className="lg:hidden text-foreground hover:text-primary transition-colors p-2 bg-white/90 backdrop-blur-sm rounded-lg shadow-sm"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -58,16 +58,16 @@ const Navbar = () => {
 
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden pb-6 pt-2 border-t border-border animate-fade-in">
-            <div className="flex flex-col space-y-1">
+          <div className="lg:hidden pb-6 pt-2 animate-fade-in">
+            <div className="flex flex-col space-y-2">
               {navLinks.map((link) => (
                 <Link
                   key={link.to}
                   to={link.to}
-                  className={`py-3 px-4 text-base font-medium rounded-lg transition-colors ${
+                  className={`py-3 px-4 text-base font-medium rounded-lg transition-all bg-white/90 backdrop-blur-sm shadow-sm ${
                     location.pathname === link.to
-                      ? "text-primary bg-primary/10"
-                      : "text-foreground hover:text-primary hover:bg-muted"
+                      ? "text-primary border border-primary/20"
+                      : "text-foreground hover:text-primary border border-transparent hover:border-primary/10"
                   }`}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >

@@ -2,11 +2,50 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Loader2 } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { contactFormSchema, type ContactFormData } from "@/lib/validation";
+import { useSafeAsync } from "@/hooks/useSafeAsync";
+import { toast } from "sonner";
 
 
 const heroImage = "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/ILoveKOSA-1760668254089.JPG";
+
 const Contact = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<ContactFormData>({
+    resolver: zodResolver(contactFormSchema),
+  });
+
+  const { loading, execute } = useSafeAsync();
+
+  const onSubmit = async (data: ContactFormData) => {
+    await execute(
+      async () => {
+        // Simulate form submission (replace with actual API call)
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        
+        // In production, integrate with your email service:
+        // await fetch('/api/contact', { method: 'POST', body: JSON.stringify(data) })
+        
+        console.log('Form submitted:', data);
+        return data;
+      },
+      {
+        errorMessage: 'Failed to send message. Please try again.',
+        onSuccess: () => {
+          toast.success('Message sent successfully! We\'ll get back to you soon.');
+          reset();
+        },
+      }
+    );
+  };
+
   return (
     <div className="min-h-screen pt-20">
       {/* Hero */}
@@ -22,26 +61,72 @@ const Contact = () => {
       </section>
 
       {/* Contact Section */}
-      <section className="py-20 px-4">
+      <section 
+        className="py-20 px-4 bg-gradient-to-b from-background to-muted"
+      >
         <div className="container mx-auto max-w-6xl">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             {/* Contact Form */}
             <div>
               <h2 className="text-3xl font-bold mb-6 text-foreground">Send Us a Message</h2>
-              <form className="space-y-4">
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 <div>
-                  <Input placeholder="Your Name" />
+                  <Input
+                    placeholder="Your Name"
+                    {...register("name")}
+                    aria-invalid={errors.name ? "true" : "false"}
+                    disabled={loading}
+                  />
+                  {errors.name && (
+                    <p className="text-sm text-destructive mt-1">{errors.name.message}</p>
+                  )}
                 </div>
                 <div>
-                  <Input type="email" placeholder="Email Address" />
+                  <Input
+                    type="email"
+                    placeholder="Email Address"
+                    {...register("email")}
+                    aria-invalid={errors.email ? "true" : "false"}
+                    disabled={loading}
+                  />
+                  {errors.email && (
+                    <p className="text-sm text-destructive mt-1">{errors.email.message}</p>
+                  )}
                 </div>
                 <div>
-                  <Input type="tel" placeholder="Phone Number" />
+                  <Input
+                    type="tel"
+                    placeholder="Phone Number (e.g., +233244375432)"
+                    {...register("phone")}
+                    aria-invalid={errors.phone ? "true" : "false"}
+                    disabled={loading}
+                  />
+                  {errors.phone && (
+                    <p className="text-sm text-destructive mt-1">{errors.phone.message}</p>
+                  )}
                 </div>
                 <div>
-                  <Textarea placeholder="Your Message" rows={6} />
+                  <Textarea
+                    placeholder="Your Message"
+                    rows={6}
+                    {...register("message")}
+                    aria-invalid={errors.message ? "true" : "false"}
+                    disabled={loading}
+                  />
+                  {errors.message && (
+                    <p className="text-sm text-destructive mt-1">{errors.message.message}</p>
+                  )}
                 </div>
-                <Button className="w-full">Send Message</Button>
+                <Button type="submit" className="w-full" disabled={loading}>
+                  {loading ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    'Send Message'
+                  )}
+                </Button>
               </form>
             </div>
 

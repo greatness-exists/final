@@ -454,13 +454,15 @@ const Restaurant = () => {
       >
         <div className="absolute inset-0 bg-black/50" />
         <div className="relative z-10 text-center text-white px-4">
-          <h1 className="text-5xl font-bold mb-4 animate-fade-in">Restaurant Menu</h1>
+          <h1 className="text-5xl font-bold mb-4 animate-fade-in">Taste the Coast</h1>
           <p className="text-xl animate-fade-in">Authentic flavors from our beachfront kitchen</p>
         </div>
       </section>
 
       {/* Dining Options */}
-      <section className="py-20 px-4 bg-muted/10">
+      <section 
+        className="py-20 px-4 bg-gradient-to-b from-background to-muted"
+      >
         <div className="container mx-auto max-w-6xl">
           <h2 className="text-4xl font-bold text-center mb-12">Dining Options</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -521,8 +523,22 @@ const Restaurant = () => {
         </div>
       </section>
 
+      {/* Fresh Preparation Notice */}
+      <section className="py-12 px-4 bg-muted/50">
+        <div className="container mx-auto max-w-4xl">
+          <div className="bg-primary/10 border-l-4 border-primary rounded-r-lg p-6 text-center">
+            <p className="text-lg text-foreground leading-relaxed">
+              Please be advised that all of our dishes are prepared fresh from scratch upon ordering. 
+              We appreciate your patience, as we believe the best meals are worth the wait.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Menu Tabs */}
-      <section className="py-20 px-4">
+      <section 
+        className="py-20 px-4 bg-gradient-to-b from-muted to-background"
+      >
         <div className="container mx-auto max-w-6xl">
           <Tabs defaultValue="breakfast" className="w-full">
             <TabsList className="w-full justify-start flex-wrap h-auto gap-2 bg-muted/30 p-2">

@@ -18,11 +18,24 @@ const activitiesImages = [
   "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/772A2130.JPG"
 ];
 
+const wellnessImages = [
+  "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/MassageAtTheBeach1.JPG",
+  "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/772A2101.JPG"
+];
+
+const galleryImages = [
+  "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/772A2074.JPG",
+  "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Environment/ENV6.JPG",
+  "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Food5.JPG",
+  "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Environment/ENV8.JPG"
+];
+
 const Home = () => {
   const revealRefs = useRef<(HTMLElement | null)[]>([]);
   const bookingUrl = "https://us2.cloudbeds.com/reservation/65CAqa";
   const [currentRoomImage, setCurrentRoomImage] = useState(0);
   const [currentActivityImage, setCurrentActivityImage] = useState(0);
+  const [currentWellnessImage, setCurrentWellnessImage] = useState(0);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -55,6 +68,14 @@ const Home = () => {
     const interval = setInterval(() => {
       setCurrentActivityImage((prev) => (prev + 1) % activitiesImages.length);
     }, 4500);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentWellnessImage((prev) => (prev + 1) % wellnessImages.length);
+    }, 4000);
 
     return () => clearInterval(interval);
   }, []);
@@ -102,15 +123,16 @@ const Home = () => {
         <div className="container mx-auto max-w-4xl text-center">
           <p className="text-sm font-sans tracking-[0.2em] uppercase text-primary mb-4 font-semibold">Welcome</p>
           <h2 className="text-5xl md:text-6xl font-serif font-light mb-6 text-foreground">
-            Luxury in Paradise
+            Green sanctuary by the beach
           </h2>
           <p className="text-lg font-sans text-muted-foreground leading-relaxed max-w-3xl mx-auto">
-            Nestled on the pristine shores of Elmina, KO-SA Beach Resort offers an
-            unparalleled escape from the everyday. Immerse yourself in luxury, embrace
-            the rhythm of the ocean, and reconnect with what truly matters.
+            Surrounded by lush tropical gardens and the pristine shores of Elmina, 
+            KO-SA Beach Resort is your eco-conscious retreat where nature and comfort 
+            harmoniously blend. Reconnect with the earth 
+            and find peace in our verdant beachside sanctuary.
           </p>
           <Button variant="outline" size="lg" className="mt-8 border-2 hover:bg-primary hover:text-primary-foreground">
-            <Link to="/contact">Learn More</Link>
+            <Link to="/about">Learn More</Link>
           </Button>
         </div>
       </section>
@@ -150,7 +172,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Restaurant Section */}
+      {/* Dining Section */}
       <section
                 ref={(el) => { revealRefs.current[2] = el; }}
         className="py-32 px-4 scroll-reveal bg-gradient-to-b from-muted to-background"
@@ -160,12 +182,12 @@ const Home = () => {
             <div className="relative h-96 md:h-[600px] overflow-hidden rounded-lg shadow-2xl">
               <img
                 src={"https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Food5.JPG"}
-                alt="Restaurant"
+                alt="Dining"
                 className="w-full h-full object-cover"
               />
             </div>
             <div className="text-center md:text-left">
-              <p className="text-sm tracking-[0.2em] uppercase text-primary mb-4 font-semibold">Restaurant</p>
+              <p className="text-sm tracking-[0.2em] uppercase text-primary mb-4 font-semibold">Dining</p>
               <h2 className="text-4xl md:text-5xl font-serif font-light mb-6 text-foreground">
                 Exquisite Dining
               </h2>
@@ -174,7 +196,7 @@ const Home = () => {
                 Fresh ingredients, ocean views, and unforgettable culinary experiences.
               </p>
               <Button variant="outline" size="lg" className="border-2 hover:bg-primary hover:text-primary-foreground">
-                <Link to="/restaurant">Explore Menu</Link>
+                <Link to="/dining">Explore Menu</Link>
               </Button>
             </div>
           </div>
@@ -200,20 +222,88 @@ const Home = () => {
         ))}
         <div className="absolute inset-0 bg-black/40 z-[2]" />
         <div className="relative z-10 text-center text-white px-4">
-          <p className="text-sm tracking-[0.2em] uppercase mb-4 font-semibold">Wellness</p>
-          <h2 className="text-5xl md:text-7xl font-serif font-light mb-6 drop-shadow-lg">Activities</h2>
+          <p className="text-sm tracking-[0.2em] uppercase mb-4 font-semibold">Activities</p>
+          <h2 className="text-5xl md:text-7xl font-serif font-light mb-6 drop-shadow-lg">Adventure Awaits</h2>
           <p className="text-lg mb-8 max-w-2xl mx-auto drop-shadow">
             Beach yoga, water sports, spa treatments, and cultural experiences.
           </p>
-          <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
+          <Button size="lg" className="bg-white text-black hover:bg-white/90 font-semibold py-2 px-4 rounded">
             <Link to="/activities">See Activities</Link>
+          </Button>
+        </div>
+      </section>
+
+      {/* Wellness Section */}
+      <section
+        ref={(el) => { revealRefs.current[5] = el; }}
+        className="py-32 px-4 scroll-reveal bg-gradient-to-b from-background to-muted"
+      >
+        <div className="container mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+            <div className="text-center md:text-left">
+              <p className="text-sm tracking-[0.2em] uppercase text-primary mb-4 font-semibold">Wellness</p>
+              <h2 className="text-4xl md:text-5xl font-serif font-light mb-6 text-foreground">
+                Rejuvenate Your Spirit
+              </h2>
+              <p className="text-lg text-muted-foreground leading-relaxed mb-8">
+                Experience holistic wellness with our yoga sessions, spa treatments, 
+                and mindfulness activities. Find balance and inner peace in our 
+                tranquil beachside sanctuary.
+              </p>
+              <Button variant="outline" size="lg" className="border-2 hover:bg-primary hover:text-primary-foreground">
+                <Link to="/wellness">Discover Wellness</Link>
+              </Button>
+            </div>
+            <div className="relative h-96 md:h-[600px] overflow-hidden rounded-lg shadow-2xl">
+              {wellnessImages.map((image, index) => (
+                <img
+                  key={image}
+                  src={image}
+                  alt="Wellness"
+                  className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000"
+                  style={{
+                    opacity: currentWellnessImage === index ? 1 : 0
+                  }}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Gallery Section */}
+      <section
+        ref={(el) => { revealRefs.current[6] = el; }}
+        className="py-32 px-4 scroll-reveal bg-gradient-to-b from-muted to-background"
+      >
+        <div className="container mx-auto text-center">
+          <p className="text-sm tracking-[0.2em] uppercase text-primary mb-4 font-semibold">Gallery</p>
+          <h2 className="text-4xl md:text-5xl font-serif font-light mb-6 text-foreground">
+            Moments at KO-SA
+          </h2>
+          <p className="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto">
+            Explore the beauty and serenity of our resort through these captured moments.
+          </p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-7xl mx-auto mb-8">
+            {galleryImages.map((image, index) => (
+              <div key={index} className="relative h-64 overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
+                <img
+                  src={image}
+                  alt={`Gallery ${index + 1}`}
+                  className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+                />
+              </div>
+            ))}
+          </div>
+          <Button variant="outline" size="lg" className="border-2 hover:bg-primary hover:text-primary-foreground">
+            <Link to="/gallery">View Full Gallery</Link>
           </Button>
         </div>
       </section>
 
       {/* CTA Section */}
       <section
-        ref={(el) => { revealRefs.current[4] = el; }}
+        ref={(el) => { revealRefs.current[7] = el; }}
         className="py-32 px-4 scroll-reveal bg-gradient-to-b from-muted to-primary/10"
       >
         <div className="container mx-auto text-center">
