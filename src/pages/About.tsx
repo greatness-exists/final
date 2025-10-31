@@ -136,6 +136,38 @@ export const About = () => {
         />
       </section>
 
+      {/* New Image Gallery Section */}
+      <section 
+        ref={(el) => { revealRefs.current[4] = el; }}
+        className="py-20 px-4 scroll-reveal bg-background"
+      >
+        <div className="container mx-auto max-w-6xl">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="relative h-80 md:h-96 overflow-hidden rounded-lg shadow-lg">
+              <img
+                src="https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Environment/ENV6.JPG"
+                alt="KOSA Beach Resort Environment"
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+            <div className="relative h-80 md:h-96 overflow-hidden rounded-lg shadow-lg">
+              <img
+                src="https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Environment/ENV10.JPG"
+                alt="KOSA Beach Resort Nature"
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+            <div className="relative h-80 md:h-96 overflow-hidden rounded-lg shadow-lg">
+              <img
+                src="https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Environment/ENV11.JPG"
+                alt="KOSA Beach Resort Atmosphere"
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Legacy Section */}
       <section 
         ref={(el) => { revealRefs.current[3] = el; }}
