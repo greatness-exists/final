@@ -169,6 +169,20 @@ export function handleApiError(error: unknown, customMessage?: string): void {
     message = 'Request timeout. Please try again.';
   } else if (error instanceof Error) {
     message = error.message;
+  } else if (typeof error === 'object' && error !== null) {
+    // Handle plain objects (like EmailJS errors)
+    const errorObj = error as any;
+    if (errorObj.text) {
+      message = errorObj.text;
+    } else if (errorObj.message) {
+      message = errorObj.message;
+    } else if (errorObj.status) {
+      message = `Error: ${errorObj.status}`;
+    } else {
+      message = customMessage || 'An unexpected error occurred';
+    }
+  } else if (typeof error === 'string') {
+    message = error;
   }
 
   toast.error(message);

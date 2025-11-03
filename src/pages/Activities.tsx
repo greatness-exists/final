@@ -215,15 +215,16 @@ const Activities = () => {
         ref={(el) => { revealRefs.current[1] = el; }}
         className="relative min-h-screen flex items-center justify-center overflow-hidden scroll-reveal py-20"
       >
-        {/* Slideshow Background */}
+        {/* Slideshow Background - Fixed for mobile */}
         {wellnessImages.map((image, index) => (
           <div
             key={image}
-            className="absolute inset-0 transition-opacity duration-2000"
+            className="absolute inset-0 bg-cover bg-center transition-opacity duration-2000"
             style={{
               backgroundImage: `url(${image})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
               opacity: currentImageIndex === index ? 1 : 0,
               animation: currentImageIndex === index ? 'kenBurns 20s ease-out infinite' : 'none',
             }}

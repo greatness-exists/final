@@ -8,7 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { contactFormSchema, type ContactFormData } from "@/lib/validation";
 import { useSafeAsync } from "@/hooks/useSafeAsync";
 import { toast } from "sonner";
-
+import emailjs from '@emailjs/browser';
 
 const heroImage = "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/ILoveKOSA-1760668254089.JPG";
 
@@ -27,13 +27,29 @@ const Contact = () => {
   const onSubmit = async (data: ContactFormData) => {
     await execute(
       async () => {
-        // Simulate form submission (replace with actual API call)
-        await new Promise(resolve => setTimeout(resolve, 1500));
+        // EmailJS integration
+        const templateParams = {
+          user_name: data.name,
+          user_email: data.email,
+          user_phone: data.phone,
+          message: data.message,
+        };
+
+        const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+        const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+        const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+
+        if (!publicKey || !serviceId || !templateId) {
+          throw new Error('EmailJS configuration is missing. Please set up your environment variables.');
+        }
+
+        await emailjs.send(
+          serviceId,
+          templateId,
+          templateParams,
+          publicKey
+        );
         
-        // In production, integrate with your email service:
-        // await fetch('/api/contact', { method: 'POST', body: JSON.stringify(data) })
-        
-        console.log('Form submitted:', data);
         return data;
       },
       {

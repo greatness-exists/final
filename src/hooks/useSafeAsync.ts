@@ -28,9 +28,28 @@ export function useSafeAsync<T = any>() {
         options?.onSuccess?.(result);
         return result;
       } catch (err) {
-        const error = err instanceof Error ? err : new Error(String(err));
+        // Handle EmailJS and other error objects properly
+        let error: Error;
+        
+        if (err instanceof Error) {
+          error = err;
+        } else if (typeof err === 'object' && err !== null) {
+          // Handle error objects (like EmailJS errors) without stringifying them
+          const errorObj = err as any;
+          const message = errorObj.text || errorObj.message || options?.errorMessage || 'An error occurred';
+          error = new Error(message);
+          // Preserve the original error object for detailed handling
+          (error as any).originalError = err;
+        } else {
+          error = new Error(String(err));
+        }
+        
         setError(error);
-        handleError(error, { message: options?.errorMessage });
+        
+        // Pass the original error object if it exists, otherwise pass the Error
+        const errorToHandle = (error as any).originalError || error;
+        handleError(errorToHandle, { message: options?.errorMessage });
+        
         options?.onError?.(error);
         return null;
       } finally {
