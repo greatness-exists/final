@@ -121,7 +121,7 @@ const Home = () => {
         className="py-32 px-4 scroll-reveal bg-gradient-to-b from-background to-muted relative z-20"
       >
         <div className="container mx-auto max-w-4xl text-center">
-          <p className="text-sm font-sans tracking-[0.2em] uppercase text-primary mb-4 font-semibold">Welcome</p>
+          <p className="text-sm font-sans tracking-[0.2em] uppercase text-primary mb-4 font-semibold">Welcome to the</p>
           <h2 className="text-5xl md:text-6xl font-serif font-light mb-6 text-foreground">
             Green sanctuary by the beach
           </h2>

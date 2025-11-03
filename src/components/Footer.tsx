@@ -7,6 +7,10 @@ const Footer = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleLinkClick = () => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  };
+
   return (
     <footer className="bg-[#f5f3ed] relative overflow-hidden">
       {/* Large transparent text background */}
@@ -88,17 +92,17 @@ const Footer = () => {
             ©{new Date().getFullYear()} MADE WITH <span className="text-red-500">♥</span> BY KO-SA BEACH RESORT
           </p>
           
-          <div className="flex gap-6 order-1 md:order-2">
-            <Link to="/rooms" className="text-sm text-gray-600 hover:text-primary transition-colors uppercase tracking-wide">
+          <div className="flex gap-6 order-1 md:order-2 relative z-20">
+            <Link to="/rooms" onClick={handleLinkClick} className="text-sm text-gray-600 hover:text-primary transition-colors uppercase tracking-wide">
               Rooms
             </Link>
-            <Link to="/dining" className="text-sm text-gray-600 hover:text-primary transition-colors uppercase tracking-wide">
+            <Link to="/dining" onClick={handleLinkClick} className="text-sm text-gray-600 hover:text-primary transition-colors uppercase tracking-wide">
               Dining
             </Link>
-            <Link to="/activities" className="text-sm text-gray-600 hover:text-primary transition-colors uppercase tracking-wide">
+            <Link to="/activities" onClick={handleLinkClick} className="text-sm text-gray-600 hover:text-primary transition-colors uppercase tracking-wide">
               Activities
             </Link>
-            <Link to="/contact" className="text-sm text-gray-600 hover:text-primary transition-colors uppercase tracking-wide">
+            <Link to="/contact" onClick={handleLinkClick} className="text-sm text-gray-600 hover:text-primary transition-colors uppercase tracking-wide">
               Contact
             </Link>
           </div>
@@ -108,7 +112,7 @@ const Footer = () => {
       {/* Scroll to top arrow */}
       <button
         onClick={scrollToTop}
-        className="absolute bottom-6 right-6 w-10 h-10 flex items-center justify-center text-primary hover:text-primary/70 transition-all duration-300 hover:translate-y-[-4px]"
+        className="absolute bottom-6 right-6 w-10 h-10 flex items-center justify-center text-primary hover:text-primary/70 transition-all duration-300 hover:translate-y-[-4px] z-20"
         aria-label="Scroll to top"
       >
         <ArrowUp size={28} strokeWidth={2.5} />

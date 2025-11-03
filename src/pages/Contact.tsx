@@ -112,7 +112,7 @@ const Contact = () => {
                 <div>
                   <Input
                     type="tel"
-                    placeholder="Phone Number (e.g., +233244375432)"
+                    placeholder="Phone Number (e.g., +233*********)"
                     {...register("phone")}
                     aria-invalid={errors.phone ? "true" : "false"}
                     disabled={loading}
