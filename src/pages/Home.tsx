@@ -1,33 +1,52 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
+import Room1 from "@/assets/rooms/Room1.JPG";
+import Room2 from "@/assets/rooms/Room2.JPG";
+import Room3 from "@/assets/rooms/Room3.JPG";
+import Room772A2074 from "@/assets/rooms/772A2074.JPG";
+
+// Activities images
+import Activity772A2245 from "@/assets/activites/772A2245.JPG";
+import Activity772A2174 from "@/assets/activites/772A2174.JPG";
+import Activity772A2130 from "@/assets/activites/772A2130.JPG";
+
+// Wellness images
+import MassageAtTheBeach1 from "@/assets/wellness/MassageAtTheBeach1.JPG";
+import Wellness772A2101 from "@/assets/wellness/772A2101.JPG";
+
+// Gallery images
+import Gallery772A2074 from "@/assets/gallery/772A2074.JPG";
+import GalleryENV6 from "@/assets/gallery/ENV6.JPG";
+import GalleryFood5 from "@/assets/gallery/Food5.JPG";
+import GalleryENV8 from "@/assets/gallery/ENV8.JPG";
 
 const heroImage = "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/ILoveKOSA-1760668254089.JPG";
 const heroVideo = "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/KOSA%20video.MOV";
 
 const roomImages = [
-  "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Room3.JPG",
-  "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Room2.JPG",
-  "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Room1.JPG",
-  "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/772A2074.JPG"
+  Room3,
+  Room2,
+  Room1,
+  Room772A2074
 ];
 
 const activitiesImages = [
-  "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/772A2245.JPG",
-  "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/772A2174.JPG",
-  "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/772A2130.JPG"
+  Activity772A2245,
+  Activity772A2174,
+  Activity772A2130
 ];
 
 const wellnessImages = [
-  "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/MassageAtTheBeach1.JPG",
-  "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/772A2101.JPG"
+  MassageAtTheBeach1,
+  Wellness772A2101
 ];
 
 const galleryImages = [
-  "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/772A2074.JPG",
-  "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Environment/ENV6.JPG",
-  "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Food5.JPG",
-  "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Environment/ENV8.JPG"
+  Gallery772A2074,
+  GalleryENV6,
+  GalleryFood5,
+  GalleryENV8
 ];
 
 const Home = () => {
