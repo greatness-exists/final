@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
+import { Link } from "react-router-dom";
 
 const wellnessImages = [
   "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Environment/ENV.JPG",
@@ -273,12 +274,12 @@ export const Wellness = () => {
             >
               Book Your Stay
             </button>
-            <a 
-              href="/contact"
-              className="bg-background text-foreground border-2 border-border px-8 py-3 rounded-lg hover:bg-muted transition-colors font-semibold inline-block"
-            >
-              Contact Wellness Team
-            </a>
+            <Link 
+  to="/contact"
+  className="bg-background text-foreground border-2 border-border px-8 py-3 rounded-lg hover:bg-muted transition-colors font-semibold inline-block"
+>
+  Contact Wellness Team
+</Link>
           </div>
         </div>
       </section>
