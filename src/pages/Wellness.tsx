@@ -124,7 +124,7 @@ export const Wellness = () => {
             Wellness Through Nature
           </h2>
           <p className="text-xl text-muted-foreground leading-relaxed mb-6">
-            KOSA's wellness philosophy is simple: nature restores. Through wellness coaching,
+            KO-SA's wellness philosophy is simple: nature restores. Through wellness coaching,
             personalized spa treatments, yoga, and a curated tea bar, guests rediscover balance 
             in body and mind.
           </p>
@@ -210,7 +210,7 @@ export const Wellness = () => {
       >
         <div className="container mx-auto max-w-4xl">
           <h2 className="text-4xl md:text-5xl font-light text-center mb-16 text-foreground">
-            The Benefits of Wellness at KOSA
+            The Benefits of Wellness at KO-SA
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -265,7 +265,7 @@ export const Wellness = () => {
           </h2>
           <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
             Contact our wellness team to design a personalized program that meets your unique needs 
-            and goals. Your path to balance starts at KOSA.
+            and goals. Your path to balance starts at KO-SA.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button

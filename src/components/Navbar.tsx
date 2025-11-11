@@ -19,6 +19,14 @@ const Navbar = () => {
     {to:"https://us2.cloudbeds.com/reservation/65CAqa", label : "Book Now" }
   ];
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, linkTo: string) => {
+    // If clicking on the current page, scroll to top
+    if (location.pathname === linkTo) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/20 backdrop-blur-lg shadow-sm border-b border-white/5">
       <div className="container mx-auto px-6">
@@ -34,6 +42,7 @@ const Navbar = () => {
               <Link
                 key={link.to}
                 to={link.to}
+                onClick={(e) => handleNavClick(e, link.to)}
                 className={`relative px-4 py-2 text-sm font-medium transition-all rounded-lg bg-white/90 backdrop-blur-sm shadow-sm hover:shadow-md ${
                   location.pathname === link.to
                     ? "text-primary border border-primary/20"
@@ -69,7 +78,10 @@ const Navbar = () => {
                       ? "text-primary border border-primary/20"
                       : "text-foreground hover:text-primary border border-transparent hover:border-primary/10"
                   }`}
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={(e) => {
+                    handleNavClick(e, link.to);
+                    setIsMobileMenuOpen(false);
+                  }}
                 >
                   {link.label}
                 </Link>

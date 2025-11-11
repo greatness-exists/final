@@ -134,7 +134,7 @@ const Gallery = () => {
           <p className="text-sm tracking-[0.2em] uppercase mb-4">Visual Stories</p>
           <h1 className="text-6xl md:text-8xl font-light mb-6">Gallery</h1>
           <p className="text-xl max-w-2xl mx-auto">
-            Authentic moments, vivid colors, and the truth of KOSA
+            Authentic moments, vivid colors, and the truth of KO-SA
           </p>
         </div>
       </section>
@@ -238,7 +238,7 @@ const Gallery = () => {
             Experience It Yourself
           </h2>
           <p className="text-lg text-muted-foreground mb-8">
-            These moments are waiting for you at KOSA Beach Resort
+            These moments are waiting for you at KO-SA Beach Resort
           </p>
           <button
             className="bg-primary text-primary-foreground px-8 py-3 rounded-lg hover:bg-primary/90 transition-colors font-semibold"

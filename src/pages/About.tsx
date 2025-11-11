@@ -44,7 +44,7 @@ export const About = () => {
       >
         <div className="container mx-auto max-w-4xl">
           <div className="text-center mb-16">
-            <p className="text-sm font-sans tracking-[0.2em] uppercase text-primary mb-4 font-semibold">Welcome to KOSA</p>
+            <p className="text-sm font-sans tracking-[0.2em] uppercase text-primary mb-4 font-semibold">Welcome to KO-SA</p>
             <h2 className="text-5xl md:text-6xl font-serif font-light mb-8 text-foreground">
               Where Life Slows Down
             </h2>
@@ -52,7 +52,7 @@ export const About = () => {
 
           <div className="prose prose-lg max-w-none text-muted-foreground leading-relaxed space-y-6">
             <p className="text-xl leading-relaxed">
-              KOSA Beach Resort has been part of the Aminyi coastline for over two decades, a 
+              KO-SA Beach Resort has been part of the Ampenyi coastline for over two decades, a 
               sanctuary where life slows down and the ocean leads the rhythm.
             </p>
             
@@ -69,7 +69,7 @@ export const About = () => {
             </p>
 
             <p className="text-lg">
-              Every corner of KOSA tells a story of the land, the people, and the rhythms of coastal 
+              Every corner of KO-SA tells a story of the land, the people, and the rhythms of coastal 
               living that have remained unchanged for generations. We honor this heritage while creating 
               modern comfort, ensuring that every guest experiences both the peace of the past and the 
               ease of the present.
@@ -131,7 +131,7 @@ export const About = () => {
       >
         <img
           src="https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Environment/ENV4.JPG"
-          alt="KOSA Beach Resort Coastline"
+          alt="KO-SA Beach Resort Coastline"
           className="w-full h-full object-cover"
         />
       </section>
@@ -146,21 +146,21 @@ export const About = () => {
             <div className="relative h-80 md:h-96 overflow-hidden rounded-lg shadow-lg">
               <img
                 src="https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Environment/ENV6.JPG"
-                alt="KOSA Beach Resort Environment"
+                alt="KO-SA Beach Resort Environment"
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
               />
             </div>
             <div className="relative h-80 md:h-96 overflow-hidden rounded-lg shadow-lg">
               <img
                 src="https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Environment/ENV10.JPG"
-                alt="KOSA Beach Resort Nature"
+                alt="KO-SA Beach Resort Nature"
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
               />
             </div>
             <div className="relative h-80 md:h-96 overflow-hidden rounded-lg shadow-lg">
               <img
                 src="https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Environment/ENV11.JPG"
-                alt="KOSA Beach Resort Atmosphere"
+                alt="KO-SA Beach Resort Atmosphere"
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
               />
             </div>
@@ -179,7 +179,7 @@ export const About = () => {
           </h2>
           <p className="text-xl text-muted-foreground leading-relaxed mb-12">
             From families returning year after year to solo travelers discovering their center, 
-            KOSA has been a constant presence on the Aminyi coast, a place where memories are made, 
+            KO-SA has been a constant presence on the Ampenyi coast, a place where memories are made, 
             perspectives shift, and the soul finds peace.
           </p>
           <p className="text-lg text-muted-foreground leading-relaxed">
@@ -193,10 +193,10 @@ export const About = () => {
       <section className="py-20 px-4 bg-gradient-to-b from-muted to-primary/10">
         <div className="container mx-auto text-center max-w-3xl">
           <h2 className="text-4xl md:text-5xl font-light mb-6 text-foreground">
-            Experience KOSA
+            Experience KO-SA
           </h2>
           <p className="text-lg text-muted-foreground mb-8">
-            Discover your own story at KOSA Beach Resort
+            Discover your own story at KO-SA Beach Resort
           </p>
           <button
             className="bg-primary text-primary-foreground px-8 py-3 rounded-lg hover:bg-primary/90 transition-colors font-semibold"

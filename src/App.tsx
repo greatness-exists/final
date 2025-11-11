@@ -3,9 +3,9 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { Toaster } from 'sonner'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import ErrorBoundary from '@/components/ErrorBoundary'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import { ScrollToTop } from '@/components/ScrollToTop'
 import Home from '@/pages/Home'
 import About from '@/pages/About'
 import Rooms from '@/pages/Rooms'
@@ -36,29 +36,28 @@ const queryClient = new QueryClient({
 })
 
 const App = () => (
-  <ErrorBoundary>
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <HoverReceiver />
-        <BrowserRouter>
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/rooms" element={<Rooms />} />
-            <Route path="/dining" element={<Dining />} />
-            <Route path="/activities" element={<Activities />} />
-            <Route path="/wellness" element={<Wellness />} />
-            <Route path="/gallery" element={<Gallery />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-          <Footer />
-        </BrowserRouter>
-      </TooltipProvider>
-    </QueryClientProvider>
-  </ErrorBoundary>
-)
+  <QueryClientProvider client={queryClient}>
+    <TooltipProvider>
+      <Toaster />
+      <HoverReceiver />
+      <BrowserRouter>
+        <ScrollToTop />
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/rooms" element={<Rooms />} />
+          <Route path="/dining" element={<Dining />} />
+          <Route path="/activities" element={<Activities />} />
+          <Route path="/wellness" element={<Wellness />} />
+          <Route path="/gallery" element={<Gallery />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+        <Footer />
+      </BrowserRouter>
+    </TooltipProvider>
+  </QueryClientProvider>
+);
 
 export default App;
