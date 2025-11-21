@@ -6,81 +6,93 @@ const activities = [
     title: "Cooking Class",
     description: "Learn to prepare authentic Ghanaian dishes with our expert chefs",
     icon: "👨‍🍳",
-    category: "culinary"
+    category: "culinary",
+    imageUrl: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/warm-inviting-scene-of-ghanaian-cooking--7ee86d03-20251121170726.jpg"
   },
   {
     title: "Drumming and Dancing",
     description: "Immerse yourself in traditional Ghanaian rhythms and movements (Transportation included)",
     icon: "🥁",
-    category: "cultural"
+    category: "cultural",
+    imageUrl: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/dynamic-scene-of-traditional-ghanaian-dr-605a2606-20251121170725.jpg"
   },
   {
     title: "Batik Making",
     description: "Create beautiful traditional fabric art (Transportation included)",
     icon: "🎨",
-    category: "arts"
+    category: "arts",
+    imageUrl: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/hands-creating-beautiful-batik-fabric-ar-9bdb45be-20251121170726.jpg"
   },
   {
     title: "Bead Making Class",
     description: "Craft your own unique jewelry with traditional techniques",
     icon: "📿",
-    category: "arts"
+    category: "arts",
+    imageUrl: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/close-up-of-hands-crafting-traditional-a-6362fae7-20251121170726.jpg"
   },
   {
     title: "Horse Back Riding",
     description: "Explore scenic trails on horseback along the coastline",
     icon: "🐴",
-    category: "adventure"
+    category: "adventure",
+    imageUrl: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/horseback-riding-along-scenic-ghana-coas-83b954d7-20251121170726.jpg"
   },
   {
     title: "Bird Watching",
     description: "Discover Ghana's diverse bird species in their natural habitat",
     icon: "🦜",
-    category: "nature"
+    category: "nature",
+    imageUrl: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/bird-watching-in-lush-ghanaian-tropical--023ef564-20251121170726.jpg"
   },
   {
     title: "Castle Tours",
     description: "Full day exploration of historic coastal castles and forts",
     icon: "🏰",
-    category: "cultural"
+    category: "cultural",
+    imageUrl: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/historic-cape-coast-castle-in-ghana-mass-4d5820a3-20251121170726.jpg"
   },
   {
     title: "Kakum Tour",
     description: "Full day adventure through the famous Kakum National Park canopy walkway",
     icon: "🌳",
-    category: "adventure"
+    category: "adventure",
+    imageUrl: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/kakum-national-park-canopy-walkway-suspe-17c46a7d-20251121170727.jpg"
   },
   {
     title: "Painting Class",
     description: "Express your creativity with guided painting sessions (Transportation included)",
     icon: "🖼️",
-    category: "arts"
+    category: "arts",
+    imageUrl: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/art-painting-class-with-easels-and-canva-41408404-20251121170726.jpg"
   },
   {
     title: "Market Tour",
     description: "Experience vibrant local markets and authentic Ghanaian culture",
     icon: "🛒",
-    category: "cultural"
+    category: "cultural",
+    imageUrl: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/vibrant-ghanaian-local-market-scene-colo-b2e6c776-20251121170726.jpg"
   },
   {
     title: "Market Tour with Cooking",
     description: "Shop at local markets then cook your finds with our chefs",
     icon: "🍲",
-    category: "culinary"
+    category: "culinary",
+    imageUrl: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/combined-scene-of-ghanaian-market-shoppi-9d4267c5-20251121170725.jpg"
   },
   {
     title: "Guided City Tour",
     description: "Discover Elmina's rich history and vibrant neighborhoods",
     icon: "🚶",
-    category: "cultural"
+    category: "cultural",
+    imageUrl: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/guided-walking-tour-through-historic-elm-0ca875dc-20251121170727.jpg"
   },
 ];
 
 const wellnessImages = [
-  "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Environment/ENV.JPG",
-  "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Environment/ENV2.JPG",
-  "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Environment/ENV3.JPG",
-  "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Environment/ENV4.JPG",
+  "/ENV.jpg",
+  "/ENV2.jpg",
+  "/ENV3.jpg",
+  "/ENV4.jpg",
 ];
 
 const Activities = () => {
@@ -134,7 +146,7 @@ const Activities = () => {
       {/* Hero with Fixed Background */}
       <section
         className="relative h-screen flex items-center justify-center bg-fixed-section"
-        style={{ backgroundImage: `url(https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/772A2174-fotor-2025102214251.jpg)` }}
+        style={{ backgroundImage: `url(/772A2174-fotor-2025102214251.jpg)` }}
       >
         <div className="absolute inset-0 bg-black/30" />
         <div className="relative z-10 text-center text-white px-4">
@@ -184,23 +196,32 @@ const Activities = () => {
             {filteredActivities.map((activity, index) => (
               <Card 
                 key={activity.title} 
-                className="border-none shadow-lg hover-scale transition-all overflow-hidden group"
+                className="border-none shadow-lg hover-scale transition-all overflow-hidden group relative h-[400px]"
                 style={{
                   animationDelay: `${index * 0.1}s`
                 }}
               >
-                <CardContent className="p-8 text-center relative">
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <div className="text-6xl mb-6 transform group-hover:scale-110 transition-transform">
+                {/* Background Image */}
+                <div 
+                  className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                  style={{
+                    backgroundImage: `url(${activity.imageUrl})`,
+                  }}
+                />
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/30 group-hover:from-black/90 group-hover:via-black/60 transition-all" />
+                
+                <CardContent className="p-8 text-center relative z-10 h-full flex flex-col justify-end text-white">
+                  <div className="text-6xl mb-6 transform group-hover:scale-110 transition-transform drop-shadow-lg">
                     {activity.icon}
                   </div>
-                  <h3 className="text-2xl font-light mb-4 text-foreground relative z-10">
+                  <h3 className="text-2xl font-light mb-4 relative z-10 drop-shadow-md">
                     {activity.title}
                   </h3>
-                  <p className="text-muted-foreground leading-relaxed relative z-10">
+                  <p className="leading-relaxed relative z-10 text-white/90 drop-shadow-md">
                     {activity.description}
                   </p>
-                  <div className="mt-6 inline-block px-4 py-1 rounded-full bg-muted text-xs uppercase tracking-wider">
+                  <div className="mt-6 inline-block px-4 py-1 rounded-full bg-white/20 backdrop-blur-sm text-xs uppercase tracking-wider border border-white/30">
                     {activity.category}
                   </div>
                 </CardContent>

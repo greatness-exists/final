@@ -27,7 +27,7 @@ export const About = () => {
       {/* Hero Section */}
       <section
         className="relative h-screen flex items-center justify-center bg-fixed-section"
-        style={{ backgroundImage: `url(https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Environment/ENV.JPG)` }}
+        style={{ backgroundImage: `url(/ENV.jpg)` }}
       >
         <div className="absolute inset-0 bg-black/40" />
         <div className="relative z-10 text-center text-white px-4">
@@ -130,7 +130,7 @@ export const About = () => {
         className="relative h-96 md:h-[600px] scroll-reveal overflow-hidden"
       >
         <img
-          src="https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Environment/ENV4.JPG"
+          src="/ENV4.jpg"
           alt="KO-SA Beach Resort Coastline"
           className="w-full h-full object-cover"
         />
@@ -145,21 +145,21 @@ export const About = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="relative h-80 md:h-96 overflow-hidden rounded-lg shadow-lg">
               <img
-                src="https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Environment/ENV6.JPG"
+                src="/ENV6.jpg"
                 alt="KO-SA Beach Resort Environment"
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
               />
             </div>
             <div className="relative h-80 md:h-96 overflow-hidden rounded-lg shadow-lg">
               <img
-                src="https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Environment/ENV10.JPG"
+                src="/ENV10.jpg"
                 alt="KO-SA Beach Resort Nature"
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
               />
             </div>
             <div className="relative h-80 md:h-96 overflow-hidden rounded-lg shadow-lg">
               <img
-                src="https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Environment/ENV11.JPG"
+                src="/ENV11.jpg"
                 alt="KO-SA Beach Resort Atmosphere"
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
               />

@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import roomImage from "@/assets/room-ocean-view.jpg";
+import Room3 from "@/assets/rooms/Room3.JPG";
 
 const bookingUrl = "https://us2.cloudbeds.com/reservation/65CAqa";
 
@@ -225,7 +226,7 @@ const Rooms = () => {
       {/* Hero */}
       <section
         className="relative h-96 flex items-center justify-center bg-cover bg-center"
-        style={{ backgroundImage: `url("https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Room3.JPG")` }}
+        style={{ backgroundImage: `url(${Room3})` }}
       >
         <div className="absolute inset-0 bg-black/50" />
         <div className="relative z-10 text-center text-white px-4">

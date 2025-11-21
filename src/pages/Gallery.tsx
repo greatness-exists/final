@@ -3,26 +3,26 @@ import { X, ChevronLeft, ChevronRight } from "lucide-react";
 
 const galleryImages = [
   // Architecture
-   { url: "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Environment/ENV10.JPG", category: "architecture", alt: "Resort Architecture" },
-   { url: "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Environment/ENV11.JPG", category: "architecture", alt: "Resort Architecture" },
-   { url: "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Environment/ENV12.JPG", category: "architecture", alt: "Resort Architecture" },
-   { url: "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Environment/ENV13.JPG", category: "architecture", alt: "Resort Architecture" },
-   { url: "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Environment/ENV14.JPG", category: "architecture", alt: "Resort Architecture" },
+   { url: "/ENV10.jpg", category: "architecture", alt: "Resort Architecture" },
+   { url: "/ENV11.jpg", category: "architecture", alt: "Resort Architecture" },
+   { url: "/ENV12.jpg", category: "architecture", alt: "Resort Architecture" },
+   { url: "/ENV13.jpg", category: "architecture", alt: "Resort Architecture" },
+   { url: "/ENV14.jpg", category: "architecture", alt: "Resort Architecture" },
   { url: "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Room3.JPG", category: "architecture", alt: "Resort Architecture" },
   { url: "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Room2.JPG", category: "architecture", alt: "Room Design" },
   { url: "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Room1.JPG", category: "architecture", alt: "Interior Space" },
-  { url: "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Environment/ENV6.JPG", category: "architecture", alt: "Resort View" },
-  { url: "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Environment/ENV4.JPG", category: "architecture", alt: "Resort Interior" },
+  { url: "/ENV6.JPG", category: "architecture", alt: "Resort View" },
+  { url: "/ENV4.JPG", category: "architecture", alt: "Resort Interior" },
   
   // Nature & Environment
-  { url: "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Environment/ENV.JPG", category: "nature", alt: "Coastal Environment" },
-  { url: "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Environment/ENV2.JPG", category: "nature", alt: "Beach View" },
-  { url: "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Environment/ENV3.JPG", category: "nature", alt: "Natural Beauty" },
-  { url: "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Environment/ENV4.JPG", category: "nature", alt: "Sunset Coast" },
-  { url: "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Environment/ENV5.JPG", category: "nature", alt: "Tropical Paradise" },
-  { url: "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Environment/ENV6.JPG", category: "nature", alt: "Ocean Views" },
-  { url: "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Environment/ENV8.JPG", category: "nature", alt: "Coastal Landscape" },
-  { url: "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Environment/ENV9.JPG", category: "nature", alt: "Natural Surroundings" },
+  { url: "/ENV.jpg", category: "nature", alt: "Coastal Environment" },
+  { url: "/ENV2.jpg", category: "nature", alt: "Beach View" },
+  { url: "/ENV3.jpg", category: "nature", alt: "Natural Beauty" },
+  { url: "/ENV4.jpg", category: "nature", alt: "Sunset Coast" },
+  { url: "/ENV5.jpg", category: "nature", alt: "Tropical Paradise" },
+  { url: "/ENV6.jpg", category: "nature", alt: "Ocean Views" },
+  { url: "/ENV8.jpg", category: "nature", alt: "Coastal Landscape" },
+  { url: "/ENV9.jpg", category: "nature", alt: "Natural Surroundings" },
   
   // Food
   { url: "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Food5.JPG", category: "food", alt: "Culinary Experience" },

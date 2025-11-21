@@ -22,7 +22,7 @@ import GalleryFood5 from "@/assets/gallery/Food5.JPG";
 import GalleryENV8 from "@/assets/gallery/ENV8.JPG";
 
 const heroImage = "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/ILoveKOSA-1760668254089.JPG";
-const heroVideo = "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/KOSA%20video.MOV";
+const heroVideo = "/KosaVideo.MOV";
 
 const roomImages = [
   Room3,
