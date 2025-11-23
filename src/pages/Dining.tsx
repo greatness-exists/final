@@ -1,446 +1,738 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Leaf, Flame } from "lucide-react";
 
 const Restaurant = () => {
-  // All menu data organized by section
+  // Menu data organized by category
   const breakfastMenu = [
     {
-      title: "KO-SA BREAKFAST",
-      dishes: [
-        { name: "Toast with margarine / jam / fried or boiled egg / fruit / Nescafe or Tea" },
-        { name: "Toast with margarine / jam / fried or boiled egg / fruit / Fresh Coffee" },
-        { name: "Toast with margarine / jam or honey" }
-      ]
+      id: "br1",
+      name: "Kosa Breakfast",
+      description: "Two eggs (any style), wheat toast with butter & house-made jam, served with fresh coffee or tea",
+      isPopular: true,
     },
     {
-      title: "EGGS",
-      dishes: [
-        { name: "Fried egg / Boiled egg / Scrambled egg" },
-        { name: "Vegetable omelet" },
-        { name: "Cheese omelet" },
-        { name: "Vegetable sausage omelet" }
-      ]
+      id: "br2",
+      name: "Kosa Breakfast Deluxe",
+      description: "Two eggs (any style), wheat toast, fresh coffee or tea, with chicken sausage, tuna, or veggie sausage",
+      isPopular: true,
     },
     {
-      title: "SANDWICHES",
-      dishes: [
-        { name: "Cheese Egg" },
-        { name: "Cheese Tomato" },
-        { name: "Tuna" },
-        { name: "Tuna Cheese" },
-        { name: "Ham Cheese" },
-        { name: "Tomato Mozzarella Basil" },
-        { name: "Chicken" },
-        { name: "Chicken Curry" }
-      ]
+      id: "br3",
+      name: "Vegetable Omelette",
+      description: "Fresh vegetables folded into fluffy eggs",
+      isVegetarian: true,
     },
     {
-      title: "PANCAKES",
-      dishes: [
-        { name: "Pancake Plain", description: "2 pieces" },
-        { name: "Pancake", description: "Choose 1: Pineapple / Banana / Honey or Chocolate" }
-      ]
+      id: "br4",
+      name: "Vegetable Sausage Omelette",
+      description: "Omelette with vegetable sausage",
     },
     {
-      title: "CEREALS",
-      dishes: [
-        { name: "Cooked Oats" },
-        { name: "Cornflakes with milk" },
-        { name: "Muesli with milk and fruit" }
-      ]
+      id: "br5",
+      name: "Cheese Omelette",
+      description: "Classic omelette with melted cheese (Add Cheese Ghc20)",
+      isPopular: true,
     },
     {
-      title: "FRUIT",
-      dishes: [
-        { name: "Fruit bowl small" },
-        { name: "Fruit bowl big" }
-      ]
-    }
+      id: "br6",
+      name: "Tuna Omelette",
+      description: "Omelette filled with tuna",
+    },
+    {
+      id: "br7",
+      name: "Ghanaian Pancakes",
+      description: "Traditional pancakes served with honey or chocolate",
+    },
+    {
+      id: "br8",
+      name: "Pancakes with Fresh Seasonal Fruits",
+      description: "Fluffy pancakes topped with fresh seasonal fruits, served with honey or chocolate",
+      isPopular: true,
+    },
+    {
+      id: "br9",
+      name: "Seasonal Fruit Bowl",
+      description: "Fresh seasonal fruits artfully arranged",
+      isVegetarian: true,
+    },
+    {
+      id: "br10",
+      name: "Oatmeal (Porridge)",
+      description: "Warm oatmeal served with fresh milk",
+      isVegetarian: true,
+    },
+    {
+      id: "br11",
+      name: "Cornflakes",
+      description: "Crispy cornflakes served with fresh milk",
+      isVegetarian: true,
+    },
+    {
+      id: "br12",
+      name: "Muesli with Seasonal Fruits",
+      description: "A wholesome blend of rolled oats, nuts, and dried fruits topped with fresh seasonal fruits, served with chilled milk",
+      isVegetarian: true,
+    },
+    {
+      id: "br13",
+      name: "Egg Sandwich",
+      description: "Fresh egg sandwich",
+    },
+    {
+      id: "br14",
+      name: "Tuna Sandwich",
+      description: "Tuna sandwich",
+    },
+    {
+      id: "br15",
+      name: "Chicken Sandwich",
+      description: "Chicken sandwich",
+    },
+    {
+      id: "br16",
+      name: "Tomato Mozzarella Basil Sandwich",
+      description: "Fresh tomato, mozzarella, and basil sandwich",
+      isVegetarian: true,
+    },
+    {
+      id: "br17",
+      name: "Wheat Toast with Butter & House-made Jam or Honey",
+      description: "Freshly toasted wheat bread with butter and house-made jam or honey",
+      isVegetarian: true,
+    },
+    {
+      id: "br18",
+      name: "Chicken Sausage",
+      description: "Breakfast extra - chicken sausage",
+    },
+    {
+      id: "br19",
+      name: "Veggie Sausage",
+      description: "Breakfast extra - veggie sausage",
+      isVegetarian: true,
+    },
+    {
+      id: "br20",
+      name: "Tuna",
+      description: "Breakfast extra - tuna",
+    },
   ];
 
   const startersMenu = [
     {
-      title: "STARTERS",
-      dishes: [
-        { name: "Bruschetta Tomato", description: "4 pieces" },
-        { name: "Spring rolls", description: "2 pieces" },
-        { name: "Fresh Tomato-vegetable soup with toast" },
-        { name: "Chicken soup with toast" }
-      ]
+      id: "st1",
+      name: "Fresh Tomato Soup with Toast",
+      description: "House-made fresh tomato soup served with toasted bread",
     },
     {
-      title: "SMALL SALADS",
-      dishes: [
-        { name: "Mixed salad", description: "Tomato - cucumber - olives - onion - lettuce and when available avocado with toast" },
-        { name: "Spring vegetable salad with toast" },
-        { name: "Mandarin Chicken salad with toast" }
-      ],
-      note: "Salads with Balsamic or Honey-mustard dressing"
-    }
+      id: "st2",
+      name: "Vegetable Soup with Toast",
+      description: "Fresh vegetable soup served with toasted bread",
+      isVegetarian: true,
+    },
+    {
+      id: "st3",
+      name: "Chicken Soup with Toast",
+      description: "Hearty chicken soup served with toasted bread",
+    },
+    {
+      id: "st4",
+      name: "Spring Rolls (2 pieces)",
+      description: "Crispy spring rolls",
+      isPopular: true,
+    },
+    {
+      id: "st5",
+      name: "Kelewele",
+      description: "Spicy fried plantain cubes - a Ghanaian favorite",
+      isSpicy: true,
+      isPopular: true,
+    },
+    {
+      id: "st6",
+      name: "Yam Balls with Sauce",
+      description: "Crispy yam balls served with dipping sauce",
+    },
+    {
+      id: "st7",
+      name: "Bruschetta with Fresh Tomatoes (4 pieces)",
+      description: "Toasted bread topped with fresh tomatoes and herbs",
+      isVegetarian: true,
+    },
+    {
+      id: "st8",
+      name: "Mixed Garden Salad",
+      description: "Fresh mixed greens with seasonal vegetables",
+      isVegetarian: true,
+    },
+    {
+      id: "st9",
+      name: "Chicken Salad",
+      description: "Fresh greens with grilled chicken",
+      isPopular: true,
+    },
+    {
+      id: "st10",
+      name: "Beef & Mango Salad",
+      description: "Tender beef with fresh mango on mixed greens",
+    },
+    {
+      id: "st11",
+      name: "Chicken Wings",
+      description: "Fried or tossed in spicy green or red chili sauce",
+      isSpicy: true,
+      isPopular: true,
+    },
+    {
+      id: "st12",
+      name: "Chicken Kebab",
+      description: "Grilled chicken skewer",
+    },
+    {
+      id: "st13",
+      name: "Fish Kebab",
+      description: "Grilled fish skewer",
+    },
+    {
+      id: "st14",
+      name: "Beef Kebab",
+      description: "Grilled beef skewer",
+    },
+    {
+      id: "st15",
+      name: "Veggie Kebab",
+      description: "Grilled vegetable skewer",
+      isVegetarian: true,
+    },
   ];
 
-  const mainDishesMenu = [
+  const mainsMenu = [
     {
-      title: "BIG SALADS",
-      dishes: [
-        { name: "Mixed Salad", description: "Tomato, cucumber, olives, onion, lettuce and when available avocado with toast" },
-        { name: "Chicken Salad", description: "With toast" }
-      ],
-      note: "Salads with Balsamic or Honey-mustard dressing"
+      id: "main1",
+      name: "Jollof Rice with Chicken (grilled)",
+      description: "Traditional West African jollof rice with perfectly grilled chicken",
+      isPopular: true,
     },
     {
-      title: "SOUP",
-      dishes: [
-        { name: "Fisherman's Soup with Toast", description: "Fillet or with bones" },
-        { name: "Fisherman's Soup Rice", description: "Fillet or with bones" }
-      ]
+      id: "main2",
+      name: "Fried Rice with Chicken (grilled)",
+      description: "Seasoned fried rice with grilled chicken",
     },
     {
-      title: "CHICKEN",
-      dishes: [
-        { name: "Grilled or Fried Chicken" },
-        { name: "Chicken Kebab", description: "2 pieces with peanut sauce" },
-        { name: "Chicken Fillet with Indian Curry" },
-        { name: "Chicken Fillet", description: "With sliced vegetables and saffron rice" },
-        { name: "Chicken Fillet in Creamy Mushroom Sauce" }
-      ],
-      note: "Please choose 1 side dish - plain, jollof or fried rice - mashed or sautéed potato - potato or yam chips or small mixed salad"
+      id: "main3",
+      name: "Red Red with Chicken or Fish",
+      description: "Traditional Ghanaian bean stew served with fried plantains and your choice of chicken or fish",
+      isPopular: true,
     },
     {
-      title: "BEEF",
-      dishes: [
-        { name: "Beef Stew" },
-        { name: "Meat Balls" },
-        { name: "Shredded Beef with Vegetables" },
-        { name: "Beef in Coconut Sauce" }
-      ],
-      note: "Please choose 1 side dish - plain, jollof or fried rice - mashed or sautéed potato - potato or yam chips or small mixed salad"
+      id: "main4",
+      name: "Mushroom Stroganoff with Plain Rice",
+      description: "Creamy mushroom stroganoff served with steamed rice",
+      isVegetarian: true,
     },
     {
-      title: "PASTA",
-      dishes: [
-        { name: "Noodle's or Spaghetti with Tomato Garlic Sauce" },
-        { name: "Noodle's or Spaghetti with Vegetable-Olive-Oil-Garlic" },
-        { name: "Delhi with Beef" },
-        { name: "Bolognese" },
-        { name: "Pasta Seafood", description: "Not always available" }
-      ],
-      note: "With Cheese 15 extra"
+      id: "main5",
+      name: "Yam with Palava Sauce",
+      description: "Boiled yam served with traditional palava sauce",
+      isVegetarian: true,
     },
     {
-      title: "BURGERS",
-      dishes: [
-        { name: "Beef Burger", description: "With chips" },
-        { name: "Cheese Burger", description: "With chips" },
-        { name: "Chicken Burger", description: "With chips" },
-        { name: "Chicken Cheese Burger", description: "With chips" }
-      ]
+      id: "main6",
+      name: "Chicken Groundnut Soup",
+      description: "Rich peanut soup with chicken (Served with plain rice, omatuo rice balls, or banku)",
+      isPopular: true,
     },
     {
-      title: "SANDWICHES",
-      dishes: [
-        { name: "Cheese Egg" },
-        { name: "Cheese Tomato" },
-        { name: "Tuna" },
-        { name: "Tuna Cheese" },
-        { name: "Ham Cheese" },
-        { name: "Tomato Mozzarella Basil" },
-        { name: "Chicken" },
-        { name: "Chicken Cheese" },
-        { name: "Chicken Curry" },
-        { name: "Club Sandwich", description: "With chips" }
-      ]
+      id: "main7",
+      name: "Beef Groundnut Soup",
+      description: "Rich peanut soup with beef (Served with plain rice, omatuo rice balls, or banku)",
     },
     {
-      title: "KO-SA SPECIALS",
-      dishes: [
-        { name: "Grilled Lobster" },
-        { name: "Grilled Prawns" },
-        { name: "Stuffed Chicken Fillet" },
-        { name: "Fish Fillet", description: "With sliced vegetables and saffron rice" },
-        { name: "Chicken Fillet in Honey Sauce", description: "With rice" }
-      ]
+      id: "main8",
+      name: "Red Snapper Groundnut Soup",
+      description: "Rich peanut soup with red snapper (Served with plain rice, omatuo rice balls, or banku)",
     },
     {
-      title: "SEAFOOD",
-      dishes: [
-        { name: "Grilled or Fried Snapper" },
-        { name: "Grilled Fish Ko-Sa Style", description: "With sliced vegetables" },
-        { name: "Fish Fillet Steamed", description: "With coconut and lemongrass in banana leaf (preparation time 1.15 hour)" },
-        { name: "Fish Fillet in Creamy Mushroom Sauce" },
-        { name: "Fish Fillet in Garlic Butter Sauce" },
-        { name: "Pan Fried Sole", description: "With butter and lemon" },
-        { name: "Octopus (Squid) Peri Peri" }
-      ],
-      note: "Please choose 1 side dish - plain, jollof or fried rice - mashed or sautéed potato - potato or yam chips or small mixed salad"
+      id: "main9",
+      name: "Banku with Chicken & Pepper Sauce",
+      description: "Fermented corn and cassava dough with grilled chicken and spicy pepper sauce",
+      isSpicy: true,
     },
     {
-      title: "GHANAIAN AND VEGETARIAN",
-      dishes: [
-        { name: "Chips with Fried Egg" },
-        { name: "Fried Rice with Fried Egg" },
-        { name: "Red Red" },
-        { name: "Red Red with Chicken" },
-        { name: "Red Red with Fish" },
-        { name: "Yam Balls", description: "With vegetable sauce" },
-        { name: "Soubisy", description: "Rice with vegetables and groundnuts" },
-        { name: "Plain Rice", description: "With vegetables in creamy mushroom sauce" },
-        { name: "Vegetables with Pineapple", description: "In a curry sauce" },
-        { name: "Pasta Delhi with Vegetables" }
-      ]
+      id: "main10",
+      name: "Banku with Red Snapper & Pepper Sauce",
+      description: "Banku with grilled red snapper and spicy pepper sauce",
+      isSpicy: true,
+      isPopular: true,
     },
     {
-      title: "GHANAIAN DISHES - ON EARLY REQUEST",
-      dishes: [
-        { name: "Omo Tuo" },
-        { name: "Omo Tuo Chicken" },
-        { name: "Omo Tuo Fish" },
-        { name: "Banku with Pepper Sauce" },
-        { name: "Banku with Pepper Sauce Chicken" },
-        { name: "Banku with Pepper Sauce Fish" },
-        { name: "Fufu with Light Soup" },
-        { name: "Fufu with Light Soup Chicken" },
-        { name: "Fufu with Light Soup Fish" }
-      ]
-    }
+      id: "main11",
+      name: "Banku and Okro",
+      description: "Banku served with okro soup and your choice of fish, chicken or beef",
+    },
+    {
+      id: "main12",
+      name: "Fufu and Light Soup",
+      description: "Traditional fufu with light soup and your choice of fish, chicken or beef",
+    },
+    {
+      id: "main13",
+      name: "Fufu with Chicken Light Soup",
+      description: "Fufu with chicken light soup",
+    },
+    {
+      id: "main14",
+      name: "Fufu with Red Snapper Light Soup",
+      description: "Fufu with red snapper light soup",
+    },
+    {
+      id: "main15",
+      name: "Fufu with Beef Light Soup",
+      description: "Fufu with beef light soup",
+    },
+    {
+      id: "main16",
+      name: "Fisherman's Soup with Red Snapper",
+      description: "Rich seafood soup with red snapper (Served with toast, rice or rice balls)",
+      isPopular: true,
+    },
+    {
+      id: "main17",
+      name: "Fisherman's Soup with Grouper Fillet",
+      description: "Rich seafood soup with grouper fillet (Served with toast, rice or rice balls)",
+    },
+    {
+      id: "main18",
+      name: "Chicken Indian Curry",
+      description: "Aromatic Indian-style chicken curry",
+      isSpicy: true,
+    },
+    {
+      id: "main19",
+      name: "Chicken with Mushroom Sauce",
+      description: "Tender chicken in creamy mushroom sauce (Comes with your choice of a side)",
+    },
+    {
+      id: "main20",
+      name: "Stuffed Chicken Fillet",
+      description: "Chicken fillet stuffed with savory filling (Comes with your choice of a side)",
+    },
+    {
+      id: "main21",
+      name: "Sliced Tenderloin Beef with Vegetables",
+      description: "Tender beef slices with fresh vegetables (Comes with your choice of a side)",
+    },
+    {
+      id: "main22",
+      name: "Beef Stew",
+      description: "Hearty beef stew (Comes with your choice of a side)",
+    },
+    {
+      id: "main23",
+      name: "Steak Dinner with One Side",
+      description: "Grilled steak served with your choice of side",
+      isPopular: true,
+    },
+    {
+      id: "main24",
+      name: "Meatballs with Tomato Sauce",
+      description: "Savory meatballs in rich tomato sauce (Comes with your choice of a side)",
+    },
+    {
+      id: "main25",
+      name: "Beef in Coconut Sauce",
+      description: "Tender beef in creamy coconut sauce (Comes with your choice of a side)",
+    },
+    {
+      id: "main26",
+      name: "Spaghetti with Tomato Garlic Sauce",
+      description: "Classic spaghetti with tomato garlic sauce",
+      isVegetarian: true,
+    },
+    {
+      id: "main27",
+      name: "Vegetable Olive Oil Garlic Pasta",
+      description: "Fresh vegetables with olive oil and garlic pasta",
+      isVegetarian: true,
+    },
+    {
+      id: "main28",
+      name: "Spicy Delhi Beef Pasta",
+      description: "Spicy Indian-style beef pasta",
+      isSpicy: true,
+    },
+    {
+      id: "main29",
+      name: "Bolognese",
+      description: "Classic spaghetti bolognese",
+      isPopular: true,
+    },
+    {
+      id: "main30",
+      name: "Seafood Pasta",
+      description: "Pasta with fresh seafood",
+      isPopular: true,
+    },
+    {
+      id: "main31",
+      name: "Beef Burger",
+      description: "Juicy beef burger served with hand cut fries or yam chips plus coleslaw or side salad",
+      isPopular: true,
+    },
+    {
+      id: "main32",
+      name: "Fish Burger",
+      description: "Fresh fish burger served with hand cut fries or yam chips plus coleslaw or side salad",
+    },
+    {
+      id: "main33",
+      name: "Chicken Burger",
+      description: "Grilled chicken burger served with hand cut fries or yam chips plus coleslaw or side salad",
+      isPopular: true,
+    },
+    {
+      id: "main34",
+      name: "Chicken Kebab Plate",
+      description: "Chicken kebab with peanut sauce, served with one side of your choice",
+    },
+    {
+      id: "main35",
+      name: "Beef Kebab Plate",
+      description: "Beef kebab served with one side of your choice",
+    },
+    {
+      id: "main36",
+      name: "Seafood Kebab Plate",
+      description: "Mixed seafood kebab served with one side of your choice",
+    },
+    {
+      id: "main37",
+      name: "Veggie Kebab Plate",
+      description: "Grilled vegetable kebab served with one side of your choice",
+      isVegetarian: true,
+    },
+    {
+      id: "main38",
+      name: "Prawns Kebab Plate",
+      description: "Grilled prawns kebab served with one side of your choice",
+    },
+    {
+      id: "main39",
+      name: "Grilled Squid Kebab Plate",
+      description: "Grilled squid kebab served with one side of your choice",
+    },
+    {
+      id: "main40",
+      name: "Whole Red Snapper - Ko-Sa Style",
+      description: "Whole red snapper served with sliced vegetables & one side of your choice",
+      isPopular: true,
+    },
+    {
+      id: "main41",
+      name: "Grilled or Fried Red Snapper",
+      description: "Red snapper grilled or fried to perfection, served with one side of your choice",
+      isPopular: true,
+    },
+    {
+      id: "main42",
+      name: "Grilled Lobster or Prawns",
+      description: "Fresh grilled lobster or prawns served with one side of your choice",
+    },
+    {
+      id: "main43",
+      name: "Grilled Prawns",
+      description: "Succulent grilled prawns served with one side of your choice",
+    },
+    {
+      id: "main44",
+      name: "Steamed Grouper in Coconut & Lemongrass",
+      description: "Grouper wrapped in banana leaf, steamed with coconut & lemongrass, served with one side of your choice",
+      isPopular: true,
+    },
+    {
+      id: "main45",
+      name: "Grouper Fillet in Mushroom Sauce",
+      description: "Tender grouper fillet in creamy mushroom sauce, served with one side of your choice",
+    },
+    {
+      id: "main46",
+      name: "Grouper Fillet in Garlic Butter Sauce",
+      description: "Grouper fillet in rich garlic butter sauce, served with one side of your choice",
+    },
+    {
+      id: "main47",
+      name: "Squid in Peri Peri Vegetable Stew",
+      description: "Spicy peri peri squid with vegetables, served with one side of your choice",
+      isSpicy: true,
+    },
+    {
+      id: "main48",
+      name: "Seafood Platter (Serves up to 3)",
+      description: "Lobster, prawns, grouper, squid with two sides of your choice",
+      isPopular: true,
+    },
+    {
+      id: "main49",
+      name: "Chicken Sandwich",
+      description: "Chicken sandwich served with fries or yam chips plus coleslaw or side salad",
+    },
+    {
+      id: "main50",
+      name: "Tuna Sandwich",
+      description: "Tuna sandwich served with fries or yam chips plus coleslaw or side salad",
+    },
+    {
+      id: "main51",
+      name: "Tomato Mozzarella Basil Sandwich",
+      description: "Fresh tomato, mozzarella and basil sandwich served with fries or yam chips plus coleslaw or side salad",
+      isVegetarian: true,
+    },
+    {
+      id: "main52",
+      name: "Club Sandwich",
+      description: "Classic club sandwich served with fries or yam chips plus coleslaw or side salad",
+    },
+  ];
+
+  const sidesMenu = [
+    { id: "side1", name: "Fried Rice", description: "Seasoned fried rice side dish" },
+    { id: "side2", name: "Jollof Rice", description: "Traditional jollof rice side dish" },
+    { id: "side3", name: "Plain Rice", description: "Steamed white rice" },
+    { id: "side4", name: "Mashed Potato", description: "Creamy mashed potatoes" },
+    { id: "side5", name: "Sautéed Potato", description: "Sautéed potatoes with herbs" },
+    { id: "side6", name: "Hand Cut Fries", description: "Fresh hand-cut french fries" },
+    { id: "side7", name: "Fried Plantain", description: "Sweet fried plantain" },
+    { id: "side8", name: "Coastal Coleslaw", description: "Fresh coleslaw" },
+    { id: "side9", name: "Yam Chips", description: "Crispy yam chips" },
   ];
 
   const childrensMenu = [
     {
-      title: "PASTA",
-      dishes: [
-        { name: "Noodles or Spaghetti with Tomato Sauce" },
-        { name: "Noodles or Spaghetti with Cheese Sauce" },
-        { name: "Noodles or Spaghetti with Bolognese" }
-      ]
+      id: "kid1",
+      name: "Fish Basket with Fries",
+      description: "Crispy fish basket served with fries",
+      isPopular: true,
     },
     {
-      title: "MAIN COURSES",
-      dishes: [
-        { name: "Chicken Fillet with Rice or Chips" },
-        { name: "Chicken Sausage with Rice or Chips" },
-        { name: "Chicken Kebab", description: "1 stick with rice or chips" },
-        { name: "Meat Balls", description: "2 pieces with mashed potatoes, rice or chips" },
-        { name: "Fish Basket with Rice or Chips" }
-      ]
-    }
+      id: "kid2",
+      name: "Chicken Basket with Fries",
+      description: "Golden chicken basket served with fries",
+      isPopular: true,
+    },
+    {
+      id: "kid3",
+      name: "Spaghetti with Meatballs",
+      description: "Kid-friendly spaghetti with meatballs",
+    },
+    {
+      id: "kid4",
+      name: "Spaghetti with Beef Sauce",
+      description: "Spaghetti with mild beef sauce",
+    },
   ];
 
-  const dessertMenu = [
+  const dessertsMenu = [
     {
-      title: "DESSERT",
-      dishes: [
-        { name: "1 Scoop of Ice Cream" },
-        { name: "1 Scoop of Ice Cream with Chocolate Sauce" },
-        { name: "Fried Banana with Chocolate Sauce" },
-        { name: "Fried Banana with Ice Cream" },
-        { name: "Fried Banana with Ice Cream and Chocolate Sauce" },
-        { name: "Fruit Bowl Small" },
-        { name: "Fruit Bowl Big" },
-        { name: "Fruit with 1 Scoop of Ice Cream" },
-        { name: "Pancake Plain", description: "2 pieces" },
-        { name: "Pancake", description: "Choose 1: Pineapple / Banana / Honey or Chocolate" },
-        { name: "Pancake with Ice Cream" }
-      ],
-      note: "When available try our Apple Pie with Fresh Coffee or Ice Cream"
-    }
+      id: "des1",
+      name: "Auntie Bene's Cookies",
+      description: "House-made cookies",
+      isPopular: true,
+    },
+    {
+      id: "des2",
+      name: "Auntie Bene's Cake",
+      description: "Delicious house-made cake",
+      isPopular: true,
+    },
+    {
+      id: "des3",
+      name: "Ice Cream",
+      description: "Creamy ice cream",
+    },
+    {
+      id: "des4",
+      name: "Ice Cream Chocolate Sauce",
+      description: "Ice cream drizzled with chocolate sauce",
+    },
+    {
+      id: "des5",
+      name: "Fried Banana with Chocolate Sauce",
+      description: "Sweet fried banana with chocolate sauce",
+    },
+    {
+      id: "des6",
+      name: "Fried Banana with Ice Cream & Chocolate Sauce",
+      description: "Fried banana topped with ice cream and chocolate sauce",
+      isPopular: true,
+    },
+    {
+      id: "des7",
+      name: "Crepe (Cinnamon and Brown Sugar)",
+      description: "Delicate crepe with cinnamon and brown sugar",
+    },
+    {
+      id: "des8",
+      name: "Crepe with Seasonal Fruits",
+      description: "Crepe topped with fresh seasonal fruits",
+      isPopular: true,
+    },
+    {
+      id: "des9",
+      name: "Crepe with Ice Cream",
+      description: "Crepe served with ice cream",
+    },
+    {
+      id: "des10",
+      name: "Banana Milkshake",
+      description: "Thick and creamy banana milkshake",
+    },
   ];
 
   const drinksMenu = [
     {
-      title: "HOT BEVERAGES",
-      dishes: [
-        { name: "Tea" },
-        { name: "Nescafe" },
-        { name: "Fresh Coffee or Espresso" },
-        { name: "Cappuccino Small" },
-        { name: "Cappuccino Big" },
-        { name: "Caffe Latte" },
-        { name: "Latte Macchiato" },
-        { name: "Ice Coffee", description: "Double Espresso, sugar, milk and ice cubes" }
-      ]
+      id: "drk1",
+      name: "African Hibiscus Juice (Bissap)",
+      description: "House-made hibiscus juice",
+      isPopular: true,
     },
     {
-      title: "COLD BEVERAGES",
-      dishes: [
-        { name: "Glass Milk" },
-        { name: "Milo" },
-        { name: "Homemade African Hibiscus Juice (Bissap)" },
-        { name: "Homemade Fresh Orange Juice" },
-        { name: "Homemade Fresh Pineapple Juice" },
-        { name: "Homemade Mixed Fruit Juice" },
-        { name: "Banana Milkshake" },
-        { name: "Smoothie" },
-        { name: "Mineral Water Small", description: "750ml" },
-        { name: "Mineral Water Big", description: "1.5ltr" },
-        { name: "Soft Drinks", description: "Coke - Sprite - Fanta - Tonic - Alvaro" },
-        { name: "Malt" }
-      ]
+      id: "drk2",
+      name: "Fresh Orange Juice",
+      description: "Freshly squeezed orange juice",
+      isPopular: true,
     },
     {
-      title: "ALCOHOLIC DRINKS",
-      dishes: [
-        { name: "Small Beer" },
-        { name: "Hunters Gold or Hunters Dry" },
-        { name: "Savanna Dry" },
-        { name: "Big Beer" },
-        { name: "Guinness" },
-        { name: "Smirnoff Ice" },
-        { name: "Heineken", description: "0.33ml" }
-      ]
+      id: "drk3",
+      name: "Fresh Pineapple Juice",
+      description: "Freshly squeezed pineapple juice",
     },
     {
-      title: "COCKTAILS",
-      dishes: [
-        { name: "Gin Tonic", description: "2 shots" },
-        { name: "Fresh Pineapple Juice with Gin", description: "2 shots" },
-        { name: "Fresh Orange Juice with Mandingo", description: "2 shots" },
-        { name: "Fresh Pineapple Juice with Rum" },
-        { name: "Fresh Orange Juice with Vodka" },
-        { name: "Fresh Mixed Juice with Rum" },
-        { name: "Fresh Orange Juice with Blue Curacao" },
-        { name: "Hibiscus Royale", description: "White wine with African Hibiscus" },
-        { name: "Mixed Juice with Coconut Milk, Gin and Tonic" },
-        { name: "Pina Colada" }
-      ]
+      id: "drk4",
+      name: "Mixed Fruit Juice",
+      description: "Blend of fresh tropical fruits",
     },
     {
-      title: "MOCKTAILS",
-      dishes: [
-        { name: "Fresh Pineapple Juice with Coconut Milk" },
-        { name: "Fresh Pineapple Juice with Bissap" },
-        { name: "Fresh Mixed Juice with Tonic or Soda" },
-        { name: "Fresh Pineapple Juice, Coconut Milk and Bissap" },
-        { name: "Fresh Pineapple Juice, Coconut Milk and Tonic" },
-        { name: "Fresh Mixed Juice, Bissap with Tonic or Soda" },
-        { name: "Fresh Orange Juice, Blue Curacao", description: "0%" }
-      ]
+      id: "drk5",
+      name: "Banana Milkshake",
+      description: "Thick and creamy banana milkshake",
     },
     {
-      title: "SINGLE SHOTS",
-      dishes: [
-        { name: "Old Admiral Brandy, Kasapreko Gin or Mandingo" },
-        { name: "Takai", description: "African Coffee Liquor" },
-        { name: "Pastis" },
-        { name: "Bermuda Rum" },
-        { name: "Johnnie Walker Red or Black & White", description: "Whisky" },
-        { name: "Bombay Sapphire or New Amsterdam", description: "Gin" },
-        { name: "Bacardi White, Bacardi Gold", description: "Rum" },
-        { name: "Absolut or Smirnoff Red", description: "Vodka" },
-        { name: "Martini Bianco, Campari, Kahlua, Baileys, Tequila or Di Amore Amaretto" }
-      ]
-    }
-  ];
-
-  const koOkiCocktails = [
+      id: "drk6",
+      name: "Smoothie (Seasonal)",
+      description: "Fresh seasonal fruit smoothie",
+      isPopular: true,
+    },
     {
-      title: "KO-OKI BAR COCKTAILS",
-      dishes: [
-        { name: "Malibu Beach", description: "Malibu, soda, pineapple juice" },
-        { name: "Red Dream", description: "Gin, lime cordial, sugar, bissap" },
-        { name: "Cuba Libre", description: "Bacardi gold, lime cordial, coke" },
-        { name: "Beach Boy", description: "Bacardi gold, lime cordial, sugar" },
-        { name: "Blue Moon", description: "Absolut vodka, Blue curacao, orange juice" },
-        { name: "Sea Breeze Coffee", description: "Espresso, Absolut vodka, Kahlua" },
-        { name: "Ko-Sa Summer Shooter", description: "Kahlua, Absolut vodka, Pineapple juice" },
-        { name: "Lady in Blue", description: "Blue curacao, gin, lime juice" },
-        { name: "Sex on the Beach", description: "Vodka, Peach schnapps, orange juice, Cranberry juice" },
-        { name: "Caipivodka on the Shore", description: "Absolut vodka, sugar, lime, soda" },
-        { name: "Vanilla Kahlua Ice", description: "Baileys, Kahlua, vanilla ice cream" },
-        { name: "Ko-Sa Iced Tea", description: "Absolut vodka, Bacardi superior, Tequila, gin, Campari, lemon juice, grenadine, coke" },
-        { name: "Long Island", description: "Vodka, triple sec, Gin, Rum, Tequila, Lemon juice" },
-        { name: "Tequila Sunrise", description: "Tequila, Orange juice, Grenadine Syrup" },
-        { name: "Classic Gin & Tonic", description: "Gin, tonic, lemon, cucumber" },
-        { name: "Spicy Gin(ger) & Tonic", description: "Bombay Saphire Gin, tonic, fresh ginger" },
-        { name: "Ko-Oki Cocktail", description: "Malibu, Absolut vodka, Pineapple juice, grenadine" }
-      ]
-    }
+      id: "drk7",
+      name: "Mineral Water Small (750ml)",
+      description: "Bottled mineral water",
+    },
+    {
+      id: "drk8",
+      name: "Mineral Water Large (1.5L)",
+      description: "Large bottle mineral water",
+    },
+    {
+      id: "drk9",
+      name: "Green/Black Tea",
+      description: "Selection of premium teas",
+    },
+    {
+      id: "drk10",
+      name: "Glass Milk",
+      description: "Fresh cold milk",
+    },
+    {
+      id: "drk11",
+      name: "Hot Chocolate",
+      description: "Rich hot chocolate",
+    },
+    {
+      id: "drk12",
+      name: "Fresh Coffee or Espresso",
+      description: "Freshly brewed coffee or espresso",
+      isPopular: true,
+    },
+    {
+      id: "drk13",
+      name: "Cappuccino",
+      description: "Classic Italian cappuccino",
+    },
+    {
+      id: "drk14",
+      name: "Caffè Latte",
+      description: "Smooth caffè latte",
+    },
+    {
+      id: "drk15",
+      name: "Latte Macchiato",
+      description: "Layered latte macchiato",
+    },
+    {
+      id: "drk16",
+      name: "Ice Coffee",
+      description: "Refreshing iced coffee",
+    },
   ];
 
   const winesMenu = [
     {
-      title: "WHITE WINES",
-      dishes: [
-        { 
-          name: "Nederburg - Sauvignon Blanc", 
-          description: "2020 - 13.5% - South Africa. Crisp and medium bodied with delicious combination of tropical and herbaceous notes" 
-        },
-        { 
-          name: "Fleur Du Cap - Sauvignon Blanc", 
-          description: "2022 - 12.5% - South Africa. Very fresh, high in complexity, green tones of apple, elderflower, citrus lime and pineapple" 
-        }
-      ]
+      id: "wine1",
+      name: "4th Street Wine",
+      description: "Sweet and fruity wine (750ml)",
+      isPopular: true,
     },
     {
-      title: "RED WINES",
-      dishes: [
-        { 
-          name: "Zonnebloem - Cabernet Sauvignon", 
-          description: "2020 - 14% - South Africa. Aromas of blackcurrants, dark berries, raspberries and oak spice" 
-        },
-        { 
-          name: "Nederburg - Baronne", 
-          description: "2020 - 13.5% - South Africa. This noble red blend has a rich heritage, a true South African classic" 
-        }
-      ]
+      id: "wine2",
+      name: "Viceroy Brandy",
+      description: "Premium brandy (750ml)",
     },
     {
-      title: "HOUSE WINES",
-      dishes: [
-        { 
-          name: "Whispering Mountain - Sauvignon Blanc (White)", 
-          description: "2023 - 13.5% - South Africa. Crisp and fresh with hints of passionfruit and ripe tropical flavours on the nose. Available by glass or bottle" 
-        },
-        { 
-          name: "Whispering Mountain - Cabernet Sauvignon (Red)", 
-          description: "2021 - 14% - South Africa. Easy drinking wine with upfront red berries. Available by glass or bottle" 
-        }
-      ],
-      note: "Cork fee for bottles from outside"
-    }
+      id: "wine3",
+      name: "Dry Gin",
+      description: "Classic dry gin - single shot",
+    },
+    {
+      id: "wine4",
+      name: "Gordon's Dry Gin",
+      description: "Premium London dry gin (750ml)",
+      isPopular: true,
+    },
   ];
 
-  const renderMenuSection = (menuData: any[]) => (
-    <div className="space-y-16">
-      {menuData.map((category, idx) => (
-        <div key={idx} className="space-y-6">
-          <h2 className="text-3xl font-bold text-foreground border-b-2 border-primary pb-2">
-            {category.title}
-          </h2>
-          
-          {category.image && (
-            <div className="relative h-80 rounded-lg overflow-hidden mb-6 bg-muted/20">
-              <img
-                src={category.image}
-                alt={category.title}
-                className="w-full h-full object-contain"
-              />
+  const renderMenuItems = (items: any[]) => (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {items.map((item) => (
+        <Card key={item.id} className="hover:shadow-lg transition-shadow">
+          <CardContent className="p-4">
+            <div className="flex items-start justify-between gap-2 mb-2">
+              <h3 className="text-lg font-semibold text-foreground flex-1">
+                {item.name}
+              </h3>
+              <div className="flex gap-1 flex-shrink-0">
+                {item.isPopular && (
+                  <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-primary/20 text-primary">
+                    Popular
+                  </span>
+                )}
+                {item.isVegetarian && (
+                  <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                    <Leaf className="w-3 h-3" />
+                  </span>
+                )}
+                {item.isSpicy && (
+                  <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                    <Flame className="w-3 h-3" />
+                  </span>
+                )}
+              </div>
             </div>
-          )}
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {category.dishes.map((dish: any, dishIdx: number) => (
-              <Card key={dishIdx} className="hover:shadow-lg transition-shadow">
-                <CardContent className="p-4">
-                  <h3 className="text-lg font-semibold text-foreground mb-1">
-                    {dish.name}
-                  </h3>
-                  {dish.description && (
-                    <p className="text-sm text-muted-foreground">
-                      {dish.description}
-                    </p>
-                  )}
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-
-          {category.note && (
-            <p className="text-sm italic text-muted-foreground mt-4 p-3 bg-muted/30 rounded-md">
-              {category.note}
+            <p className="text-sm text-muted-foreground">
+              {item.description}
             </p>
-          )}
-        </div>
+          </CardContent>
+        </Card>
       ))}
     </div>
   );
@@ -546,59 +838,91 @@ const Restaurant = () => {
                 Breakfast
               </TabsTrigger>
               <TabsTrigger value="starters" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
-                Starters
+                Starters & Appetizers
               </TabsTrigger>
-              <TabsTrigger value="main-dishes" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
-                Main Dishes
+              <TabsTrigger value="mains" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+                Main Courses
               </TabsTrigger>
-              <TabsTrigger value="childrens-menu" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+              <TabsTrigger value="sides" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+                Sides
+              </TabsTrigger>
+              <TabsTrigger value="children" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
                 Children's Menu
               </TabsTrigger>
-              <TabsTrigger value="dessert" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
-                Dessert
+              <TabsTrigger value="desserts" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+                Desserts
               </TabsTrigger>
               <TabsTrigger value="drinks" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
-                Drinks Menu
-              </TabsTrigger>
-              <TabsTrigger value="ko-oki-cocktails" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
-                Ko-Oki Cocktails
+                Beverages
               </TabsTrigger>
               <TabsTrigger value="wines" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
-                Wines
+                Wine & Spirits
               </TabsTrigger>
             </TabsList>
 
             <div className="mt-12">
               <TabsContent value="breakfast">
-                {renderMenuSection(breakfastMenu)}
+                <div className="mb-8">
+                  <h2 className="text-3xl font-bold text-foreground mb-2">Breakfast</h2>
+                  <p className="text-muted-foreground">Start your day with our delicious breakfast selections</p>
+                </div>
+                {renderMenuItems(breakfastMenu)}
               </TabsContent>
 
               <TabsContent value="starters">
-                {renderMenuSection(startersMenu)}
+                <div className="mb-8">
+                  <h2 className="text-3xl font-bold text-foreground mb-2">Starters & Appetizers</h2>
+                  <p className="text-muted-foreground">Perfect beginnings to your culinary journey</p>
+                </div>
+                {renderMenuItems(startersMenu)}
               </TabsContent>
 
-              <TabsContent value="main-dishes">
-                {renderMenuSection(mainDishesMenu)}
+              <TabsContent value="mains">
+                <div className="mb-8">
+                  <h2 className="text-3xl font-bold text-foreground mb-2">Main Courses</h2>
+                  <p className="text-muted-foreground">Signature dishes featuring the finest ingredients</p>
+                </div>
+                {renderMenuItems(mainsMenu)}
               </TabsContent>
 
-              <TabsContent value="childrens-menu">
-                {renderMenuSection(childrensMenu)}
+              <TabsContent value="sides">
+                <div className="mb-8">
+                  <h2 className="text-3xl font-bold text-foreground mb-2">Sides</h2>
+                  <p className="text-muted-foreground">Perfect accompaniments to your main course</p>
+                </div>
+                {renderMenuItems(sidesMenu)}
               </TabsContent>
 
-              <TabsContent value="dessert">
-                {renderMenuSection(dessertMenu)}
+              <TabsContent value="children">
+                <div className="mb-8">
+                  <h2 className="text-3xl font-bold text-foreground mb-2">Children's Menu</h2>
+                  <p className="text-muted-foreground">Delicious and nutritious meals for our little guests</p>
+                </div>
+                {renderMenuItems(childrensMenu)}
+              </TabsContent>
+
+              <TabsContent value="desserts">
+                <div className="mb-8">
+                  <h2 className="text-3xl font-bold text-foreground mb-2">Desserts</h2>
+                  <p className="text-muted-foreground">Sweet endings to complete your dining experience</p>
+                </div>
+                {renderMenuItems(dessertsMenu)}
               </TabsContent>
 
               <TabsContent value="drinks">
-                {renderMenuSection(drinksMenu)}
-              </TabsContent>
-
-              <TabsContent value="ko-oki-cocktails">
-                {renderMenuSection(koOkiCocktails)}
+                <div className="mb-8">
+                  <h2 className="text-3xl font-bold text-foreground mb-2">Beverages</h2>
+                  <p className="text-muted-foreground">Refreshing drinks to complement your meal</p>
+                </div>
+                {renderMenuItems(drinksMenu)}
               </TabsContent>
 
               <TabsContent value="wines">
-                {renderMenuSection(winesMenu)}
+                <div className="mb-8">
+                  <h2 className="text-3xl font-bold text-foreground mb-2">Wine & Spirits Selection</h2>
+                  <p className="text-muted-foreground">Carefully curated wines and spirits</p>
+                </div>
+                {renderMenuItems(winesMenu)}
               </TabsContent>
             </div>
           </Tabs>
