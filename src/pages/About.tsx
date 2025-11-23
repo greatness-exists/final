@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-export const About = () => {
+const About = () => {
   const revealRefs = useRef<(HTMLElement | null)[]>([]);
 
   useEffect(() => {
@@ -89,36 +89,64 @@ export const About = () => {
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="text-center p-6">
-              <div className="text-5xl mb-4">🌊</div>
-              <h3 className="text-2xl font-light mb-3 text-foreground">Connection</h3>
-              <p className="text-muted-foreground">
-                Deep connection with nature, community, and oneself
-              </p>
+            <div className="relative text-center p-6 rounded-lg overflow-hidden group h-80">
+              <div 
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                style={{ backgroundImage: `url(https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/serene-coastal-beach-scene-with-people-c-878b69ce-20251123010957.jpg)` }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/30" />
+              <div className="relative z-10 flex flex-col items-center justify-center h-full text-white">
+                <div className="text-5xl mb-4 drop-shadow-lg">🌊</div>
+                <h3 className="text-2xl font-light mb-3 drop-shadow-lg">Connection</h3>
+                <p className="drop-shadow-lg">
+                  Deep connection with nature, community, and oneself
+                </p>
+              </div>
             </div>
 
-            <div className="text-center p-6">
-              <div className="text-5xl mb-4">🍃</div>
-              <h3 className="text-2xl font-light mb-3 text-foreground">Simplicity</h3>
-              <p className="text-muted-foreground">
-                Authentic experiences free from unnecessary complexity
-              </p>
+            <div className="relative text-center p-6 rounded-lg overflow-hidden group h-80">
+              <div 
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                style={{ backgroundImage: `url(https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/minimalist-coastal-living-scene-simple-w-e34fd921-20251123010957.jpg)` }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/30" />
+              <div className="relative z-10 flex flex-col items-center justify-center h-full text-white">
+                <div className="text-5xl mb-4 drop-shadow-lg">🍃</div>
+                <h3 className="text-2xl font-light mb-3 drop-shadow-lg">Simplicity</h3>
+                <p className="drop-shadow-lg">
+                  Authentic experiences free from unnecessary complexity
+                </p>
+              </div>
             </div>
 
-            <div className="text-center p-6">
-              <div className="text-5xl mb-4">🌅</div>
-              <h3 className="text-2xl font-light mb-3 text-foreground">Rhythm</h3>
-              <p className="text-muted-foreground">
-                Living in harmony with the natural flow of coastal life
-              </p>
+            <div className="relative text-center p-6 rounded-lg overflow-hidden group h-80">
+              <div 
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                style={{ backgroundImage: `url(https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/ocean-waves-rhythm-and-flow-sunrise-over-ff9b432a-20251123010957.jpg)` }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/30" />
+              <div className="relative z-10 flex flex-col items-center justify-center h-full text-white">
+                <div className="text-5xl mb-4 drop-shadow-lg">🌅</div>
+                <h3 className="text-2xl font-light mb-3 drop-shadow-lg">Rhythm</h3>
+                <p className="drop-shadow-lg">
+                  Living in harmony with the natural flow of coastal life
+                </p>
+              </div>
             </div>
 
-            <div className="text-center p-6">
-              <div className="text-5xl mb-4">💚</div>
-              <h3 className="text-2xl font-light mb-3 text-foreground">Wellness</h3>
-              <p className="text-muted-foreground">
-                Holistic well-being through clean air, food, and rest
-              </p>
+            <div className="relative text-center p-6 rounded-lg overflow-hidden group h-80">
+              <div 
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                style={{ backgroundImage: `url(https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/holistic-wellness-scene-with-fresh-organ-54e99e48-20251123010956.jpg)` }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/30" />
+              <div className="relative z-10 flex flex-col items-center justify-center h-full text-white">
+                <div className="text-5xl mb-4 drop-shadow-lg">💚</div>
+                <h3 className="text-2xl font-light mb-3 drop-shadow-lg">Wellness</h3>
+                <p className="drop-shadow-lg">
+                  Holistic well-being through clean air, food, and rest
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -199,7 +227,7 @@ export const About = () => {
             Discover your own story at KO-SA Beach Resort
           </p>
           <button
-            className="bg-primary text-primary-foreground px-8 py-3 rounded-lg hover:bg-primary/90 transition-colors font-semibold"
+            className="bg-background text-foreground border-2 border-border px-8 py-3 rounded-lg hover:bg-muted transition-colors font-semibold inline-block"
             onClick={() => window.open("https://us2.cloudbeds.com/reservation/65CAqa", '_blank')}
           >
             Book Your Stay

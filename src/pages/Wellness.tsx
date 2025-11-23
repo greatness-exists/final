@@ -13,32 +13,38 @@ const wellnessFeatures = [
   {
     title: "Spa Services",
     description: "Herbal treatments and massage therapies using natural local ingredients",
-    icon: "🌿"
+    icon: "🌿",
+    image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/luxurious-spa-treatment-with-natural-her-ff3a7cc8-20251123010957.jpg"
   },
   {
     title: "Wellness Coaching",
     description: "Personalized guidance for calm, clarity, and long-lasting well-being",
-    icon: "🧘"
+    icon: "🧘",
+    image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/wellness-coach-guiding-client-in-peacefu-9a0a20e3-20251123010957.jpg"
   },
   {
     title: "Herbal Tea & Juice Bar",
     description: "Curated selection of nourishing beverages for body and mind",
-    icon: "🍵"
+    icon: "🍵",
+    image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/beautiful-herbal-tea-and-juice-bar-with--3c42bba9-20251123010957.jpg"
   },
   {
     title: "Yoga by the Sea",
     description: "Gentle movement sessions with ocean views and sea breeze",
-    icon: "🌊"
+    icon: "🌊",
+    image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/yoga-session-by-the-ocean-at-sunrise-peo-cce24390-20251123010957.jpg"
   },
   {
     title: "Guided Mindfulness",
     description: "Meditation and breathing practices in serene natural settings",
-    icon: "🕉️"
+    icon: "🕉️",
+    image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/guided-meditation-in-serene-natural-sett-5b229e57-20251123010956.jpg"
   },
   {
     title: "Nature Connection",
     description: "Restorative walks and immersive experiences in coastal environment",
-    icon: "🌅"
+    icon: "🌅",
+    image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/restorative-nature-walk-through-coastal--b5278c1a-20251123010957.jpg"
   }
 ];
 
@@ -150,18 +156,22 @@ export const Wellness = () => {
             {wellnessFeatures.map((feature, index) => (
               <Card 
                 key={feature.title}
-                className="border-none shadow-lg hover-scale transition-all overflow-hidden group"
+                className="border-none shadow-lg hover-scale transition-all overflow-hidden group relative h-96"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <CardContent className="p-8 text-center relative">
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <div className="text-6xl mb-6 transform group-hover:scale-110 transition-transform">
+                <div 
+                  className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                  style={{ backgroundImage: `url(${feature.image})` }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/30" />
+                <CardContent className="relative z-10 p-8 text-center flex flex-col items-center justify-center h-full text-white">
+                  <div className="text-6xl mb-6 transform group-hover:scale-110 transition-transform drop-shadow-lg">
                     {feature.icon}
                   </div>
-                  <h3 className="text-2xl font-light mb-4 text-foreground relative z-10">
+                  <h3 className="text-2xl font-light mb-4 drop-shadow-lg">
                     {feature.title}
                   </h3>
-                  <p className="text-muted-foreground leading-relaxed relative z-10">
+                  <p className="leading-relaxed drop-shadow-lg">
                     {feature.description}
                   </p>
                 </CardContent>
