@@ -71,7 +71,12 @@ const Contact = () => {
       >
         <div className="absolute inset-0 bg-black/50" />
         <div className="relative z-10 text-center text-white px-4">
-          <h1 className="text-5xl font-bold mb-4 animate-fade-in">Get In Touch</h1>
+          <h1 
+            className="text-5xl font-bold mb-4 animate-fade-in text-transparent-bg"
+            style={{ backgroundImage: `url(${heroImage})` }}
+          >
+            Get In Touch
+          </h1>
           <p className="text-xl animate-fade-in">We're here to help plan your perfect getaway</p>
         </div>
       </section>

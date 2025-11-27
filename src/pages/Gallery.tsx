@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 
+const heroImage = "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/ILoveKOSA-1760668254089.JPG";
+
 const galleryImages = [
   // Architecture
    { url: "/ENV10.jpg", category: "architecture", alt: "Resort Architecture" },
@@ -132,7 +134,12 @@ const Gallery = () => {
         <div className="absolute inset-0 bg-black/40" />
         <div className="relative z-10 text-center text-white px-4">
           <p className="text-sm tracking-[0.2em] uppercase mb-4">Visual Stories</p>
-          <h1 className="text-6xl md:text-8xl font-light mb-6">Gallery</h1>
+          <h1 
+            className="text-5xl md:text-7xl font-light mb-6 text-transparent-bg"
+            style={{ backgroundImage: `url(${heroImage})` }}
+          >
+            Gallery
+          </h1>
           <p className="text-xl max-w-2xl mx-auto">
             Authentic moments, vivid colors, and the truth of KO-SA
           </p>
@@ -241,7 +248,7 @@ const Gallery = () => {
             These moments are waiting for you at KO-SA Beach Resort
           </p>
           <button
-            className="bg-primary text-primary-foreground px-8 py-3 rounded-lg hover:bg-primary/90 transition-colors font-semibold"
+            className="bg-primary text-primary-foreground px-8 py-3 rounded-lg hover:bg-primary/90 transition-colors font-semibold book-button"
             onClick={() => window.open("https://us2.cloudbeds.com/reservation/65CAqa", '_blank')}
           >
             Book Your Stay

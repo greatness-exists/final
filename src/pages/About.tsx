@@ -1,5 +1,7 @@
 import { useEffect, useRef } from "react";
 
+const heroImage = "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/ILoveKOSA-1760668254089.JPG";
+
 const About = () => {
   const revealRefs = useRef<(HTMLElement | null)[]>([]);
 
@@ -32,7 +34,12 @@ const About = () => {
         <div className="absolute inset-0 bg-black/40" />
         <div className="relative z-10 text-center text-white px-4">
           <p className="text-sm tracking-[0.2em] uppercase mb-4">Our Story</p>
-          <h1 className="text-6xl md:text-8xl font-light mb-6">A Legacy of Coastal Living</h1>
+          <h1 
+            className="text-6xl md:text-8xl font-light mb-6 text-transparent-bg"
+            style={{ backgroundImage: `url(${heroImage})` }}
+          >
+            A Legacy of Coastal Living
+          </h1>
           <p className="text-xl max-w-2xl mx-auto">23 years of sanctuary, simplicity, and connection with nature</p>
         </div>
       </section>
@@ -227,7 +234,7 @@ const About = () => {
             Discover your own story at KO-SA Beach Resort
           </p>
           <button
-            className="bg-background text-foreground border-2 border-border px-8 py-3 rounded-lg hover:bg-muted transition-colors font-semibold inline-block"
+            className="bg-background text-foreground border-2 border-border px-8 py-3 rounded-lg hover:bg-muted transition-colors font-semibold inline-block book-button"
             onClick={() => window.open("https://us2.cloudbeds.com/reservation/65CAqa", '_blank')}
           >
             Book Your Stay

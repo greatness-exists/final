@@ -5,7 +5,10 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import roomImage from "@/assets/room-ocean-view.jpg";
 import Room3 from "@/assets/rooms/Room3.JPG";
 
+
+
 const bookingUrl = "https://us2.cloudbeds.com/reservation/65CAqa";
+const heroImage = "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/ILoveKOSA-1760668254089.JPG";
 
 const rooms = [
   {
@@ -210,7 +213,7 @@ const RoomCard = ({ room }: { room: typeof rooms[0] }) => {
             </span>
           ))}
         </div>
-        <Button asChild className="w-full">
+        <Button asChild className="w-full book-button">
           <a href={bookingUrl} target="_blank" rel="noopener noreferrer">
             Book Now
           </a>
@@ -230,10 +233,16 @@ const Rooms = () => {
       >
         <div className="absolute inset-0 bg-black/50" />
         <div className="relative z-10 text-center text-white px-4">
-          <h1 className="text-5xl font-bold mb-4 animate-fade-in">Our Rooms</h1>
+          <h1 
+            className="text-4xl md:text-6xl font-bold mb-4 animate-fade-in text-transparent-bg"
+            style={{ backgroundImage: `url(${heroImage})` }}
+          >
+            Our Rooms
+          </h1>
           <p className="text-xl mb-6 animate-fade-in">Find your perfect coastal sanctuary</p>
         </div>
       </section>
+
 
       {/* Rooms Grid */}
       <section className="py-20 px-4">

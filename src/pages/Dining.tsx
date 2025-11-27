@@ -2,6 +2,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Leaf, Flame } from "lucide-react";
 
+const heroImage = "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/ILoveKOSA-1760668254089.JPG";
+
 const Restaurant = () => {
   // Menu data organized by category
   const breakfastMenu = [
@@ -746,7 +748,12 @@ const Restaurant = () => {
       >
         <div className="absolute inset-0 bg-black/50" />
         <div className="relative z-10 text-center text-white px-4">
-          <h1 className="text-5xl font-bold mb-4 animate-fade-in">Taste the Coast</h1>
+          <h1 
+            className="text-4xl md:text-6xl font-bold mb-4 animate-fade-in text-transparent-bg"
+            style={{ backgroundImage: `url(${heroImage})` }}
+          >
+            Taste the Coast
+          </h1>
           <p className="text-xl animate-fade-in">Authentic flavors from our beachfront kitchen</p>
         </div>
       </section>

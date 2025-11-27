@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 
+const heroImage = "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/ILoveKOSA-1760668254089.JPG";
+
 const wellnessImages = [
   "/ENV.jpg",
   "/ENV2.jpg",
@@ -104,7 +106,12 @@ export const Wellness = () => {
         <div className="absolute inset-0 bg-black/40" />
         <div className="relative z-10 text-center text-white px-4">
           <p className="text-sm tracking-[0.2em] uppercase mb-4">Wellness</p>
-          <h1 className="text-6xl md:text-8xl font-light mb-6">Your Wellness Journey Starts Here</h1>
+          <h1 
+            className="text-5xl md:text-7xl font-light mb-6 text-transparent-bg"
+            style={{ backgroundImage: `url(${heroImage})` }}
+          >
+            Your Wellness Journey Starts Here
+          </h1>
           <p className="text-xl max-w-2xl mx-auto">
             Nature restores. Discover balance in body and mind.
           </p>
@@ -279,7 +286,7 @@ export const Wellness = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
-              className="bg-primary text-primary-foreground px-8 py-3 rounded-lg hover:bg-primary/90 transition-colors font-semibold"
+              className="bg-primary text-primary-foreground px-8 py-3 rounded-lg hover:bg-primary/90 transition-colors font-semibold book-button"
               onClick={() => window.open("https://us2.cloudbeds.com/reservation/65CAqa", '_blank')}
             >
               Book Your Stay

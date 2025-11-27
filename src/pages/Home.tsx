@@ -6,6 +6,7 @@ import Room2 from "@/assets/rooms/Room2.JPG";
 import Room3 from "@/assets/rooms/Room3.JPG";
 import Room772A2074 from "@/assets/rooms/772A2074.JPG";
 
+
 // Activities images
 import Activity772A2245 from "@/assets/activites/772A2245.JPG";
 import Activity772A2174 from "@/assets/activites/772A2174.JPG";
@@ -134,6 +135,7 @@ const Home = () => {
         </p>
       </section>
 
+
       {/* About Section */}
       <section 
          ref={(el) => { revealRefs.current[0] = el; }}
@@ -182,7 +184,7 @@ const Home = () => {
             Book your stay at KO-SA and experience the golden shores of Elmina.
           </p>
           <button
-  className="bg-white text-black hover:bg-white/90 font-semibold py-2 px-4 rounded"
+  className="bg-white text-black hover:bg-white/90 font-semibold py-2 px-4 rounded book-button"
   onClick={() => window.open(bookingUrl, '_blank')}
 >
   Book Now
@@ -331,7 +333,7 @@ const Home = () => {
             Book your stay at KO-SA Beach Resort and discover your slice of paradise.
           </p>
           <button
-  className="bg-white text-black hover:bg-white/90 font-semibold py-2 px-4 rounded"
+  className="bg-white text-black hover:bg-white/90 font-semibold py-2 px-4 rounded book-button"
   onClick={() => window.open(bookingUrl, '_blank')}
 >
   Book Now

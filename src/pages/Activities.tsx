@@ -1,6 +1,8 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { useEffect, useRef, useState } from "react";
 
+const heroImage = "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/ILoveKOSA-1760668254089.JPG";
+
 const activities = [
   {
     title: "Cooking Class",
@@ -151,7 +153,12 @@ const Activities = () => {
         <div className="absolute inset-0 bg-black/30" />
         <div className="relative z-10 text-center text-white px-4">
           <p className="text-sm tracking-[0.2em] uppercase mb-4">Experiences</p>
-          <h1 className="text-6xl md:text-8xl font-light mb-6">Activities</h1>
+          <h1 
+            className="text-5xl md:text-7xl font-light mb-6 text-transparent-bg"
+            style={{ backgroundImage: `url(${heroImage})` }}
+          >
+            Activities
+          </h1>
           <p className="text-xl">Discover the culture, beauty, and adventure of Ghana</p>
         </div>
       </section>
