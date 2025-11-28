@@ -2,6 +2,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { CloudbedsWidget } from "@/components/CloudbedsWidget";
 import roomImage from "@/assets/room-ocean-view.jpg";
 import Room3 from "@/assets/rooms/Room3.JPG";
 
@@ -243,6 +244,12 @@ const Rooms = () => {
         </div>
       </section>
 
+      {/* Check Availability Widget */}
+      <section className="py-16 px-4 bg-gradient-to-b from-background to-muted">
+        <div className="container mx-auto max-w-5xl">
+          <CloudbedsWidget />
+        </div>
+      </section>
 
       {/* Rooms Grid */}
       <section className="py-20 px-4">

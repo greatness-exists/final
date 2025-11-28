@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
+import { CloudbedsWidget } from "@/components/CloudbedsWidget";
 import Room1 from "@/assets/rooms/Room1.JPG";
 import Room2 from "@/assets/rooms/Room2.JPG";
 import Room3 from "@/assets/rooms/Room3.JPG";
@@ -135,6 +136,12 @@ const Home = () => {
         </p>
       </section>
 
+      {/* Check Availability Widget */}
+      <section className="py-16 px-4 bg-gradient-to-b from-background to-muted">
+        <div className="container mx-auto max-w-5xl">
+          <CloudbedsWidget />
+        </div>
+      </section>
 
       {/* About Section */}
       <section 
