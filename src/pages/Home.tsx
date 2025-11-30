@@ -137,7 +137,7 @@ const Home = () => {
       </section>
 
       {/* Check Availability Widget */}
-      <section className="py-16 px-4 bg-gradient-to-b from-background to-muted">
+      <section className="py-16 px-4 bg-gradient-to-b from-background to-muted relative z-20">
         <div className="container mx-auto max-w-5xl">
           <CloudbedsWidget />
         </div>
@@ -146,7 +146,7 @@ const Home = () => {
       {/* About Section */}
       <section 
          ref={(el) => { revealRefs.current[0] = el; }}
-        className="py-32 px-4 scroll-reveal bg-gradient-to-b from-background to-muted relative z-20"
+        className="py-32 px-4 scroll-reveal bg-gradient-to-b from-muted to-background relative z-20"
       >
         <div className="container mx-auto max-w-4xl text-center">
           <p className="text-sm font-sans tracking-[0.2em] uppercase text-primary mb-4 font-semibold">Welcome to the</p>
@@ -209,7 +209,7 @@ const Home = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
             <div className="relative h-96 md:h-[600px] overflow-hidden rounded-lg shadow-2xl">
               <img
-                src={"https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Food5.JPG"}
+                src={"/KO-SA breeze restaurant.jpg"}
                 alt="Dining"
                 className="w-full h-full object-cover"
               />
