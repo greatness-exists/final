@@ -7,7 +7,7 @@
 }
 
 .booking-widget-wrapper {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #F8F3E8 0%, #F4EEDC 100%);
   border-radius: 16px;
   padding: 2.5rem;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
@@ -37,19 +37,22 @@
 .booking-widget-title {
   font-size: 2rem;
   font-weight: 700;
-  color: white;
+  color: #4A3B32;
   margin: 0 0 0.5rem 0;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  font-family: 'Cormorant Garamond', serif;
 }
 
 .booking-widget-subtitle {
   font-size: 1rem;
-  color: rgba(255, 255, 255, 0.9);
+  color: #4A3B32;
   margin: 0;
+  font-family: 'Inter', sans-serif;
+  opacity: 0.8;
 }
 
 .booking-widget-content {
-  background: white;
+  background: #ffffff;
   border-radius: 12px;
   padding: 2rem;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
@@ -86,59 +89,60 @@
 
 .form-field label {
   font-weight: 600;
-  color: #374151;
+  color: #4A3B32;
   font-size: 0.875rem;
   margin-bottom: 0.5rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   display: block;
+  font-family: 'Inter', sans-serif;
 }
 
 .date-input {
   width: 100%;
   padding: 0.75rem 1rem;
-  border: 2px solid #e5e7eb;
+  border: 2px solid #D2CEC8;
   border-radius: 8px;
   font-size: 1rem;
   transition: all 0.2s ease;
-  background: white;
-  color: #111827;
+  background: #ffffff;
+  color: #4A3B32;
   font-weight: 500;
   cursor: pointer;
-  font-family: inherit;
+  font-family: 'Inter', sans-serif;
 }
 
 .date-input:hover {
-  border-color: #9ca3af;
+  border-color: #E07D2B;
 }
 
 .date-input:focus {
   outline: none;
-  border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  border-color: #E07D2B;
+  box-shadow: 0 0 0 3px rgba(224, 125, 43, 0.1);
 }
 
 .check-availability-button {
   width: 100%;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  background: linear-gradient(135deg, #E07D2B 0%, #F19232 100%);
+  color: #ffffff;
   padding: 0.875rem 2.5rem;
   border-radius: 8px;
   font-weight: 600;
   font-size: 1rem;
   border: none;
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 4px 12px rgba(224, 125, 43, 0.4);
   transition: all 0.3s ease;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   cursor: pointer;
-  font-family: inherit;
+  font-family: 'Inter', sans-serif;
 }
 
 .check-availability-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
-  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+  box-shadow: 0 6px 20px rgba(224, 125, 43, 0.5);
+  background: linear-gradient(135deg, #F19232 0%, #E07D2B 100%);
 }
 
 .check-availability-button:active {
