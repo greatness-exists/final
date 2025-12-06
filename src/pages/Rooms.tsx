@@ -4,7 +4,6 @@ import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { CloudbedsWidget } from "@/components/CloudbedsWidget";
 
-import Room3 from "@/assets/rooms/Room3.JPG";
 
 const bookingUrl = "https://us2.cloudbeds.com/reservation/65CAqa";
 
@@ -23,11 +22,11 @@ const rooms = [
       "Balcony",
     ],
     images: [
-      "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Deluxe%20Double%20rooms%20with%20sea%20view/DDRWSV.jpg",
-      "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Deluxe%20Double%20rooms%20with%20sea%20view/DDRWSV2.jpg",
-      "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Deluxe%20Double%20rooms%20with%20sea%20view/DDRWSV3.jpg",
-      "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Deluxe%20Double%20rooms%20with%20sea%20view/DDRWSV4.jpg",
-      "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Deluxe%20Double%20rooms%20with%20sea%20view/DDRWSV5.jpg",
+      "/Rooms/DDRWSV.jpg",
+      "/Rooms/DDRWSV2.jpg",
+      "/Rooms/DDRWSV3.jpg",
+      "/Rooms/DDRWSV4.jpg",
+      "/Rooms/DDRWSV5.jpg",
     ],
   },
   {
@@ -44,11 +43,11 @@ const rooms = [
       "Balcony",
     ],
     images: [
-      "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Luxury%20double%20room%20with%20sea%20view/LDRWSV.jpg",
-      "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Luxury%20double%20room%20with%20sea%20view/LDRWSV2.jpg",
-      "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Luxury%20double%20room%20with%20sea%20view/LDRWSV3.jpg",
-      "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Luxury%20double%20room%20with%20sea%20view/LDRWSV4.jpg",
-      "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Luxury%20double%20room%20with%20sea%20view/LDRWSV5.jpg",
+      "/Rooms/LDRWSV.jpg",
+      "/Rooms/LDRWSV2.jpg",
+      "/Rooms/LDRWSV3.jpg",
+      "/Rooms/LDRWSV4.jpg",
+      "/Rooms/LDRWSV5.jpg",
     ],
   },
   {
@@ -65,30 +64,43 @@ const rooms = [
       "Balcony",
     ],
     images: [
-      "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Family%20room%20with%20private%20bathroom/FRWPB.jpg",
-      "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Family%20room%20with%20private%20bathroom/FRWPB2.jpg",
+      "/Rooms/FRWPB.jpg",
+      "/Rooms/FRWPB2.jpg",
     ],
   },
   { id: 4, 
     name: "Double Room with Garden View", description: "Peaceful double room overlooking our lush tropical gardens.", 
     amenities: [ "Garden View", "Double Bed", "Private Bathroom", "Air Conditioning", "WiFi", "Balcony", ], 
-    images: [ "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Double%20room%20with%20graden%20view/DRWGV.jpg", "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Double%20room%20with%20graden%20view/DRWGV2.jpg", ], }, 
+    images: [ "/Rooms/DRWGV.jpg", 
+      "/Rooms/DRWGV2.jpg", ], }, 
   { id: 5, 
     name: "Triple Room with Private Bathroom", description: "Comfortable triple room ideal for small groups or families.", 
-    amenities: [ "Private Bathroom", "Three Beds", "Air Conditioning", "WiFi", "Balcony", ], images: [ "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Triple%20Bedroom%20W%20Private%20Bathroom/TBWPB.jpg", "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Triple%20Bedroom%20W%20Private%20Bathroom/TBWPB2.jpg", "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Triple%20Bedroom%20W%20Private%20Bathroom/TBWPB3.jpg", "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Triple%20Bedroom%20W%20Private%20Bathroom/TBWPB4.jpg", "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Triple%20Bedroom%20W%20Private%20Bathroom/TBWPB5.JPG", "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Triple%20Bedroom%20W%20Private%20Bathroom/TBWPB6.jpg", "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Triple%20Bedroom%20W%20Private%20Bathroom/TBWPB7.jpg", ], }, 
+    amenities: [ "Private Bathroom", "Three Beds", "Air Conditioning", "WiFi", "Balcony", ], images: [ "/Rooms/TBWPB.jpg", 
+      "/Rooms/TBWPB2.jpg", 
+      "/Rooms/TBWPB3.jpg", 
+      "/Rooms/TBWPB4.jpg", 
+      "/Rooms/TBWPB5.JPG", 
+      "/Rooms/TBWPB6.jpg", 
+      "/Rooms/TBWPB7.jpg", ], }, 
   { id: 6, 
-    name: "Deluxe Twin Room with Sea View", description: "Premium twin room with spectacular ocean views and modern comforts.", amenities: [ "Sea View", "Twin Beds", "Private Bathroom", "Air Conditioning", "Balcony", "WiFi", ], images: [ "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Double%20Twin%20Room%20with%20Sea%20view/DTRWSV.JPG", "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Double%20Twin%20Room%20with%20Sea%20view/DTRWSV2.jpg", "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Double%20Twin%20Room%20with%20Sea%20view/DTRWSV3.jpg", "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Double%20Twin%20Room%20with%20Sea%20view/DTRWSV4.jpg", "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Double%20Twin%20Room%20with%20Sea%20view/DTRWSV5.jpg", ], }, 
+    name: "Deluxe Twin Room with Sea View", description: "Premium twin room with spectacular ocean views and modern comforts.", amenities: [ "Sea View", "Twin Beds", "Private Bathroom", "Air Conditioning", "Balcony", "WiFi", ], images: [ "/Rooms/DTRWSV.jpg", 
+      "/Rooms/DTRWSV2.jpg", 
+      "/Rooms/DTRWSV3.jpg", 
+      "/Rooms/DTRWSV4.jpg", 
+      "/Rooms/DTRWSV5.jpg", ], }, 
   { id: 7, 
-    name: "Twin Room with Garden View", description: "Serene twin room with views of our beautiful gardens.", amenities: [ "Garden View", "Twin Beds", "Private Bathroom", "Air Conditioning", "WiFi", "Balcony", ], images: [ "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Twin%20room%20with%20garden%20view/TRWGV.jpg", "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Twin%20room%20with%20garden%20view/TRWGV2.jpg", ], }, 
+    name: "Twin Room with Garden View", description: "Serene twin room with views of our beautiful gardens.", amenities: [ "Garden View", "Twin Beds", "Private Bathroom", "Air Conditioning", "WiFi", "Balcony", ], images: [ "/Rooms/TRWGV.jpg", 
+      "/Rooms/TRWGV2.jpg", ], }, 
   { id: 8, 
     name: "Standard Twin Room with Shared Bathroom", description: "Comfortable and affordable twin room with shared bathroom facilities.", 
     amenities: ["Twin Beds", "Shared Bathroom", "Fan", "WiFi", "Balcony"], 
-    images: [ "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Standard%20Twin%20Room%20with%20Shared%20Bathroom/STRWSB.jpg", "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Standard%20Twin%20Room%20with%20Shared%20Bathroom/STRWSB2.jpg", ], }, 
+    images: [ "/Rooms/STRWSB.jpg", 
+      "/Rooms/STRWSB2.jpg", ], }, 
   { id: 9, 
     name: "Standard Double Room with Shared Bathroom", 
     description: "Budget-friendly double room with shared bathroom facilities.", 
     amenities: ["Double Bed", "Shared Bathroom", "Fan", "WiFi", "Balcony"], 
-    images: [ "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Standard%20Double%20Room%20with%20Shared%20Bathroom/SDRWSB.jpg", ], },
+    images: [ "/Rooms/SDRWSB.jpg", ], },
 ];
 
 // Room Card Component
@@ -197,7 +209,7 @@ const Rooms = () => {
       {/* HERO */}
       <section
         className="relative h-96 flex items-center justify-center bg-cover bg-center"
-        style={{ backgroundImage: `url(${Room3})` }}
+        style={{ backgroundImage: `url(${"/Room3.jpg"})` }}
       >
         <div className="absolute inset-0 bg-black/50" />
         <div className="relative z-10 text-center text-white px-4">

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 
-const heroImage = "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/ILoveKOSA-1760668254089.JPG";
+const heroImage = "/ILoveKOSA-1760668254089.jpg";
 
 const galleryImages = [
   // Architecture
@@ -10,11 +10,11 @@ const galleryImages = [
    { url: "/ENV12.jpg", category: "architecture", alt: "Resort Architecture" },
    { url: "/ENV13.jpg", category: "architecture", alt: "Resort Architecture" },
    { url: "/ENV14.jpg", category: "architecture", alt: "Resort Architecture" },
-  { url: "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Room3.JPG", category: "architecture", alt: "Resort Architecture" },
-  { url: "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Room2.JPG", category: "architecture", alt: "Room Design" },
-  { url: "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Room1.JPG", category: "architecture", alt: "Interior Space" },
-  { url: "/ENV6.JPG", category: "architecture", alt: "Resort View" },
-  { url: "/ENV4.JPG", category: "architecture", alt: "Resort Interior" },
+  { url: "/Room3.jpg", category: "architecture", alt: "Resort Architecture" },
+  { url: "/Room2.jpg", category: "architecture", alt: "Room Design" },
+  { url: "/Room1.jpg", category: "architecture", alt: "Interior Space" },
+  { url: "/ENV6.jpg", category: "architecture", alt: "Resort View" },
+  { url: "/ENV4.jpg", category: "architecture", alt: "Resort Interior" },
   
   // Nature & Environment
   { url: "/ENV.jpg", category: "nature", alt: "Coastal Environment" },
@@ -27,31 +27,31 @@ const galleryImages = [
   { url: "/ENV9.jpg", category: "nature", alt: "Natural Surroundings" },
   
   // Food
-  { url: "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Food5.JPG", category: "food", alt: "Culinary Experience" },
-  { url: "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Food4.JPG", category: "food", alt: "Gourmet Cuisine" },
-  { url: "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Food3.JPG", category: "food", alt: "Delicious Dishes" },
-  { url: "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Food2.JPG", category: "food", alt: "Culinary Delights" },
-  { url: "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Food1.JPG", category: "food", alt: "Fine Dining" },
-  { url: "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Dining.JPG", category: "food", alt: "Dining Experience" },
-  { url: "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Drinks2.JPG", category: "food", alt: "Refreshing Beverages" },
+  { url: "/Food5.jpg", category: "food", alt: "Culinary Experience" },
+  { url: "/Food4.jpg", category: "food", alt: "Gourmet Cuisine" },
+  { url: "/Food3.jpg", category: "food", alt: "Delicious Dishes" },
+  { url: "/Food2.jpg", category: "food", alt: "Culinary Delights" },
+  { url: "/Food1.jpg", category: "food", alt: "Fine Dining" },
+  { url: "/Dining.jpg", category: "food", alt: "Dining Experience" },
+  { url: "/Drinks2.jpg", category: "food", alt: "Refreshing Beverages" },
   
   // Activities & People
-  { url: "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Activities/IMG-20251027-WA0001.jpg", category: "activities", alt: "Resort Activities" },
-  { url: "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/772A2174.JPG", category: "activities", alt: "Beach Activities" },
-  { url: "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/772A2130.JPG", category: "activities", alt: "Guest Experiences" },
-  { url: "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/772A2173.JPG", category: "activities", alt: "Resort Experiences" },
-  { url: "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Activities/IMG-20251027-WA0002.jpg", category: "activities", alt: "Resort Experiences" },
-  { url: "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Activities/IMG-20251027-WA0003.jpg", category: "activities", alt: "Resort Experiences" },
-  { url: "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Activities/IMG-20251027-WA0004.jpg", category: "activities", alt: "Resort Experiences" },
-  { url: "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Activities/IMG-20251027-WA0006.jpg", category: "activities", alt: "Resort Experiences" },
-  { url: "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Activities/IMG-20251027-WA0007.jpg", category: "activities", alt: "Resort Experiences" },
-  { url: "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Activities/IMG-20251027-WA0008.jpg", category: "activities", alt: "Resort Experiences" },
-  { url: "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Activities/IMG-20251027-WA0009.jpg", category: "activities", alt: "Resort Experiences" },
-  { url: "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Activities/IMG-20251027-WA0012.jpg", category: "activities", alt: "Resort Experiences" },
-  { url: "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Activities/IMG-20251027-WA0013.jpg", category: "activities", alt: "Resort Experiences" },
-  { url: "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Activities/IMG-20251027-WA0014.jpg", category: "activities", alt: "Resort Experiences" },
-  { url: "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Activities/IMG-20251027-WA0015.jpg", category: "activities", alt: "Resort Experiences" },
-  { url: "https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Activities/IMG-20251027-WA0016.jpg", category: "activities", alt: "Resort Experiences" },
+  { url: "/IMG-20251027-WA0001.jpg", category: "activities", alt: "Resort Activities" },
+  { url: "/772A2174.jpg", category: "activities", alt: "Beach Activities" },
+  { url: "/772A2130.jpg", category: "activities", alt: "Guest Experiences" },
+  { url: "/772A2173.jpg", category: "activities", alt: "Resort Experiences" },
+  { url: "/IMG-20251027-WA0002.jpg", category: "activities", alt: "Resort Experiences" },
+  { url: "/IMG-20251027-WA0003.jpg", category: "activities", alt: "Resort Experiences" },
+  { url: "/IMG-20251027-WA0004.jpg", category: "activities", alt: "Resort Experiences" },
+  { url: "/IMG-20251027-WA0006.jpg", category: "activities", alt: "Resort Experiences" },
+  { url: "/IMG-20251027-WA0007.jpg", category: "activities", alt: "Resort Experiences" },
+  { url: "/IMG-20251027-WA0008.jpg", category: "activities", alt: "Resort Experiences" },
+  { url: "/IMG-20251027-WA0009.jpg", category: "activities", alt: "Resort Experiences" },
+  { url: "/IMG-20251027-WA0012.jpg", category: "activities", alt: "Resort Experiences" },
+  { url: "/IMG-20251027-WA0013.jpg", category: "activities", alt: "Resort Experiences" },
+  { url: "/IMG-20251027-WA0014.jpg", category: "activities", alt: "Resort Experiences" },
+  { url: "/IMG-20251027-WA0015.jpg", category: "activities", alt: "Resort Experiences" },
+  { url: "/IMG-20251027-WA0016.jpg", category: "activities", alt: "Resort Experiences" },
 
 ];
 
@@ -129,7 +129,7 @@ const Gallery = () => {
       {/* Hero Section */}
       <section
         className="relative h-[60vh] flex items-center justify-center bg-fixed-section"
-        style={{ backgroundImage: `url(https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/772A1842.JPG)` }}
+        style={{ backgroundImage: `url("/772A1842.jpg")` }}
       >
         <div className="absolute inset-0 bg-black/40" />
         <div className="relative z-10 text-center text-white px-4">

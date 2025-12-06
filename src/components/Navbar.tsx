@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
-import logo from "@/assets/logo.png";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -33,7 +32,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center hover:opacity-80 transition-opacity">
-            <img src={logo} alt="KO-SA Beach Resort" className="h-14 w-auto drop-shadow-md" />
+            <img src={"/logo.png"} alt="KO-SA Beach Resort" className="h-14 w-auto drop-shadow-md" />
           </Link>
 
           {/* Desktop Navigation */}

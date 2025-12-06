@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 
-const heroImage = "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/ILoveKOSA-1760668254089.JPG";
+const heroImage = "/ILoveKOSA-1760668254089.jpg";
 
 const wellnessImages = [
   "/ENV.jpg",
@@ -197,7 +197,7 @@ export const Wellness = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
             <div className="relative h-96 md:h-[500px] overflow-hidden rounded-lg shadow-2xl">
               <img
-                src="https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/772A2245.JPG"
+                src="/772A2245.jpg"
                 alt="Wellness Experience"
                 className="w-full h-full object-cover"
               />

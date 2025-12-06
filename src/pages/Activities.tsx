@@ -1,7 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { useEffect, useRef, useState } from "react";
 
-const heroImage = "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/ILoveKOSA-1760668254089.JPG";
+const heroImage = "/ILoveKOSA-1760668254089.jpg";
 
 const activities = [
   {

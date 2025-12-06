@@ -10,7 +10,7 @@ import { useSafeAsync } from "@/hooks/useSafeAsync";
 import { toast } from "sonner";
 import emailjs from '@emailjs/browser';
 
-const heroImage = "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/ILoveKOSA-1760668254089.JPG";
+const heroImage = "/ILoveKOSA-1760668254089.jpg";
 
 const Contact = () => {
   const {

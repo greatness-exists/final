@@ -2,7 +2,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Leaf, Flame } from "lucide-react";
 
-const heroImage = "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/ILoveKOSA-1760668254089.JPG";
+const heroImage = "/ILoveKOSA-1760668254089.jpg";
 
 const Restaurant = () => {
   // Menu data organized by category
@@ -744,7 +744,7 @@ const Restaurant = () => {
       {/* Hero */}
       <section
         className="relative h-96 flex items-center justify-center bg-cover bg-center"
-        style={{ backgroundImage: `url(https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/772A2416.JPG)` }}
+        style={{ backgroundImage: `url("/772A2416.jpg")` }}
       >
         <div className="absolute inset-0 bg-black/50" />
         <div className="relative z-10 text-center text-white px-4">
@@ -769,7 +769,7 @@ const Restaurant = () => {
               <div 
                 className="absolute inset-0 bg-cover bg-center"
                 style={{ 
-                  backgroundImage: `url(https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Food5.JPG)`,
+                  backgroundImage: `url("/Food5.jpg")`,
                   filter: 'blur(2px)'
                 }}
               />
@@ -787,7 +787,7 @@ const Restaurant = () => {
               <div 
                 className="absolute inset-0 bg-cover bg-center"
                 style={{ 
-                  backgroundImage: `url(https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Food2.JPG)`,
+                  backgroundImage: `url("/Food2.jpg")`,
                   filter: 'blur(2px)'
                 }}
               />
@@ -805,7 +805,7 @@ const Restaurant = () => {
               <div 
                 className="absolute inset-0 bg-cover bg-center"
                 style={{ 
-                  backgroundImage: `url(https://sxprqwspkubfrdannakj.supabase.co/storage/v1/object/public/Assets/Food1.JPG)`,
+                  backgroundImage: `url("/Food1.jpg")`,
                   filter: 'blur(2px)'
                 }}
               />

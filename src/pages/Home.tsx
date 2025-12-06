@@ -2,53 +2,34 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { CloudbedsWidget } from "@/components/CloudbedsWidget";
-import Room1 from "@/assets/rooms/Room1.JPG";
-import Room2 from "@/assets/rooms/Room2.JPG";
-import Room3 from "@/assets/rooms/Room3.JPG";
-import Room772A2074 from "@/assets/rooms/772A2074.JPG";
 
 
-// Activities images
-import Activity772A2245 from "@/assets/activites/772A2245.JPG";
-import Activity772A2174 from "@/assets/activites/772A2174.JPG";
-import Activity772A2130 from "@/assets/activites/772A2130.JPG";
-
-// Wellness images
-import MassageAtTheBeach1 from "@/assets/wellness/MassageAtTheBeach1.JPG";
-import Wellness772A2101 from "@/assets/wellness/772A2101.JPG";
-
-// Gallery images
-import Gallery772A2074 from "@/assets/gallery/772A2074.JPG";
-import GalleryENV6 from "@/assets/gallery/ENV6.JPG";
-import GalleryFood5 from "@/assets/gallery/Food5.JPG";
-import GalleryENV8 from "@/assets/gallery/ENV8.JPG";
-
-const heroImage = "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/ILoveKOSA-1760668254089.JPG";
+const heroImage = "/ILoveKOSA-1760668254089.jpg";
 const heroVideo = "/KosaVideo.MOV";
 
 const roomImages = [
-  Room3,
-  Room2,
-  Room1,
-  Room772A2074
+  "/Room3.jpg",
+  "/Room2.jpg",
+  "Room1.jpg",
+  "/772A2074.jpg"
 ];
 
 const activitiesImages = [
-  Activity772A2245,
-  Activity772A2174,
-  Activity772A2130
+  "/772A2245.jpg",
+  "/772A2174.jpg",
+  "/772A2130.jpg"
 ];
 
 const wellnessImages = [
-  MassageAtTheBeach1,
-  Wellness772A2101
+  "/MassageAtTheBeach1.jpg",
+  "/772A2101.jpg"
 ];
 
 const galleryImages = [
-  Gallery772A2074,
-  GalleryENV6,
-  GalleryFood5,
-  GalleryENV8
+  "/772A2074.jpg",
+  "/ENV6.jpg",
+  "/Food5.jpg",
+  "/ENV8.jpg"
 ];
 
 const Home = () => {
