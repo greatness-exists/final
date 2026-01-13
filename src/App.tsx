@@ -15,6 +15,13 @@ import Wellness from '@/pages/Wellness'
 import Gallery from '@/pages/Gallery'
 import Contact from '@/pages/Contact'
 import NotFound from '@/pages/NotFound'
+import AdminLayout from '@/components/admin/AdminLayout'
+import AdminContent from '@/pages/admin/Content'
+import AdminDashboard from '@/pages/admin/Dashboard'
+import AdminRooms from '@/pages/admin/Rooms'
+import AdminGallery from '@/pages/admin/Gallery'
+import AdminLogin from '@/pages/admin/Login'
+import { ProtectedRoute } from '@/components/admin/ProtectedRoute'
 import HoverReceiver from "@/visual-edits/VisualEditsMessenger";
 
 // Configure QueryClient with error handling and retry logic
@@ -42,19 +49,32 @@ const App = () => (
       <HoverReceiver />
       <BrowserRouter>
         <ScrollToTop />
-        <Navbar />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/rooms" element={<Rooms />} />
-          <Route path="/dining" element={<Dining />} />
-          <Route path="/activities" element={<Activities />} />
-          <Route path="/wellness" element={<Wellness />} />
-          <Route path="/gallery" element={<Gallery />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="*" element={<NotFound />} />
+          {/* Public Routes */}
+          <Route path="/" element={<><Navbar /><Home /><Footer /></>} />
+          <Route path="/about" element={<><Navbar /><About /><Footer /></>} />
+          <Route path="/rooms" element={<><Navbar /><Rooms /><Footer /></>} />
+          <Route path="/dining" element={<><Navbar /><Dining /><Footer /></>} />
+          <Route path="/activities" element={<><Navbar /><Activities /><Footer /></>} />
+          <Route path="/wellness" element={<><Navbar /><Wellness /><Footer /></>} />
+          <Route path="/gallery" element={<><Navbar /><Gallery /><Footer /></>} />
+          <Route path="/contact" element={<><Navbar /><Contact /><Footer /></>} />
+
+          {/* Admin Routes */}
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin" element={
+            <ProtectedRoute>
+              <AdminLayout />
+            </ProtectedRoute>
+          }>
+          <Route index element={<AdminDashboard />} />
+            <Route path="content" element={<AdminContent />} />
+            <Route path="rooms" element={<AdminRooms />} />
+            <Route path="gallery" element={<AdminGallery />} />
+          </Route>
+
+          <Route path="*" element={<><Navbar /><NotFound /><Footer /></>} />
         </Routes>
-        <Footer />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
