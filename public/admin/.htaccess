@@ -1,0 +1,8 @@
+# Protect /admin with basic auth
+AuthType Basic
+AuthName "Admin Access"
+AuthUserFile /home/username/.htpasswd
+Require valid-user
+
+# Prevent directory listing
+Options -Indexes

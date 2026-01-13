@@ -99,7 +99,7 @@ const About = () => {
             <div className="relative text-center p-6 rounded-lg overflow-hidden group h-80">
               <div 
                 className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                style={{ backgroundImage: `url(https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/serene-coastal-beach-scene-with-people-c-878b69ce-20251123010957.jpg)` }}
+                style={{ backgroundImage: `url(/serene-coastal-beach-scene-with-people.jpg)` }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/30" />
               <div className="relative z-10 flex flex-col items-center justify-center h-full text-white">
@@ -114,7 +114,7 @@ const About = () => {
             <div className="relative text-center p-6 rounded-lg overflow-hidden group h-80">
               <div 
                 className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                style={{ backgroundImage: `url(https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/minimalist-coastal-living-scene-simple-w-e34fd921-20251123010957.jpg)` }}
+                style={{ backgroundImage: `url(/minimalist-coastal-living-scene-simple.jpg)` }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/30" />
               <div className="relative z-10 flex flex-col items-center justify-center h-full text-white">
@@ -129,7 +129,7 @@ const About = () => {
             <div className="relative text-center p-6 rounded-lg overflow-hidden group h-80">
               <div 
                 className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                style={{ backgroundImage: `url(https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/ocean-waves-rhythm-and-flow-sunrise-over-ff9b432a-20251123010957.jpg)` }}
+                style={{ backgroundImage: `url(/ocean-waves-rhythm-and-flow-sunrise-over.jpg)` }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/30" />
               <div className="relative z-10 flex flex-col items-center justify-center h-full text-white">
@@ -144,7 +144,7 @@ const About = () => {
             <div className="relative text-center p-6 rounded-lg overflow-hidden group h-80">
               <div 
                 className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                style={{ backgroundImage: `url(https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/holistic-wellness-scene-with-fresh-organ-54e99e48-20251123010956.jpg)` }}
+                style={{ backgroundImage: `url(/holistic-wellness-scene.jpg)` }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/30" />
               <div className="relative z-10 flex flex-col items-center justify-center h-full text-white">

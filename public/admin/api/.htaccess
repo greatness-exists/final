@@ -1,0 +1,12 @@
+# Allow PHP execution
+<Files "*.php">
+    Order allow,deny
+    Allow from all
+</Files>
+
+# Prevent access to non-php files
+Order deny,allow
+Deny from all
+<Files "*.php">
+    Allow from all
+</Files>

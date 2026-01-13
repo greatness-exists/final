@@ -1,0 +1,58 @@
+[
+  {
+    "id": "about-1",
+    "section": "about",
+    "key": "hero_title",
+    "content": "A Legacy of Coastal Living",
+    "type": "text"
+  },
+  {
+    "id": "about-2",
+    "section": "about",
+    "key": "hero_subtitle",
+    "content": "23 years of sanctuary, simplicity, and connection with nature",
+    "type": "text"
+  },
+  {
+    "id": "about-3",
+    "section": "about",
+    "key": "philosophy_connection_image",
+    "content": "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/serene-coastal-beach-scene-with-people-c-878b69ce-20251123010957.jpg",
+    "type": "image"
+  },
+  {
+    "id": "about-4",
+    "section": "about",
+    "key": "philosophy_simplicity_image",
+    "content": "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/minimalist-coastal-living-scene-simple-w-e34fd921-20251123010957.jpg",
+    "type": "image"
+  },
+  {
+    "id": "about-5",
+    "section": "about",
+    "key": "philosophy_rhythm_image",
+    "content": "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/ocean-waves-rhythm-and-flow-sunrise-over-ff9b432a-20251123010957.jpg",
+    "type": "image"
+  },
+  {
+    "id": "about-6",
+    "section": "about",
+    "key": "philosophy_wellness_image",
+    "content": "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/holistic-wellness-scene-with-fresh-organ-54e99e48-20251123010956.jpg",
+    "type": "image"
+  },
+  {
+    "id": "activities-1",
+    "section": "activities",
+    "key": "activities_list",
+    "content": "[{\"title\":\"Cooking Class\",\"description\":\"Learn to prepare authentic Ghanaian dishes with our expert chefs\",\"icon\":\"👨‍🍳\",\"category\":\"culinary\",\"imageUrl\":\"https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/warm-inviting-scene-of-ghanaian-cooking--7ee86d03-20251121170726.jpg\"},{\"title\":\"Drumming and Dancing\",\"description\":\"Immerse yourself in traditional Ghanaian rhythms and movements (Transportation included)\",\"icon\":\"🥁\",\"category\":\"cultural\",\"imageUrl\":\"https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/dynamic-scene-of-traditional-ghanaian-dr-605a2606-20251121170725.jpg\"},{\"title\":\"Batik Making\",\"description\":\"Create beautiful traditional fabric art (Transportation included)\",\"icon\":\"🎨\",\"category\":\"arts\",\"imageUrl\":\"https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/hands-creating-beautiful-batik-fabric-ar-9bdb45be-20251121170726.jpg\"},{\"title\":\"Bead Making Class\",\"description\":\"Craft your own unique jewelry with traditional techniques\",\"icon\":\"📿\",\"category\":\"arts\",\"imageUrl\":\"https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/close-up-of-hands-crafting-traditional-a-6362fae7-20251121170726.jpg\"},{\"title\":\"Horse Back Riding\",\"description\":\"Explore scenic trails on horseback along the coastline\",\"icon\":\"🐴\",\"category\":\"adventure\",\"imageUrl\":\"https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/horseback-riding-along-scenic-ghana-coas-83b954d7-20251121170726.jpg\"},{\"title\":\"Bird Watching\",\"description\":\"Discover Ghana's diverse bird species in their natural habitat\",\"icon\":\"🦜\",\"category\":\"nature\",\"imageUrl\":\"https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/bird-watching-in-lush-ghanaian-tropical--023ef564-20251121170726.jpg\"},{\"title\":\"Castle Tours\",\"description\":\"Full day exploration of historic coastal castles and forts\",\"icon\":\"🏰\",\"category\":\"cultural\",\"imageUrl\":\"https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/historic-cape-coast-castle-in-ghana-mass-4d5820a3-20251121170726.jpg\"},{\"title\":\"Kakum Tour\",\"description\":\"Full day adventure through the famous Kakum National Park canopy walkway\",\"icon\":\"🌳\",\"category\":\"adventure\",\"imageUrl\":\"https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/kakum-national-park-canopy-walkway-suspe-17c46a7d-20251121170727.jpg\"},{\"title\":\"Painting Class\",\"description\":\"Express your creativity with guided painting sessions (Transportation included)\",\"icon\":\"🖼️\",\"category\":\"arts\",\"imageUrl\":\"https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/art-painting-class-with-easels-and-canva-41408404-20251121170726.jpg\"},{\"title\":\"Market Tour\",\"description\":\"Experience vibrant local markets and authentic Ghanaian culture\",\"icon\":\"🛒\",\"category\":\"cultural\",\"imageUrl\":\"https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/vibrant-ghanaian-local-market-scene-colo-b2e6c776-20251121170726.jpg\"},{\"title\":\"Market Tour with Cooking\",\"description\":\"Shop at local markets then cook your finds with our chefs\",\"icon\":\"🍲\",\"category\":\"culinary\",\"imageUrl\":\"https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/combined-scene-of-ghanaian-market-shoppi-9d4267c5-20251121170725.jpg\"},{\"title\":\"Guided City Tour\",\"description\":\"Discover Elmina's rich history and vibrant neighborhoods\",\"icon\":\"🚶\",\"category\":\"cultural\",\"imageUrl\":\"https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/guided-walking-tour-through-historic-elm-0ca875dc-20251121170727.jpg\"}]",
+    "type": "text"
+  },
+  {
+    "id": "wellness-1",
+    "section": "wellness",
+    "key": "wellness_features",
+    "content": "[{\"title\":\"Spa Services\",\"description\":\"Herbal treatments and massage therapies using natural local ingredients\",\"icon\":\"🌿\",\"image\":\"https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/luxurious-spa-treatment-with-natural-her-ff3a7cc8-20251123010957.jpg\"},{\"title\":\"Wellness Coaching\",\"description\":\"Personalized guidance for calm, clarity, and long-lasting well-being\",\"icon\":\"🧘\",\"image\":\"https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/wellness-coach-guiding-client-in-peacefu-9a0a20e3-20251123010957.jpg\"},{\"title\":\"Herbal Tea & Juice Bar\",\"description\":\"Curated selection of nourishing beverages for body and mind\",\"icon\":\"🍵\",\"image\":\"https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/beautiful-herbal-tea-and-juice-bar-with--3c42bba9-20251123010957.jpg\"},{\"title\":\"Yoga by the Sea\",\"description\":\"Gentle movement sessions with ocean views and sea breeze\",\"icon\":\"🌊\",\"image\":\"https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/yoga-session-by-the-ocean-at-sunrise-peo-cce24390-20251123010957.jpg\"},{\"title\":\"Guided Mindfulness\",\"description\":\"Meditation and breathing practices in serene natural settings\",\"icon\":\"🕉️\",\"image\":\"https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/guided-meditation-in-serene-natural-sett-5b229e57-20251123010956.jpg\"},{\"title\":\"Nature Connection\",\"description\":\"Restorative walks and immersive experiences in coastal environment\",\"icon\":\"🌅\",\"image\":\"https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/restorative-nature-walk-through-coastal--b5278c1a-20251123010957.jpg\"}]",
+    "type": "text"
+  }
+]

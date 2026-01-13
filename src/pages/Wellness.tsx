@@ -16,37 +16,37 @@ const wellnessFeatures = [
     title: "Spa Services",
     description: "Herbal treatments and massage therapies using natural local ingredients",
     icon: "🌿",
-    image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/luxurious-spa-treatment-with-natural-her-ff3a7cc8-20251123010957.jpg"
+    image: "/luxurious-spa-treatment-with-natural-herbs.jpg"
   },
   {
     title: "Wellness Coaching",
     description: "Personalized guidance for calm, clarity, and long-lasting well-being",
     icon: "🧘",
-    image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/wellness-coach-guiding-client-in-peacefu-9a0a20e3-20251123010957.jpg"
+    image: "/wellness-coach-guiding-client-in-peace.jpg"
   },
   {
     title: "Herbal Tea & Juice Bar",
     description: "Curated selection of nourishing beverages for body and mind",
     icon: "🍵",
-    image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/beautiful-herbal-tea-and-juice-bar-with--3c42bba9-20251123010957.jpg"
+    image: "/beautiful-herbal-tea-and-juice-bar.jpg"
   },
   {
     title: "Yoga by the Sea",
     description: "Gentle movement sessions with ocean views and sea breeze",
     icon: "🌊",
-    image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/yoga-session-by-the-ocean-at-sunrise-peo-cce24390-20251123010957.jpg"
+    image: "/yoga-session-by-the-ocean-at-sunrise.jpg"
   },
   {
     title: "Guided Mindfulness",
     description: "Meditation and breathing practices in serene natural settings",
     icon: "🕉️",
-    image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/guided-meditation-in-serene-natural-sett-5b229e57-20251123010956.jpg"
+    image: "/guided-meditation-in-serene-natural-setting.jpg"
   },
   {
     title: "Nature Connection",
     description: "Restorative walks and immersive experiences in coastal environment",
     icon: "🌅",
-    image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/project-uploads/dfde4131-4958-49ce-9172-6b7eec9f6f7b/generated_images/restorative-nature-walk-through-coastal--b5278c1a-20251123010957.jpg"
+    image: "/restorative-nature-walk-through-coastal.jpg"
   }
 ];
 
