@@ -1,8 +1,6 @@
 import { useNavigate, Link, useLocation } from 'react-router-dom';
-import { supabase } from '@/supabaseClient';
 import { Button } from '@/components/ui/button';
-import { LogOut, Home, LayoutDashboard, FileEdit, Image as ImageIcon, Bed, Menu, X, Sparkles } from 'lucide-react';
-import { toast } from 'sonner';
+import { LogOut, Home, LayoutDashboard, FileEdit, Image as ImageIcon, Bed, Menu, X, Sparkles, FolderOpen } from 'lucide-react';import { toast } from 'sonner';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 
@@ -12,8 +10,7 @@ export default function AdminNavbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleLogout = async () => {
-    await supabase.auth.signOut();
-    toast.success('Logged out successfully');
+localStorage.removeItem('admin_authenticated');    toast.success('Logged out successfully');
     navigate('/admin/login');
   };
 
@@ -22,6 +19,8 @@ export default function AdminNavbar() {
     { label: 'Content', path: '/admin/content', icon: FileEdit },
     { label: 'Rooms', path: '/admin/rooms', icon: Bed },
     { label: 'Gallery', path: '/admin/gallery', icon: ImageIcon },
+        { label: 'Files', path: '/admin/files', icon: FolderOpen },
+
   ];
 
   return (

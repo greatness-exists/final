@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { supabase } from '@/supabaseClient';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -31,28 +30,39 @@ export default function AdminRooms() {
 
   const fetchRooms = async () => {
     setLoading(true);
-    const { data, error } = await supabase
-      .from('rooms')
-      .select('*')
-      .order('order_index', { ascending: true });
-
-    if (error) toast.error('Failed to fetch rooms');
-    else setRooms(data || []);
+      try {
+      const response = await fetch('/admin/api/list.php?type=rooms');
+      const data = await response.json();
+      setRooms(data || []);
+    } catch (error) {
+      toast.error('Failed to fetch rooms');
+    }
     setLoading(false);
   };
 
   const handleRoomUpdate = async (id: string, field: string, value: any) => {
     setSaving(id);
-    const { error } = await supabase
-      .from('rooms')
-      .update({ [field]: value, updated_at: new Date().toISOString() })
-      .eq('id', id);
-
-    if (error) {
-      toast.error(`Failed to update room ${field}`);
-    } else {
-      toast.success(`Room updated`);
-      setRooms(rooms.map(room => room.id === id ? { ...room, [field]: value } : room));
+     try {
+      const response = await fetch('/admin/api/save.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'update',
+          type: 'rooms',
+          id: id,
+          updates: { [field]: value }
+        })
+      });
+      const result = await response.json();
+      
+      if (result.success) {
+        toast.success(`Room updated`);
+        setRooms(rooms.map(room => room.id === id ? { ...room, [field]: value } : room));
+      } else {
+        throw new Error(result.error || 'Failed to update room');
+      }
+    } catch (error: any) {
+      toast.error(error.message || 'Failed to update room');
     }
     setSaving(null);
   };
@@ -66,30 +76,51 @@ export default function AdminRooms() {
       order_index: rooms.length
     };
 
-    const { data, error } = await supabase
-      .from('rooms')
-      .insert([newRoom])
-      .select();
-
-    if (error) toast.error('Failed to add room');
-    else {
-      toast.success('New room type created');
-      if (data) setRooms([...rooms, data[0]]);
+      try {
+      const response = await fetch('/admin/api/save.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'add',
+          type: 'rooms',
+          data: newRoom
+        })
+      });
+      const result = await response.json();
+      
+      if (result.success) {
+        toast.success('New room type created');
+        setRooms([...rooms, result.item]);
+      } else {
+        throw new Error(result.error || 'Failed to add room');
+      }
+    } catch (error: any) {
+      toast.error(error.message || 'Failed to add room');
     }
   };
 
   const handleDeleteRoom = async (id: string) => {
     if (!window.confirm('Permanently remove this room type? This action cannot be undone.')) return;
 
-    const { error } = await supabase
-      .from('rooms')
-      .delete()
-      .eq('id', id);
-
-    if (error) toast.error('Failed to delete room');
-    else {
-      toast.success('Room type removed');
-      setRooms(rooms.filter(room => room.id !== id));
+     try {
+      const response = await fetch('/admin/api/delete.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'rooms',
+          id: id
+        })
+      });
+      const result = await response.json();
+      
+      if (result.success) {
+        toast.success('Room type removed');
+        setRooms(rooms.filter(room => room.id !== id));
+      } else {
+        throw new Error(result.error || 'Failed to delete room');
+      }
+    } catch (error: any) {
+      toast.error(error.message || 'Failed to delete room');
     }
   };
 

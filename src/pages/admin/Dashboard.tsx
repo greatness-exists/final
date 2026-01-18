@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { supabase } from '@/supabaseClient';
+import { toast } from 'sonner';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Loader2, Image as ImageIcon, Bed, FileText, ExternalLink, RefreshCw, LayoutDashboard, Sparkles, ShieldCheck } from 'lucide-react';
@@ -15,17 +15,21 @@ export default function AdminDashboard() {
 
   const fetchStats = async () => {
     setLoading(true);
-    const [contentRes, galleryRes, roomsRes] = await Promise.all([
-      supabase.from('site_content').select('id', { count: 'exact', head: true }),
-      supabase.from('gallery').select('id', { count: 'exact', head: true }),
-      supabase.from('rooms').select('id', { count: 'exact', head: true })
-    ]);
+    try {
+      const [contentRes, galleryRes, roomsRes] = await Promise.all([
+        fetch('/admin/api/list.php?type=site_content').then(res => res.json()),
+        fetch('/admin/api/list.php?type=gallery').then(res => res.json()),
+        fetch('/admin/api/list.php?type=rooms').then(res => res.json())
+      ]);
 
-    setStats({
-      contentCount: contentRes.count || 0,
-      galleryCount: galleryRes.count || 0,
-      roomCount: roomsRes.count || 0,
-    });
+      setStats({
+        contentCount: Array.isArray(contentRes) ? contentRes.length : 0,
+        galleryCount: Array.isArray(galleryRes) ? galleryRes.length : 0,
+        roomCount: Array.isArray(roomsRes) ? roomsRes.length : 0,
+      });
+    } catch (error) {
+      toast.error('Failed to fetch dashboard stats');
+    }
     setLoading(false);
   };
 

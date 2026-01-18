@@ -21,6 +21,7 @@ import AdminDashboard from '@/pages/admin/Dashboard'
 import AdminRooms from '@/pages/admin/Rooms'
 import AdminGallery from '@/pages/admin/Gallery'
 import AdminLogin from '@/pages/admin/Login'
+import AdminFileManager from '@/pages/admin/FileManager'
 import { ProtectedRoute } from '@/components/admin/ProtectedRoute'
 import HoverReceiver from "@/visual-edits/VisualEditsMessenger";
 
@@ -69,9 +70,10 @@ const App = () => (
           }>
           <Route index element={<AdminDashboard />} />
             <Route path="content" element={<AdminContent />} />
-            <Route path="rooms" element={<AdminRooms />} />
-            <Route path="gallery" element={<AdminGallery />} />
-          </Route>
+           <Route path="rooms" element={<AdminRooms />} />
+              <Route path="gallery" element={<AdminGallery />} />
+              <Route path="files" element={<AdminFileManager />} />
+            </Route>
 
           <Route path="*" element={<><Navbar /><NotFound /><Footer /></>} />
         </Routes>

@@ -1,0 +1,43 @@
+[
+  {
+    "id": "room_1",
+    "name": "Deluxe Double Room with Sea View",
+    "description": "Luxurious double room featuring stunning ocean views and premium amenities.",
+    "price": "$150 / night",
+    "amenities": [
+      "Sea View",
+      "Double Bed",
+      "Private Bathroom",
+      "Air Conditioning",
+      "WiFi",
+      "Balcony"
+    ],
+    "images": [
+      "/Rooms/DDRWSV.jpg",
+      "/Rooms/DDRWSV2.jpg",
+      "/Rooms/DDRWSV3.jpg"
+    ],
+    "order_index": 0,
+    "created_at": "2025-01-01T12:00:00Z"
+  },
+  {
+    "id": "room_2",
+    "name": "Luxury Double Room with Sea View",
+    "description": "Experience ultimate comfort in our premium double room with breathtaking sea views.",
+    "price": "$180 / night",
+    "amenities": [
+      "Sea View",
+      "Double Bed",
+      "Private Bathroom",
+      "Air Conditioning",
+      "WiFi",
+      "Balcony"
+    ],
+    "images": [
+      "/Rooms/LDRWSV.jpg",
+      "/Rooms/LDRWSV2.jpg"
+    ],
+    "order_index": 1,
+    "created_at": "2025-01-01T12:00:01Z"
+  }
+]

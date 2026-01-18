@@ -1,140 +1,114 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 
 const heroImage = "/ILoveKOSA-1760668254089.jpg";
 
-const galleryImages = [
-  // Architecture
-   { url: "/ENV10.jpg", category: "architecture", alt: "Resort Architecture" },
-   { url: "/ENV11.jpg", category: "architecture", alt: "Resort Architecture" },
-   { url: "/ENV12.jpg", category: "architecture", alt: "Resort Architecture" },
-   { url: "/ENV13.jpg", category: "architecture", alt: "Resort Architecture" },
-   { url: "/ENV14.jpg", category: "architecture", alt: "Resort Architecture" },
-  { url: "/Room3.jpg", category: "architecture", alt: "Resort Architecture" },
-  { url: "/Room2.jpg", category: "architecture", alt: "Room Design" },
+/* ---------- Fallback images ---------- */
+const fallbackImages = [
+  { url: "/ENV10.jpg", category: "architecture", alt: "Resort Architecture" },
+  { url: "/ENV11.jpg", category: "architecture", alt: "Resort Architecture" },
+  { url: "/ENV12.jpg", category: "architecture", alt: "Resort Architecture" },
   { url: "/Room1.jpg", category: "architecture", alt: "Interior Space" },
-  { url: "/ENV6.jpg", category: "architecture", alt: "Resort View" },
-  { url: "/ENV4.jpg", category: "architecture", alt: "Resort Interior" },
-  
-  // Nature & Environment
+
   { url: "/ENV.jpg", category: "nature", alt: "Coastal Environment" },
   { url: "/ENV2.jpg", category: "nature", alt: "Beach View" },
-  { url: "/ENV3.jpg", category: "nature", alt: "Natural Beauty" },
-  { url: "/ENV4.jpg", category: "nature", alt: "Sunset Coast" },
-  { url: "/ENV5.jpg", category: "nature", alt: "Tropical Paradise" },
-  { url: "/ENV6.jpg", category: "nature", alt: "Ocean Views" },
-  { url: "/ENV8.jpg", category: "nature", alt: "Coastal Landscape" },
-  { url: "/ENV9.jpg", category: "nature", alt: "Natural Surroundings" },
-  
-  // Food
-  { url: "/Food5.jpg", category: "food", alt: "Culinary Experience" },
-  { url: "/Food4.jpg", category: "food", alt: "Gourmet Cuisine" },
-  { url: "/Food3.jpg", category: "food", alt: "Delicious Dishes" },
-  { url: "/Food2.jpg", category: "food", alt: "Culinary Delights" },
-  { url: "/Food1.jpg", category: "food", alt: "Fine Dining" },
-  { url: "/Dining.jpg", category: "food", alt: "Dining Experience" },
-  { url: "/Drinks2.jpg", category: "food", alt: "Refreshing Beverages" },
-  
-  // Activities & People
-  { url: "/IMG-20251027-WA0001.jpg", category: "activities", alt: "Resort Activities" },
-  { url: "/772A2174.jpg", category: "activities", alt: "Beach Activities" },
-  { url: "/772A2130.jpg", category: "activities", alt: "Guest Experiences" },
-  { url: "/772A2173.jpg", category: "activities", alt: "Resort Experiences" },
-  { url: "/IMG-20251027-WA0002.jpg", category: "activities", alt: "Resort Experiences" },
-  { url: "/IMG-20251027-WA0003.jpg", category: "activities", alt: "Resort Experiences" },
-  { url: "/IMG-20251027-WA0004.jpg", category: "activities", alt: "Resort Experiences" },
-  { url: "/IMG-20251027-WA0006.jpg", category: "activities", alt: "Resort Experiences" },
-  { url: "/IMG-20251027-WA0007.jpg", category: "activities", alt: "Resort Experiences" },
-  { url: "/IMG-20251027-WA0008.jpg", category: "activities", alt: "Resort Experiences" },
-  { url: "/IMG-20251027-WA0009.jpg", category: "activities", alt: "Resort Experiences" },
-  { url: "/IMG-20251027-WA0012.jpg", category: "activities", alt: "Resort Experiences" },
-  { url: "/IMG-20251027-WA0013.jpg", category: "activities", alt: "Resort Experiences" },
-  { url: "/IMG-20251027-WA0014.jpg", category: "activities", alt: "Resort Experiences" },
-  { url: "/IMG-20251027-WA0015.jpg", category: "activities", alt: "Resort Experiences" },
-  { url: "/IMG-20251027-WA0016.jpg", category: "activities", alt: "Resort Experiences" },
 
+  { url: "/Food1.jpg", category: "food", alt: "Fine Dining" },
+  { url: "/Food2.jpg", category: "food", alt: "Culinary Delights" },
+
+  { url: "/772A2174.jpg", category: "activities", alt: "Beach Activities" },
+];
+
+/* ---------- Categories ---------- */
+const categories = [
+  { id: "all", label: "All" },
+  { id: "architecture", label: "Architecture" },
+  { id: "nature", label: "Nature" },
+  { id: "food", label: "Food" },
+  { id: "activities", label: "Activities" },
 ];
 
 const Gallery = () => {
-  const [selectedImage, setSelectedImage] = useState<number | null>(null);
-  const [selectedCategory, setSelectedCategory] = useState<string>("all");
-  const revealRefs = useRef<(HTMLElement | null)[]>([]);
+  const [images, setImages] = useState(fallbackImages);
+  const [loading, setLoading] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
+  /* ---------- Fetch gallery from PHP ---------- */
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("revealed");
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
+    const fetchGallery = async () => {
+      try {
+        const res = await fetch("/admin/api/list.php?type=gallery");
+        const data = await res.json();
 
-    revealRefs.current.forEach((ref) => {
-      if (ref) observer.observe(ref);
-    });
+        if (Array.isArray(data) && data.length > 0) {
+          setImages(
+            data.map((item: any) => ({
+              url: item.image_url,
+              category: item.category,
+              alt: item.description || "Resort Moment",
+            }))
+          );
+        } else {
+          setImages(fallbackImages);
+        }
+      } catch {
+        setImages(fallbackImages);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    return () => observer.disconnect();
+    fetchGallery();
   }, []);
 
-  const categories = [
-    { id: "all", label: "All" },
-    { id: "architecture", label: "Architecture" },
-    { id: "nature", label: "Nature" },
-    { id: "food", label: "Food" },
-    { id: "activities", label: "Activities" }
-  ];
+  /* ---------- Reset lightbox on category change ---------- */
+  useEffect(() => {
+    setSelectedIndex(null);
+  }, [selectedCategory]);
 
-  const filteredImages = selectedCategory === "all" 
-    ? galleryImages 
-    : galleryImages.filter(img => img.category === selectedCategory);
+  const filteredImages =
+    selectedCategory === "all"
+      ? images
+      : images.filter((img) => img.category === selectedCategory);
 
-  const openLightbox = (index: number) => {
-    setSelectedImage(index);
-  };
-
-  const closeLightbox = () => {
-    setSelectedImage(null);
-  };
+  const openLightbox = (index: number) => setSelectedIndex(index);
+  const closeLightbox = () => setSelectedIndex(null);
 
   const nextImage = () => {
-    if (selectedImage !== null) {
-      setSelectedImage((selectedImage + 1) % filteredImages.length);
-    }
+    if (selectedIndex === null) return;
+    setSelectedIndex((selectedIndex + 1) % filteredImages.length);
   };
 
   const prevImage = () => {
-    if (selectedImage !== null) {
-      setSelectedImage((selectedImage - 1 + filteredImages.length) % filteredImages.length);
-    }
+    if (selectedIndex === null) return;
+    setSelectedIndex(
+      (selectedIndex - 1 + filteredImages.length) % filteredImages.length
+    );
   };
 
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (selectedImage === null) return;
-      
-      if (e.key === "Escape") closeLightbox();
-      if (e.key === "ArrowRight") nextImage();
-      if (e.key === "ArrowLeft") prevImage();
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [selectedImage]);
+  /* ---------- Loading ---------- */
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="h-24 w-24 animate-spin rounded-full border-t-2 border-b-2 border-primary" />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen pt-20">
-      {/* Hero Section */}
+      {/* ================= HEADER (UNCHANGED) ================= */}
       <section
         className="relative h-[60vh] flex items-center justify-center bg-fixed-section"
         style={{ backgroundImage: `url("/772A1842.jpg")` }}
       >
         <div className="absolute inset-0 bg-black/40" />
         <div className="relative z-10 text-center text-white px-4">
-          <p className="text-sm tracking-[0.2em] uppercase mb-4">Visual Stories</p>
-          <h1 
+          <p className="text-sm tracking-[0.2em] uppercase mb-4">
+            Visual Stories
+          </p>
+          <h1
             className="text-5xl md:text-7xl font-light mb-6 text-transparent-bg"
             style={{ backgroundImage: `url(${heroImage})` }}
           >
@@ -145,116 +119,84 @@ const Gallery = () => {
           </p>
         </div>
       </section>
+      {/* ====================================================== */}
 
       {/* Category Filter */}
-      <section className="py-12 px-4 bg-gradient-to-b from-background to-muted">
-        <div className="container mx-auto max-w-6xl">
-          <div className="flex flex-wrap justify-center gap-3">
-            {categories.map((category) => (
-              <button
-                key={category.id}
-                onClick={() => setSelectedCategory(category.id)}
-                className={`px-6 py-2 rounded-full transition-all ${
-                  selectedCategory === category.id
-                    ? "bg-primary text-primary-foreground shadow-lg scale-105"
-                    : "bg-background text-foreground hover:bg-muted border border-border"
-                }`}
-              >
-                {category.label}
-              </button>
-            ))}
-          </div>
+      <section className="py-12 px-4">
+        <div className="flex justify-center gap-3 flex-wrap">
+          {categories.map((c) => (
+            <button
+              key={c.id}
+              onClick={() => setSelectedCategory(c.id)}
+              className={`px-6 py-2 rounded-full transition ${
+                selectedCategory === c.id
+                  ? "bg-primary text-primary-foreground"
+                  : "border"
+              }`}
+            >
+              {c.label}
+            </button>
+          ))}
         </div>
       </section>
 
       {/* Gallery Grid */}
-      <section 
-        ref={(el) => { revealRefs.current[0] = el; }}
-        className="py-20 px-4 scroll-reveal bg-gradient-to-b from-muted to-background"
-      >
-        <div className="container mx-auto max-w-7xl">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredImages.map((image, index) => (
-              <div
-                key={index}
-                className="relative aspect-square overflow-hidden rounded-lg cursor-pointer group"
-                onClick={() => openLightbox(index)}
-              >
-                <img
-                  src={image.url}
-                  alt={image.alt}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300" />
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <span className="text-white text-sm tracking-wider uppercase">View</span>
-                </div>
-              </div>
-            ))}
-          </div>
+      <section className="py-20 px-4">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredImages.map((img, i) => (
+            <div
+              key={i}
+              onClick={() => openLightbox(i)}
+              className="relative aspect-square overflow-hidden rounded-lg cursor-pointer group"
+            >
+              <img
+                src={img.url}
+                alt={img.alt}
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition" />
+            </div>
+          ))}
         </div>
       </section>
 
       {/* Lightbox */}
-      {selectedImage !== null && (
-        <div 
+      {selectedIndex !== null && filteredImages[selectedIndex] && (
+        <div
           className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center"
           onClick={closeLightbox}
         >
-          <button
-            className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors z-50"
-            onClick={closeLightbox}
-          >
+          <button className="absolute top-6 right-6 text-white">
             <X size={32} />
           </button>
 
           <button
-            className="absolute left-4 text-white hover:text-gray-300 transition-colors z-50"
-            onClick={(e) => { e.stopPropagation(); prevImage(); }}
+            className="absolute left-6 text-white"
+            onClick={(e) => {
+              e.stopPropagation();
+              prevImage();
+            }}
           >
             <ChevronLeft size={48} />
           </button>
 
           <button
-            className="absolute right-4 text-white hover:text-gray-300 transition-colors z-50"
-            onClick={(e) => { e.stopPropagation(); nextImage(); }}
+            className="absolute right-6 text-white"
+            onClick={(e) => {
+              e.stopPropagation();
+              nextImage();
+            }}
           >
             <ChevronRight size={48} />
           </button>
 
-          <div 
-            className="max-w-7xl max-h-[90vh] px-16"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <img
-              src={filteredImages[selectedImage].url}
-              alt={filteredImages[selectedImage].alt}
-              className="max-w-full max-h-[90vh] object-contain"
-            />
-            <p className="text-white text-center mt-4 text-sm tracking-wider">
-              {filteredImages[selectedImage].alt}
-            </p>
-          </div>
+          <img
+            src={filteredImages[selectedIndex].url}
+            alt={filteredImages[selectedIndex].alt}
+            className="max-w-full max-h-[90vh] object-contain"
+          />
         </div>
       )}
-
-      {/* CTA Section */}
-      <section className="py-20 px-4 bg-gradient-to-b from-background to-muted">
-        <div className="container mx-auto text-center max-w-3xl">
-          <h2 className="text-4xl md:text-5xl font-light mb-6 text-foreground">
-            Experience It Yourself
-          </h2>
-          <p className="text-lg text-muted-foreground mb-8">
-            These moments are waiting for you at KO-SA Beach Resort
-          </p>
-          <button
-            className="bg-primary text-primary-foreground px-8 py-3 rounded-lg hover:bg-primary/90 transition-colors font-semibold book-button"
-            onClick={() => window.open("https://us2.cloudbeds.com/reservation/65CAqa", '_blank')}
-          >
-            Book Your Stay
-          </button>
-        </div>
-      </section>
     </div>
   );
 };

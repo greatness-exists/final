@@ -1,0 +1,330 @@
+[
+  {
+    "id": "gal_1",
+    "image_url": "/ENV10.jpg",
+    "category": "architecture",
+    "description": "Resort Architecture",
+    "order_index": 0,
+    "created_at": "2025-01-01T12:00:00Z"
+  },
+  {
+    "id": "gal_2",
+    "image_url": "/ENV11.jpg",
+    "category": "architecture",
+    "description": "Resort Architecture",
+    "order_index": 1,
+    "created_at": "2025-01-01T12:00:01Z"
+  },
+  {
+    "id": "gal_3",
+    "image_url": "/ENV12.jpg",
+    "category": "architecture",
+    "description": "Resort Architecture",
+    "order_index": 2,
+    "created_at": "2025-01-01T12:00:02Z"
+  },
+  {
+    "id": "gal_4",
+    "image_url": "/ENV13.jpg",
+    "category": "architecture",
+    "description": "Resort Architecture",
+    "order_index": 3,
+    "created_at": "2025-01-01T12:00:03Z"
+  },
+  {
+    "id": "gal_5",
+    "image_url": "/ENV14.jpg",
+    "category": "architecture",
+    "description": "Resort Architecture",
+    "order_index": 4,
+    "created_at": "2025-01-01T12:00:04Z"
+  },
+  {
+    "id": "gal_6",
+    "image_url": "/Room3.jpg",
+    "category": "architecture",
+    "description": "Resort Architecture",
+    "order_index": 5,
+    "created_at": "2025-01-01T12:00:05Z"
+  },
+  {
+    "id": "gal_7",
+    "image_url": "/Room2.jpg",
+    "category": "architecture",
+    "description": "Room Design",
+    "order_index": 6,
+    "created_at": "2025-01-01T12:00:06Z"
+  },
+  {
+    "id": "gal_8",
+    "image_url": "/Room1.jpg",
+    "category": "architecture",
+    "description": "Interior Space",
+    "order_index": 7,
+    "created_at": "2025-01-01T12:00:07Z"
+  },
+  {
+    "id": "gal_9",
+    "image_url": "/ENV6.jpg",
+    "category": "architecture",
+    "description": "Resort View",
+    "order_index": 8,
+    "created_at": "2025-01-01T12:00:08Z"
+  },
+  {
+    "id": "gal_10",
+    "image_url": "/ENV4.jpg",
+    "category": "architecture",
+    "description": "Resort Interior",
+    "order_index": 9,
+    "created_at": "2025-01-01T12:00:09Z"
+  },
+  {
+    "id": "gal_11",
+    "image_url": "/ENV.jpg",
+    "category": "nature",
+    "description": "Coastal Environment",
+    "order_index": 10,
+    "created_at": "2025-01-01T12:00:10Z"
+  },
+  {
+    "id": "gal_12",
+    "image_url": "/ENV2.jpg",
+    "category": "nature",
+    "description": "Beach View",
+    "order_index": 11,
+    "created_at": "2025-01-01T12:00:11Z"
+  },
+  {
+    "id": "gal_13",
+    "image_url": "/ENV3.jpg",
+    "category": "nature",
+    "description": "Natural Beauty",
+    "order_index": 12,
+    "created_at": "2025-01-01T12:00:12Z"
+  },
+  {
+    "id": "gal_14",
+    "image_url": "/ENV4.jpg",
+    "category": "nature",
+    "description": "Sunset Coast",
+    "order_index": 13,
+    "created_at": "2025-01-01T12:00:13Z"
+  },
+  {
+    "id": "gal_15",
+    "image_url": "/ENV5.jpg",
+    "category": "nature",
+    "description": "Tropical Paradise",
+    "order_index": 14,
+    "created_at": "2025-01-01T12:00:14Z"
+  },
+  {
+    "id": "gal_16",
+    "image_url": "/ENV6.jpg",
+    "category": "nature",
+    "description": "Ocean Views",
+    "order_index": 15,
+    "created_at": "2025-01-01T12:00:15Z"
+  },
+  {
+    "id": "gal_17",
+    "image_url": "/ENV8.jpg",
+    "category": "nature",
+    "description": "Coastal Landscape",
+    "order_index": 16,
+    "created_at": "2025-01-01T12:00:16Z"
+  },
+  {
+    "id": "gal_18",
+    "image_url": "/ENV9.jpg",
+    "category": "nature",
+    "description": "Natural Surroundings",
+    "order_index": 17,
+    "created_at": "2025-01-01T12:00:17Z"
+  },
+  {
+    "id": "gal_19",
+    "image_url": "/Food5.jpg",
+    "category": "food",
+    "description": "Culinary Experience",
+    "order_index": 18,
+    "created_at": "2025-01-01T12:00:18Z"
+  },
+  {
+    "id": "gal_20",
+    "image_url": "/Food4.jpg",
+    "category": "food",
+    "description": "Gourmet Cuisine",
+    "order_index": 19,
+    "created_at": "2025-01-01T12:00:19Z"
+  },
+  {
+    "id": "gal_21",
+    "image_url": "/Food3.jpg",
+    "category": "food",
+    "description": "Delicious Dishes",
+    "order_index": 20,
+    "created_at": "2025-01-01T12:00:20Z"
+  },
+  {
+    "id": "gal_22",
+    "image_url": "/Food2.jpg",
+    "category": "food",
+    "description": "Culinary Delights",
+    "order_index": 21,
+    "created_at": "2025-01-01T12:00:21Z"
+  },
+  {
+    "id": "gal_23",
+    "image_url": "/Food1.jpg",
+    "category": "food",
+    "description": "Fine Dining",
+    "order_index": 22,
+    "created_at": "2025-01-01T12:00:22Z"
+  },
+  {
+    "id": "gal_24",
+    "image_url": "/Dining.jpg",
+    "category": "food",
+    "description": "Dining Experience",
+    "order_index": 23,
+    "created_at": "2025-01-01T12:00:23Z"
+  },
+  {
+    "id": "gal_25",
+    "image_url": "/Drinks2.jpg",
+    "category": "food",
+    "description": "Refreshing Beverages",
+    "order_index": 24,
+    "created_at": "2025-01-01T12:00:24Z"
+  },
+  {
+    "id": "gal_26",
+    "image_url": "/IMG-20251027-WA0001.jpg",
+    "category": "activities",
+    "description": "Resort Activities",
+    "order_index": 25,
+    "created_at": "2025-01-01T12:00:25Z"
+  },
+  {
+    "id": "gal_27",
+    "image_url": "/772A2174.jpg",
+    "category": "activities",
+    "description": "Beach Activities",
+    "order_index": 26,
+    "created_at": "2025-01-01T12:00:26Z"
+  },
+  {
+    "id": "gal_28",
+    "image_url": "/772A2130.jpg",
+    "category": "activities",
+    "description": "Guest Experiences",
+    "order_index": 27,
+    "created_at": "2025-01-01T12:00:27Z"
+  },
+  {
+    "id": "gal_29",
+    "image_url": "/772A2173.jpg",
+    "category": "activities",
+    "description": "Resort Experiences",
+    "order_index": 28,
+    "created_at": "2025-01-01T12:00:28Z"
+  },
+  {
+    "id": "gal_30",
+    "image_url": "/IMG-20251027-WA0002.jpg",
+    "category": "activities",
+    "description": "Resort Experiences",
+    "order_index": 29,
+    "created_at": "2025-01-01T12:00:29Z"
+  },
+  {
+    "id": "gal_31",
+    "image_url": "/IMG-20251027-WA0003.jpg",
+    "category": "activities",
+    "description": "Resort Experiences",
+    "order_index": 30,
+    "created_at": "2025-01-01T12:00:30Z"
+  },
+  {
+    "id": "gal_32",
+    "image_url": "/IMG-20251027-WA0004.jpg",
+    "category": "activities",
+    "description": "Resort Experiences",
+    "order_index": 31,
+    "created_at": "2025-01-01T12:00:31Z"
+  },
+  {
+    "id": "gal_33",
+    "image_url": "/IMG-20251027-WA0006.jpg",
+    "category": "activities",
+    "description": "Resort Experiences",
+    "order_index": 32,
+    "created_at": "2025-01-01T12:00:32Z"
+  },
+  {
+    "id": "gal_34",
+    "image_url": "/IMG-20251027-WA0007.jpg",
+    "category": "activities",
+    "description": "Resort Experiences",
+    "order_index": 33,
+    "created_at": "2025-01-01T12:00:33Z"
+  },
+  {
+    "id": "gal_35",
+    "image_url": "/IMG-20251027-WA0008.jpg",
+    "category": "activities",
+    "description": "Resort Experiences",
+    "order_index": 34,
+    "created_at": "2025-01-01T12:00:34Z"
+  },
+  {
+    "id": "gal_36",
+    "image_url": "/IMG-20251027-WA0009.jpg",
+    "category": "activities",
+    "description": "Resort Experiences",
+    "order_index": 35,
+    "created_at": "2025-01-01T12:00:35Z"
+  },
+  {
+    "id": "gal_37",
+    "image_url": "/IMG-20251027-WA0012.jpg",
+    "category": "activities",
+    "description": "Resort Experiences",
+    "order_index": 36,
+    "created_at": "2025-01-01T12:00:36Z"
+  },
+  {
+    "id": "gal_38",
+    "image_url": "/IMG-20251027-WA0013.jpg",
+    "category": "activities",
+    "description": "Resort Experiences",
+    "order_index": 37,
+    "created_at": "2025-01-01T12:00:37Z"
+  },
+  {
+    "id": "gal_39",
+    "image_url": "/IMG-20251027-WA0014.jpg",
+    "category": "activities",
+    "description": "Resort Experiences",
+    "order_index": 38,
+    "created_at": "2025-01-01T12:00:38Z"
+  },
+  {
+    "id": "gal_40",
+    "image_url": "/IMG-20251027-WA0015.jpg",
+    "category": "activities",
+    "description": "Resort Experiences",
+    "order_index": 39,
+    "created_at": "2025-01-01T12:00:39Z"
+  },
+  {
+    "id": "gal_41",
+    "image_url": "/IMG-20251027-WA0016.jpg",
+    "category": "activities",
+    "description": "Resort Experiences",
+    "order_index": 40,
+    "created_at": "2025-01-01T12:00:40Z"
+  }
+]

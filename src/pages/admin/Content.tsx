@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { supabase } from '@/supabaseClient';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -29,28 +28,39 @@ export default function AdminContent() {
 
   const fetchContent = async () => {
     setLoading(true);
-    const { data, error } = await supabase
-      .from('site_content')
-      .select('*')
-      .order('section', { ascending: true });
-
-    if (error) toast.error('Failed to fetch content');
-    else setContent(data || []);
+      try {
+      const response = await fetch('/admin/api/list.php?type=site_content');
+      const data = await response.json();
+      setContent(data || []);
+    } catch (error) {
+      toast.error('Failed to fetch content');
+    }
     setLoading(false);
   };
 
   const handleUpdate = async (id: string, newContent: string) => {
     setSaving(id);
-    const { error } = await supabase
-      .from('site_content')
-      .update({ content: newContent, updated_at: new Date().toISOString() })
-      .eq('id', id);
-
-    if (error) {
-      toast.error('Failed to update content');
-    } else {
-      toast.success('Content updated');
-      setContent(prev => prev.map(item => item.id === id ? { ...item, content: newContent } : item));
+      try {
+      const response = await fetch('/admin/api/save.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'update',
+          type: 'site_content',
+          id: id,
+          updates: { content: newContent }
+        })
+      });
+      const result = await response.json();
+      
+      if (result.success) {
+        toast.success('Content updated');
+        setContent(prev => prev.map(item => item.id === id ? { ...item, content: newContent } : item));
+      } else {
+        throw new Error(result.error || 'Failed to update content');
+      }
+    } catch (error: any) {
+      toast.error(error.message || 'Failed to update content');
     }
     setSaving(null);
   };

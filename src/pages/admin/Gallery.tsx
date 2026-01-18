@@ -1,12 +1,27 @@
 import { useEffect, useState } from 'react';
-import { supabase } from '@/supabaseClient';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+  CardFooter,
+} from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
-import { Loader2, Plus, Trash2, Image as ImageIcon, Camera, LayoutGrid, Sparkles } from 'lucide-react';
+import {
+  Loader2,
+  Plus,
+  Trash2,
+  Image as ImageIcon,
+  Camera,
+  LayoutGrid,
+  Sparkles,
+} from 'lucide-react';
 import ImageUpload from '@/components/admin/ImageUpload';
+import FileManager from '@/components/admin/FileManager';
 
 interface GalleryItem {
   id: string;
@@ -20,7 +35,13 @@ export default function AdminGallery() {
   const [gallery, setGallery] = useState<GalleryItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [adding, setAdding] = useState(false);
-  const [newGalleryItem, setNewGalleryItem] = useState({ image_url: '', category: 'general', description: '' });
+  const [showFileManager, setShowFileManager] = useState(false);
+
+  const [newGalleryItem, setNewGalleryItem] = useState({
+    image_url: '',
+    category: 'general',
+    description: '',
+  });
 
   useEffect(() => {
     fetchGallery();
@@ -28,34 +49,51 @@ export default function AdminGallery() {
 
   const fetchGallery = async () => {
     setLoading(true);
-    const { data, error } = await supabase
-      .from('gallery')
-      .select('*')
-      .order('order_index', { ascending: true });
-
-    if (error) toast.error('Failed to fetch gallery');
-    else setGallery(data || []);
+    try {
+      const response = await fetch('/admin/api/list.php?type=gallery');
+      const data = await response.json();
+      setGallery(data || []);
+    } catch {
+      toast.error('Failed to fetch gallery');
+    }
     setLoading(false);
   };
 
   const handleAddGallery = async () => {
-    if (!newGalleryItem.image_url) return toast.error('Please upload an image first');
-    
-    setAdding(true);
-    const { data, error } = await supabase
-      .from('gallery')
-      .insert([{ 
-        ...newGalleryItem, 
-        order_index: gallery.length 
-      }])
-      .select();
+    if (!newGalleryItem.image_url) {
+      toast.error('Please upload an image first');
+      return;
+    }
 
-    if (error) {
-      toast.error('Failed to add gallery item');
-    } else {
-      toast.success('Image added to gallery');
-      if (data) setGallery([...gallery, data[0]]);
-      setNewGalleryItem({ image_url: '', category: 'general', description: '' });
+    setAdding(true);
+    try {
+      const response = await fetch('/admin/api/save.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'add',
+          type: 'gallery',
+          data: {
+            ...newGalleryItem,
+            order_index: gallery.length,
+          },
+        }),
+      });
+
+      const result = await response.json();
+
+      if (!result.success) throw new Error(result.error);
+
+      setGallery([...gallery, result.item]);
+      setNewGalleryItem({
+        image_url: '',
+        category: 'general',
+        description: '',
+      });
+
+      toast.success('Image added');
+    } catch (e: any) {
+      toast.error(e.message || 'Failed to add image');
     }
     setAdding(false);
   };
@@ -63,16 +101,24 @@ export default function AdminGallery() {
   const handleDeleteGallery = async (item: GalleryItem) => {
     if (!window.confirm('Remove this image from the gallery?')) return;
 
-    const { error } = await supabase
-      .from('gallery')
-      .delete()
-      .eq('id', item.id);
+    try {
+      const response = await fetch('/admin/api/delete.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'gallery',
+          id: item.id,
+          path: item.image_url,
+        }),
+      });
 
-    if (error) {
-      toast.error('Failed to delete gallery item');
-    } else {
+      const result = await response.json();
+      if (!result.success) throw new Error(result.error);
+
+      setGallery(gallery.filter((i) => i.id !== item.id));
       toast.success('Image removed');
-      setGallery(gallery.filter(i => i.id !== item.id));
+    } catch (e: any) {
+      toast.error(e.message || 'Failed to delete image');
     }
   };
 
@@ -85,135 +131,141 @@ export default function AdminGallery() {
   }
 
   return (
-    <div className="space-y-16 animate-in fade-in duration-1000">
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 pb-4 border-b border-primary/5">
-        <div className="space-y-2">
-          <div className="flex items-center gap-4">
-            <div className="p-3 rounded-2xl bg-primary/5">
-              <ImageIcon className="w-8 h-8 text-primary" />
-            </div>
-            <h1 className="text-6xl font-serif font-bold text-foreground tracking-tighter">
-              Gallery
-            </h1>
+    <div className="space-y-16">
+      {/* Header */}
+      <div className="flex justify-between items-end border-b pb-6">
+        <div className="flex items-center gap-4">
+          <div className="p-3 rounded-2xl bg-primary/5">
+            <ImageIcon className="w-8 h-8 text-primary" />
           </div>
-          <p className="text-muted-foreground font-sans uppercase tracking-[0.4em] text-[10px] font-bold opacity-60 ml-16">Visual Library of Resort Moments</p>
+          <h1 className="text-5xl font-serif font-bold">Gallery</h1>
         </div>
+
+        <Button onClick={() => setShowFileManager(true)}>
+          Open File Manager
+        </Button>
       </div>
 
+      {/* File Manager Modal */}
+      {showFileManager && (
+        <div className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center">
+          <div className="bg-white rounded-2xl max-w-6xl w-full max-h-[85vh] overflow-auto relative p-6">
+            <button
+              className="absolute top-4 right-4 px-3 py-1 text-sm rounded bg-gray-200"
+              onClick={() => setShowFileManager(false)}
+            >
+              Close
+            </button>
+            <FileManager />
+          </div>
+        </div>
+      )}
+
       <div className="grid gap-12 lg:grid-cols-3">
-        <Card className="lg:col-span-1 border-none shadow-[0_20px_50px_rgba(0,0,0,0.04)] bg-white/60 backdrop-blur-xl rounded-[3rem] h-fit sticky top-28">
-          <CardHeader className="bg-primary/5 p-10 border-b border-primary/5">
-            <CardTitle className="text-3xl font-serif flex items-center gap-4">
-              <div className="p-2.5 rounded-xl bg-primary/10">
-                <Plus className="w-6 h-6 text-primary" />
-              </div>
-              New Entry
+        {/* Add New */}
+        <Card className="lg:col-span-1 rounded-[3rem] sticky top-28">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-3">
+              <Plus /> New Entry
             </CardTitle>
-            <CardDescription className="font-sans text-[10px] uppercase tracking-[0.4em] font-bold opacity-30 mt-2 ml-14">
-              Add a new visual to the site
-            </CardDescription>
+            <CardDescription>Add a new image</CardDescription>
           </CardHeader>
-          <CardContent className="p-10 space-y-10">
-            <ImageUpload 
+
+          <CardContent className="space-y-8">
+            <ImageUpload
               label="Select Image"
               currentUrl={newGalleryItem.image_url}
-              onUpload={(url) => setNewGalleryItem({...newGalleryItem, image_url: url})}
+              onUpload={(url) =>
+                setNewGalleryItem({ ...newGalleryItem, image_url: url })
+              }
             />
-            
-            <div className="grid gap-4">
-              <Label className="text-[10px] uppercase tracking-[0.3em] font-bold text-muted-foreground opacity-60 flex items-center gap-3 ml-2">
-                <LayoutGrid className="w-3.5 h-3.5" /> Category
-              </Label>
-              <div className="relative group">
-                <select 
-                  className="flex h-16 w-full rounded-2xl border-primary/5 bg-white/40 px-6 py-2 text-lg font-serif focus:ring-primary focus:border-primary transition-all appearance-none cursor-pointer shadow-inner"
-                  value={newGalleryItem.category}
-                  onChange={(e) => setNewGalleryItem({...newGalleryItem, category: e.target.value})}
-                >
-                  <option value="general">General Resort</option>
-                  <option value="rooms">Suites & Rooms</option>
-                  <option value="food">Dining & Drinks</option>
-                  <option value="activities">Guest Activities</option>
-                  <option value="wellness">Spa & Wellness</option>
-                  <option value="nature">Nature & Eco</option>
-                </select>
-                <div className="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none opacity-40">
-                  <LayoutGrid className="w-4 h-4" />
-                </div>
-              </div>
+
+            <div>
+              <Label>Category</Label>
+              <select
+                className="w-full h-14 rounded-xl px-4"
+                value={newGalleryItem.category}
+                onChange={(e) =>
+                  setNewGalleryItem({
+                    ...newGalleryItem,
+                    category: e.target.value,
+                  })
+                }
+              >
+                <option value="general">General</option>
+                <option value="rooms">Rooms</option>
+                <option value="food">Food</option>
+                <option value="activities">Activities</option>
+                <option value="wellness">Wellness</option>
+                <option value="nature">Nature</option>
+              </select>
             </div>
 
-            <div className="grid gap-4">
-              <Label className="text-[10px] uppercase tracking-[0.3em] font-bold text-muted-foreground opacity-60 flex items-center gap-3 ml-2">
-                <Camera className="w-3.5 h-3.5" /> Context
-              </Label>
-              <Input 
-                placeholder="Morning waves at Elmina..." 
-                className="font-sans text-lg h-16 bg-white/40 border-primary/5 focus:border-primary/20 transition-all rounded-2xl px-6 shadow-inner"
+            <div>
+              <Label>Description</Label>
+              <Input
                 value={newGalleryItem.description}
-                onChange={(e) => setNewGalleryItem({...newGalleryItem, description: e.target.value})}
+                onChange={(e) =>
+                  setNewGalleryItem({
+                    ...newGalleryItem,
+                    description: e.target.value,
+                  })
+                }
               />
             </div>
           </CardContent>
-          <CardFooter className="p-10 bg-primary/5 border-t border-primary/5">
-            <Button 
-              onClick={handleAddGallery} 
-              disabled={adding || !newGalleryItem.image_url} 
-              className="w-full h-16 text-xl font-serif rounded-2xl shadow-xl hover:shadow-primary/20 transition-all hover:-translate-y-1 active:translate-y-0"
+
+          <CardFooter>
+            <Button
+              className="w-full"
+              disabled={adding}
+              onClick={handleAddGallery}
             >
-              {adding ? <Loader2 className="w-6 h-6 animate-spin mr-3" /> : <Plus className="w-6 h-6 mr-3" />} 
-              Publish Moment
+              {adding ? (
+                <Loader2 className="animate-spin" />
+              ) : (
+                'Publish'
+              )}
             </Button>
           </CardFooter>
         </Card>
 
-        <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-10 h-fit">
-          {gallery.map((item, i) => (
-            <Card key={item.id} className="overflow-hidden group border-none shadow-[0_20px_50px_rgba(0,0,0,0.04)] hover:shadow-[0_30px_60px_rgba(0,0,0,0.08)] transition-all duration-700 rounded-[2.5rem] bg-white/40 backdrop-blur-xl animate-in fade-in slide-in-from-bottom-8" style={{ animationDelay: `${i * 50}ms` }}>
-              <div className="aspect-[4/5] relative overflow-hidden">
-                <img 
-                  src={item.image_url} 
-                  alt={item.description || 'Gallery'} 
-                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-                  onError={(e) => (e.target as HTMLImageElement).src = 'https://placehold.co/400x500?text=Invalid+URL'}
+        {/* Gallery Grid */}
+        <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-8">
+          {gallery.map((item) => (
+            <Card
+              key={item.id}
+              className="overflow-hidden rounded-[2.5rem]"
+            >
+              <div className="aspect-[4/5] relative">
+                <img
+                  src={item.image_url}
+                  alt={item.description || 'Gallery image'}
+                  className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                  <Button 
-                    variant="destructive" 
+
+                <div className="absolute inset-0 bg-black/60 opacity-0 hover:opacity-100 flex items-center justify-center transition">
+                  <Button
+                    variant="destructive"
                     size="icon"
-                    className="h-16 w-16 rounded-[1.5rem] shadow-2xl transform scale-75 group-hover:scale-100 transition-all duration-500"
                     onClick={() => handleDeleteGallery(item)}
                   >
-                    <Trash2 className="w-6 h-6" />
+                    <Trash2 />
                   </Button>
                 </div>
-                <div className="absolute top-6 left-6">
-                  <span className="bg-white/90 backdrop-blur-md text-[9px] uppercase font-bold tracking-[0.4em] px-4 py-2 rounded-full shadow-2xl text-primary border border-white/20">
-                    {item.category}
-                  </span>
-                </div>
               </div>
-              <CardFooter className="p-8 bg-white/30 backdrop-blur-md flex items-center justify-between border-t border-white/20">
-                <div className="space-y-1">
-                  <p className="text-xl font-serif italic text-foreground truncate max-w-[180px]">{item.description || 'Untitled Moment'}</p>
-                  <p className="text-[9px] uppercase tracking-widest opacity-30 font-bold">Sanctuary Asset</p>
+
+              <CardFooter className="flex justify-between">
+                <div>
+                  <p className="font-serif italic truncate max-w-[180px]">
+                    {item.description || 'Untitled'}
+                  </p>
+                  <p className="text-xs opacity-40">{item.category}</p>
                 </div>
-                <div className="p-2.5 rounded-xl bg-primary/5">
-                  <Sparkles className="w-4 h-4 text-primary/40" />
-                </div>
+                <Sparkles className="opacity-30" />
               </CardFooter>
             </Card>
           ))}
-          
-          {gallery.length === 0 && (
-            <div className="col-span-full py-48 text-center border-4 border-dashed rounded-[4rem] bg-primary/5 flex flex-col items-center justify-center animate-pulse">
-              <div className="p-8 rounded-full bg-primary/5 mb-8">
-                <ImageIcon className="w-20 h-20 text-primary/20" />
-              </div>
-              <h3 className="text-4xl font-serif text-muted-foreground/60">Sanctuary is silent</h3>
-              <p className="text-[10px] uppercase tracking-[0.4em] font-bold text-muted-foreground/40 mt-4">Start by adding your first resort moment</p>
-            </div>
-          )}
         </div>
       </div>
     </div>

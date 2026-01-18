@@ -1,14 +1,13 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useState, useEffect } from "react";import { ChevronLeft, ChevronRight } from "lucide-react";
 import { CloudbedsWidget } from "@/components/CloudbedsWidget";
 
 
 const bookingUrl = "https://us2.cloudbeds.com/reservation/65CAqa";
 
-const rooms = [
-  {
+
+const initialRooms = [  {
     id: 1,
     name: "Deluxe Double Room with Sea View",
     description:
@@ -104,12 +103,12 @@ const rooms = [
 ];
 
 // Room Card Component
-const RoomCard = ({ room }: { room: (typeof rooms)[0] }) => {
+const RoomCard = ({ room }: { room: any }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
 
-  const images = room.images;
+  const images = room.images || [];
   const hasMultiple = images.length > 1;
 
   const next = () => setCurrentImageIndex((i) => (i + 1) % images.length);
@@ -162,7 +161,8 @@ const RoomCard = ({ room }: { room: (typeof rooms)[0] }) => {
             </button>
 
             <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1.5">
-              {images.map((_, i) => (
+                            {images.map((_: any, i: number) => (
+
                 <button
                   key={i}
                   onClick={() => setCurrentImageIndex(i)}
@@ -183,8 +183,7 @@ const RoomCard = ({ room }: { room: (typeof rooms)[0] }) => {
         <p className="text-muted-foreground mb-4">{room.description}</p>
 
         <div className="flex flex-wrap gap-2 mb-4">
-          {room.amenities.map((a) => (
-            <span
+{room.amenities?.map((a: string) => (            <span
               key={a}
               className="text-xs bg-muted px-3 py-1 rounded-full text-muted-foreground"
             >
@@ -203,9 +202,39 @@ const RoomCard = ({ room }: { room: (typeof rooms)[0] }) => {
   );
 };
 
-const Rooms = () => {
-  return (
-    <div className="min-h-screen pt-20">
+  const Rooms = () => {
+    const [rooms, setRooms] = useState<any[]>([]);
+    const [loading, setLoading] = useState(true);
+  
+    const fetchRooms = async () => {
+      try {
+        const response = await fetch('/admin/api/list.php?type=rooms');
+        const data = await response.json();
+        if (Array.isArray(data) && data.length > 0) {
+          setRooms(data);
+        } else {
+          setRooms(initialRooms);
+        }
+      } catch (error) {
+        console.error('Failed to fetch rooms:', error);
+        setRooms(initialRooms);
+      } finally {
+        setLoading(false);
+      }
+    };
+   useEffect(() => {
+      fetchRooms();
+    }, []);
+   if (loading) {
+      return (
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-primary"></div>
+        </div>
+      );
+    }
+
+    return (
+      <div className="min-h-screen pt-20">
       {/* HERO */}
       <section
         className="relative h-96 flex items-center justify-center bg-cover bg-center"

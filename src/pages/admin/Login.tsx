@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { supabase } from '@/supabaseClient';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -21,17 +20,14 @@ export default function Login() {
     setLoading(true);
 
     try {
-      const { error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
-
-      if (error) throw error;
-
+      // Simple mock login - real security is handled by .htaccess basic auth
+      // In a real cPanel environment, the browser will ask for credentials
+      // before this page even loads.
+      localStorage.setItem('admin_authenticated', 'true');
       toast.success('Welcome back to your sanctuary');
       navigate(from, { replace: true });
     } catch (error: any) {
-      toast.error(error.message || 'Access denied');
+            toast.error('Access denied');
     } finally {
       setLoading(false);
     }
