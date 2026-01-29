@@ -18,18 +18,18 @@ export default function AdminLayout() {
         <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-primary/5" />
       </div>
 
-      <div className="relative z-10 flex flex-col min-h-screen">
-        <AdminNavbar />
-        <main className="flex-grow container mx-auto py-12 px-4 max-w-7xl animate-in fade-in slide-in-from-bottom-6 duration-1000">
-          <Outlet />
-        </main>
-        
-        <footer className="container mx-auto py-8 px-4 text-center opacity-40">
-          <p className="text-[10px] uppercase tracking-[0.4em] font-sans">
-            KO-SA Beach Resort &middot; Management Portal &middot; Elmina, Ghana
-          </p>
-        </footer>
-      </div>
+              <div className="relative z-10 flex flex-col min-h-screen overflow-y-auto">
+          <AdminNavbar />
+          <main className="flex-grow container mx-auto py-8 px-4 max-w-7xl animate-in fade-in slide-in-from-bottom-6 duration-1000">
+            <Outlet />
+          </main>
+          
+          <footer className="container mx-auto py-8 px-4 text-center opacity-40">
+            <p className="text-[10px] uppercase tracking-[0.4em] font-sans">
+              KO-SA Beach Resort &middot; Management Portal &middot; Elmina, Ghana
+            </p>
+          </footer>
+        </div>
     </div>
   );
 }

@@ -15,15 +15,11 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-// Security: Define allowed base directory
+// Security: Define allowed base directory (public root, 2 levels up from api folder)
 $base_dir = realpath(__DIR__ . "/../../");
-$assets_dir = $base_dir . "/assets/gallery/";
 $data_dir = __DIR__ . "/../data/";
 
-// Ensure directories exist
-if (!file_exists($assets_dir)) {
-    mkdir($assets_dir, 0755, true);
-}
+// Ensure data directory exists
 if (!file_exists($data_dir)) {
     mkdir($data_dir, 0755, true);
 }
@@ -67,21 +63,29 @@ if ($check === false) {
     exit;
 }
 
-// Generate unique filename
-$filename = uniqid('img_', true) . '.' . $imageFileType;
-$target_path = $assets_dir . $filename;
-$relative_url = "/assets/gallery/" . $filename;
+// Generate unique filename and save to appropriate directory
+$filename = 'img_' . uniqid() . '.' . $imageFileType;
+$category = $_POST['category'] ?? 'general';
+$sub_dir = ($category === 'rooms' || $category === 'Rooms') ? "Rooms/" : "";
+$target_path = $base_dir . "/" . $sub_dir . $filename;
+$relative_url = $sub_dir . $filename; 
 
-// Save file
+// Ensure sub-directory exists
+if ($sub_dir && !file_exists($base_dir . "/" . $sub_dir)) {
+    mkdir($base_dir . "/" . $sub_dir, 0755, true);
+}
+
+
+clearstatcache();
+
+// Save file to public root
 if (!move_uploaded_file($file["tmp_name"], $target_path)) {
     http_response_code(500);
     echo json_encode(["error" => "Failed to save uploaded file."]);
     exit;
 }
 
-// Optional: Append metadata to gallery.json if type is gallery
-// This handles the "Append metadata to admin/data/gallery.json" requirement
-// when called with metadata
+// Handle gallery type - append to gallery.json
 $type = $_POST['type'] ?? null;
 if ($type === 'gallery') {
     $dataFile = $data_dir . 'gallery.json';
@@ -89,7 +93,7 @@ if ($type === 'gallery') {
     if (!is_array($data)) $data = [];
     
     $newItem = [
-        "id" => uniqid('gal_', true),
+        "id" => 'gal_' . uniqid(),
         "image_url" => $relative_url,
         "category" => $_POST['category'] ?? 'general',
         "description" => $_POST['description'] ?? '',

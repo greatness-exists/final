@@ -5,15 +5,19 @@ import { Label } from '@/components/ui/label';
 import { Loader2, Upload, X, Link as LinkIcon } from 'lucide-react';
 import { toast } from 'sonner';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { uploadFile } from '@/lib/adminApi';
+import { getImageUrl } from '@/lib/utils';
 
 interface ImageUploadProps {
   onUpload: (url: string) => void;
   currentUrl?: string;
   label?: string;
+  compact?: boolean;
+  category?: string;
+
 }
 
-export default function ImageUpload({ onUpload, currentUrl, label }: ImageUploadProps) {
-  const [uploading, setUploading] = useState(false);
+export default function ImageUpload({ onUpload, currentUrl, label, compact, category }: ImageUploadProps) {  const [uploading, setUploading] = useState(false);
   const [preview, setPreview] = useState<string | null>(currentUrl || null);
   const [urlInput, setUrlInput] = useState(currentUrl || '');
 
@@ -24,32 +28,39 @@ export default function ImageUpload({ onUpload, currentUrl, label }: ImageUpload
 
   const handleUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     try {
-      setUploading(true);
       if (!event.target.files || event.target.files.length === 0) {
         throw new Error('You must select an image to upload.');
       }
 
       const file = event.target.files[0];
-      const fileExt = file.name.split('.').pop();
-      const fileName = `${Math.random()}.${fileExt}`;
-      const filePath = `${fileName}`;
+            
+      // Create immediate local preview
+      const localPreview = URL.createObjectURL(file);
+      setPreview(localPreview);
+      setUploading(true);
 
-      const { error: uploadError } = await supabase.storage
-        .from('images')
-        .upload(filePath, file);
+const result = await uploadFile(file, undefined, category);      
+      if (!result.success) {
+        setPreview(currentUrl || null);
+                URL.revokeObjectURL(localPreview);
+        throw new Error(result.error || 'Upload failed');
+      }
 
-      if (uploadError) throw uploadError;
-
-      const { data: { publicUrl } } = supabase.storage
-        .from('images')
-        .getPublicUrl(filePath);
-
-      setPreview(publicUrl);
-      setUrlInput(publicUrl);
-      onUpload(publicUrl);
+  // Set server URL
+      const serverUrl = result.url || '';
+      setPreview(serverUrl);
+      setUrlInput(serverUrl);
+      onUpload(serverUrl);
+      
+      // Cleanup local preview AFTER a short delay to allow the new image to start loading
+      setTimeout(() => {
+        URL.revokeObjectURL(localPreview);
+      }, 2000);
+      
       toast.success('Image uploaded successfully');
-    } catch (error: any) {
-      toast.error(error.message || 'Error uploading image');
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : 'Error uploading image';
+      toast.error(message);
     } finally {
       setUploading(false);
     }
@@ -63,19 +74,44 @@ export default function ImageUpload({ onUpload, currentUrl, label }: ImageUpload
     }
   };
 
+  if (compact) {
+    return (
+      <div className="relative">
+        <Button
+          variant="secondary"
+          size="icon"
+          className="rounded-full h-12 w-12 shadow-xl hover:scale-110 active:scale-95 bg-white/90 hover:bg-white text-primary"
+          disabled={uploading}
+          asChild
+        >
+          <label className="cursor-pointer">
+            {uploading ? <Loader2 className="w-5 h-5 animate-spin" /> : <Upload className="w-5 h-5" />}
+            <input 
+              type="file" 
+              className="hidden" 
+              accept="image/*"
+              onChange={handleUpload}
+              disabled={uploading}
+            />
+          </label>
+        </Button>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-4">
       {label && <Label className="text-sm font-serif uppercase tracking-widest opacity-60">{label}</Label>}
       
       <div className="grid gap-6">
         {preview && (
-          <div className="relative aspect-video rounded-3xl overflow-hidden border-4 border-white shadow-xl bg-muted/20 group">
-            <img 
-              src={preview} 
-              alt="Preview" 
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-              onError={(e) => (e.target as HTMLImageElement).src = 'https://placehold.co/600x400?text=Invalid+Image+URL'}
-            />
+            <div className="relative aspect-video rounded-3xl overflow-hidden border-4 border-white shadow-xl bg-muted/20 group">
+              <img 
+                src={getImageUrl(preview)} 
+                alt="Preview" 
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                onError={(e) => (e.target as HTMLImageElement).src = 'https://placehold.co/600x400?text=Invalid+Image+URL'}
+              />
             <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
               <Button 
                 variant="destructive" 

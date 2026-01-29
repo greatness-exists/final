@@ -3,6 +3,9 @@ header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
+header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+header('Cache-Control: post-check=0, pre-check=0', false);
+header('Pragma: no-cache');
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
@@ -17,12 +20,11 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 $input = json_decode(file_get_contents('php://input'), true);
 if (!$input) {
-    // Fallback to $_POST for non-JSON requests
     $input = $_POST;
 }
 
 $path = $input['path'] ?? null;
-$type = $input['type'] ?? 'gallery'; // Default to gallery
+$type = $input['type'] ?? 'gallery';
 $id = $input['id'] ?? null;
 
 if (!$path && !$id) {
@@ -31,30 +33,34 @@ if (!$path && !$id) {
     exit;
 }
 
-$base_dir = realpath(__DIR__ . "/../../");
-$assets_dir = realpath($base_dir . "/assets/gallery/");
+$publicRoot = realpath(__DIR__ . "/../../");
 $data_dir = __DIR__ . "/../data/";
+
+clearstatcache();
 
 // 1. Delete file if path provided
 if ($path) {
-    $filename = basename($path);
-    
-    // Prevent directory traversal
-    if (preg_match('/\.\./', $filename) || preg_match('/[\/\\\\]/', $filename)) {
-        http_response_code(400);
+    // Basic security: prevent traversal
+    if (strpos($path, '..') !== false) {
+        http_response_code(403);
         echo json_encode(["error" => "Invalid path"]);
         exit;
     }
+
+    $fullPath = $publicRoot . '/' . ltrim($path, '/');
     
-    if ($assets_dir) {
-        $file_to_delete = $assets_dir . "/" . $filename;
-        
-        // Final security check: ensure the file is within the assets directory
-        $real_path = realpath($file_to_delete);
-        if ($real_path && strpos($real_path, $assets_dir) === 0 && file_exists($real_path)) {
-            if (!unlink($real_path)) {
-                // Log error but continue with JSON removal
-            }
+    // Check if path is in allowed directories
+    $allowedDirectories = ['', 'Rooms/', 'assets/gallery/'];
+    $dir = dirname($path);
+    $dir = ($dir === '.' || $dir === '') ? '' : $dir . '/';
+    
+    // Ensure we don't delete system files
+    $basename = basename($path);
+    $protectedFiles = ['logo.png', 'vite.svg', 'robots.txt', 'sitemap.xml', 'index.html', '.htaccess', 'favicon.ico'];
+    
+    if (in_array($dir, $allowedDirectories) && !in_array($basename, $protectedFiles)) {
+        if (file_exists($fullPath) && is_file($fullPath)) {
+            unlink($fullPath);
         }
     }
 }
@@ -70,6 +76,8 @@ if ($id || $path) {
             $filteredData = array_filter($data, function($item) use ($id, $path) {
                 if ($id && isset($item['id']) && $item['id'] === $id) return false;
                 if ($path && isset($item['image_url']) && $item['image_url'] === $path) return false;
+                // Special case for image_url with leading slash
+                if ($path && isset($item['image_url']) && ltrim($item['image_url'], '/') === ltrim($path, '/')) return false;
                 return true;
             });
             

@@ -14,13 +14,14 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
+import { fetchFiles, deleteFile, replaceFile } from '@/lib/adminApi';
 
 interface FileItem {
   filename: string;
-  path: string;
-  folder: string;
+  name: string;
   size: number;
   modified: number;
+  extension: string;
 }
 
 export default function FileManager() {
@@ -32,15 +33,14 @@ export default function FileManager() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const replaceTargetRef = useRef<string | null>(null);
 
-  const fetchFiles = async () => {
+  const loadFiles = async () => {
     setLoading(true);
     try {
-      const res = await fetch('/admin/api/list-files.php');
-      const data = await res.json();
+      const data = await fetchFiles();
       if (data.success) {
-        setFiles(data.files);
+        setFiles(data.files || []);
       } else {
-        throw new Error(data.error || 'Failed to load files');
+        throw new Error('Failed to load files');
       }
     } catch (error) {
       toast.error(error instanceof Error ? error.message : 'Failed to load files');
@@ -49,25 +49,20 @@ export default function FileManager() {
   };
 
   useEffect(() => {
-    fetchFiles();
+    loadFiles();
   }, []);
 
   const handleDelete = async () => {
     if (!deleteTarget) return;
     
     try {
-      const res = await fetch('/admin/api/delete-image.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ filename: deleteTarget.path }),
-      });
-      const data = await res.json();
+      const result = await deleteFile(deleteTarget.filename);
       
-      if (data.success) {
-        toast.success(`Deleted ${deleteTarget.filename}`);
-        setFiles(files.filter(f => f.path !== deleteTarget.path));
+      if (result.success) {
+        toast.success(`Deleted ${deleteTarget.name}`);
+        setFiles(files.filter(f => f.filename !== deleteTarget.filename));
       } else {
-        throw new Error(data.error || 'Delete failed');
+        throw new Error(result.error || 'Delete failed');
       }
     } catch (error) {
       toast.error(error instanceof Error ? error.message : 'Delete failed');
@@ -75,9 +70,9 @@ export default function FileManager() {
     setDeleteTarget(null);
   };
 
-  const handleReplaceClick = (path: string) => {
-    replaceTargetRef.current = path;
-    setReplacing(path);
+  const handleReplaceClick = (filename: string) => {
+    replaceTargetRef.current = filename;
+    setReplacing(filename);
     fileInputRef.current?.click();
   };
 
@@ -91,21 +86,13 @@ export default function FileManager() {
     }
 
     try {
-      const formData = new FormData();
-      formData.append('target', targetPath);
-      formData.append('replacement', file);
+      const result = await replaceFile(targetPath, file);
 
-      const res = await fetch('/admin/api/replace.php', {
-        method: 'POST',
-        body: formData,
-      });
-      const data = await res.json();
-
-      if (data.success) {
+      if (result.success) {
         toast.success(`Replaced ${targetPath} successfully`);
-        await fetchFiles();
+        await loadFiles();
       } else {
-        throw new Error(data.error || 'Replace failed');
+        throw new Error(result.error || 'Replace failed');
       }
     } catch (error) {
       toast.error(error instanceof Error ? error.message : 'Replace failed');
@@ -126,11 +113,11 @@ export default function FileManager() {
 
   const filteredFiles = files.filter(f => 
     f.filename.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    f.folder.toLowerCase().includes(searchQuery.toLowerCase())
+    f.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const rootFiles = filteredFiles.filter(f => f.folder === 'root');
-  const roomsFiles = filteredFiles.filter(f => f.folder === 'Rooms');
+  const rootFiles = filteredFiles.filter(f => !f.filename.includes('/'));
+  const roomsFiles = filteredFiles.filter(f => f.filename.startsWith('Rooms/'));
 
   if (loading) {
     return (
@@ -166,7 +153,7 @@ export default function FileManager() {
         </div>
         <Button 
           variant="outline" 
-          onClick={fetchFiles} 
+          onClick={loadFiles} 
           className="gap-2 h-14 px-6 font-sans uppercase tracking-widest text-[10px] font-bold border-primary/10 hover:bg-primary/5 rounded-2xl transition-all"
         >
           <RefreshCw className="w-3.5 h-3.5" /> Refresh
@@ -210,7 +197,7 @@ export default function FileManager() {
           <AlertDialogHeader>
             <AlertDialogTitle className="font-serif text-2xl">Delete Image?</AlertDialogTitle>
             <AlertDialogDescription className="font-sans">
-              Are you sure you want to delete <strong>{deleteTarget?.filename}</strong>? This action cannot be undone.
+              Are you sure you want to delete <strong>{deleteTarget?.name}</strong>? This action cannot be undone.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
@@ -242,7 +229,7 @@ function FileSection({
   files: FileItem[];
   formatSize: (bytes: number) => string;
   onDelete: (file: FileItem) => void;
-  onReplace: (path: string) => void;
+  onReplace: (filename: string) => void;
   replacing: string | null;
 }) {
   if (files.length === 0) return null;
@@ -264,12 +251,12 @@ function FileSection({
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
           {files.map((file) => (
             <div 
-              key={file.path}
+              key={file.filename}
               className="group relative aspect-square rounded-2xl overflow-hidden bg-muted/20 border-2 border-transparent hover:border-primary/20 transition-all duration-300"
             >
               <img
-                src={`/${file.path}?t=${file.modified}`}
-                alt={file.filename}
+                src={`/${file.filename}?t=${file.modified}`}
+                alt={file.name}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 onError={(e) => {
                   (e.target as HTMLImageElement).src = 'https://placehold.co/200x200?text=Error';
@@ -277,7 +264,7 @@ function FileSection({
               />
               
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-3">
-                <p className="text-white text-xs font-medium truncate mb-1">{file.filename}</p>
+                <p className="text-white text-xs font-medium truncate mb-1">{file.name}</p>
                 <p className="text-white/60 text-[10px]">{formatSize(file.size)}</p>
                 
                 <div className="flex gap-2 mt-3">
@@ -285,10 +272,10 @@ function FileSection({
                     size="sm"
                     variant="secondary"
                     className="flex-1 h-8 text-[10px] rounded-lg gap-1 bg-white/20 hover:bg-white/30 text-white border-none"
-                    onClick={() => onReplace(file.path)}
-                    disabled={replacing === file.path}
+                    onClick={() => onReplace(file.filename)}
+                    disabled={replacing === file.filename}
                   >
-                    {replacing === file.path ? (
+                    {replacing === file.filename ? (
                       <Loader2 className="w-3 h-3 animate-spin" />
                     ) : (
                       <Replace className="w-3 h-3" />

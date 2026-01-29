@@ -3,6 +3,9 @@ header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
+header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+header('Cache-Control: post-check=0, pre-check=0', false);
+header('Pragma: no-cache');
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
@@ -30,7 +33,7 @@ if (strpos($targetFile, '..') !== false) {
     exit;
 }
 
-$allowedPaths = ['', 'Rooms/'];
+$allowedPaths = ['', 'Rooms/', 'assets/gallery/'];
 $targetDir = dirname($targetFile);
 $targetDir = ($targetDir === '.' || $targetDir === '') ? '' : $targetDir . '/';
 
@@ -48,6 +51,8 @@ if (!file_exists($fullPath)) {
     echo json_encode(['error' => 'Target file not found']);
     exit;
 }
+
+clearstatcache();
 
 if ($uploadedFile['error'] !== UPLOAD_ERR_OK) {
     http_response_code(400);

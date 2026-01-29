@@ -3,6 +3,9 @@ header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
+header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+header('Cache-Control: post-check=0, pre-check=0', false);
+header('Pragma: no-cache');
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
@@ -14,6 +17,8 @@ $type = $_GET['type'] ?? 'gallery';
 // Security: Sanitize type to prevent directory traversal
 $type = preg_replace('/[^a-zA-Z0-9_]/', '', $type);
 $dataFile = __DIR__ . '/../data/' . $type . '.json';
+
+clearstatcache();
 
 if (!file_exists($dataFile)) {
     echo json_encode([]);

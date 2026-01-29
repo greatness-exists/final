@@ -1,41 +1,123 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { toast } from 'sonner';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Loader2, Image as ImageIcon, Bed, FileText, ExternalLink, RefreshCw, LayoutDashboard, Sparkles, ShieldCheck } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Input } from '@/components/ui/input';
+import { Loader2, FolderOpen, RefreshCw, Trash2, Replace, Search, Image as ImageIcon, FolderTree } from 'lucide-react';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
+import { fetchFiles, deleteFile, replaceFile } from '@/lib/adminApi';
 
-export default function AdminDashboard() {
-  const [stats, setStats] = useState({
-    contentCount: 0,
-    galleryCount: 0,
-    roomCount: 0,
-  });
+interface FileItem {
+  filename: string;
+  name: string;
+  size: number;
+  modified: number;
+  extension: string;
+}
+
+export default function FileManager() {
+  const [files, setFiles] = useState<FileItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [deleteTarget, setDeleteTarget] = useState<FileItem | null>(null);
+  const [replacing, setReplacing] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const replaceTargetRef = useRef<string | null>(null);
 
-  const fetchStats = async () => {
+  const loadFiles = async () => {
     setLoading(true);
     try {
-      const [contentRes, galleryRes, roomsRes] = await Promise.all([
-        fetch('/admin/api/list.php?type=site_content').then(res => res.json()),
-        fetch('/admin/api/list.php?type=gallery').then(res => res.json()),
-        fetch('/admin/api/list.php?type=rooms').then(res => res.json())
-      ]);
-
-      setStats({
-        contentCount: Array.isArray(contentRes) ? contentRes.length : 0,
-        galleryCount: Array.isArray(galleryRes) ? galleryRes.length : 0,
-        roomCount: Array.isArray(roomsRes) ? roomsRes.length : 0,
-      });
+      const data = await fetchFiles();
+      if (data.success) {
+        setFiles(data.files || []);
+      } else {
+        throw new Error('Failed to load files');
+      }
     } catch (error) {
-      toast.error('Failed to fetch dashboard stats');
+      toast.error(error instanceof Error ? error.message : 'Failed to load files');
     }
     setLoading(false);
   };
 
   useEffect(() => {
-    fetchStats();
+    loadFiles();
   }, []);
+
+  const handleDelete = async () => {
+    if (!deleteTarget) return;
+    
+    try {
+      const result = await deleteFile(deleteTarget.filename);
+      
+      if (result.success) {
+        toast.success(`Deleted ${deleteTarget.name}`);
+        setFiles(files.filter(f => f.filename !== deleteTarget.filename));
+      } else {
+        throw new Error(result.error || 'Delete failed');
+      }
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : 'Delete failed');
+    }
+    setDeleteTarget(null);
+  };
+
+  const handleReplaceClick = (filename: string) => {
+    replaceTargetRef.current = filename;
+    setReplacing(filename);
+    fileInputRef.current?.click();
+  };
+
+  const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    const targetPath = replaceTargetRef.current;
+    
+    if (!file || !targetPath) {
+      setReplacing(null);
+      return;
+    }
+
+    try {
+      const result = await replaceFile(targetPath, file);
+
+      if (result.success) {
+        toast.success(`Replaced ${targetPath} successfully`);
+        await loadFiles();
+      } else {
+        throw new Error(result.error || 'Replace failed');
+      }
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : 'Replace failed');
+    }
+    
+    setReplacing(null);
+    replaceTargetRef.current = null;
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+  };
+
+  const formatSize = (bytes: number) => {
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+    return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
+  };
+
+  const filteredFiles = files.filter(f => 
+    f.filename.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    f.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const rootFiles = filteredFiles.filter(f => !f.filename.includes('/'));
+  const roomsFiles = filteredFiles.filter(f => f.filename.startsWith('Rooms/'));
 
   if (loading) {
     return (
@@ -45,149 +127,181 @@ export default function AdminDashboard() {
     );
   }
 
-  const cards = [
-    { 
-      title: 'Site Content', 
-      count: stats.contentCount, 
-      desc: 'Editable texts & visuals', 
-      icon: FileText, 
-      link: '/admin/content',
-      color: 'bg-primary'
-    },
-    { 
-      title: 'Resort Gallery', 
-      count: stats.galleryCount, 
-      desc: 'Active photo collection', 
-      icon: ImageIcon, 
-      link: '/admin/gallery',
-      color: 'bg-primary'
-    },
-    { 
-      title: 'Room Types', 
-      count: stats.roomCount, 
-      desc: 'Accommodation listings', 
-      icon: Bed, 
-      link: '/admin/rooms',
-      color: 'bg-primary'
-    }
-  ];
-
   return (
-    <div className="space-y-16 animate-in fade-in duration-1000">
+    <div className="space-y-12 animate-in fade-in duration-1000">
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept="image/*"
+        className="hidden"
+        onChange={handleFileSelect}
+      />
+      
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 pb-4 border-b border-primary/5">
         <div className="space-y-2">
           <div className="flex items-center gap-4">
             <div className="p-3 rounded-2xl bg-primary/5">
-              <LayoutDashboard className="w-8 h-8 text-primary" />
+              <FolderOpen className="w-8 h-8 text-primary" />
             </div>
             <h1 className="text-6xl font-serif font-bold text-foreground tracking-tighter">
-              Overview
+              File Manager
             </h1>
           </div>
-          <p className="text-muted-foreground font-sans uppercase tracking-[0.4em] text-[10px] font-bold opacity-60 ml-16">Sanctuary Management Control</p>
+          <p className="text-muted-foreground font-sans uppercase tracking-[0.4em] text-[10px] font-bold opacity-60 ml-16">
+            Manage static images in your project
+          </p>
         </div>
-        <div className="flex gap-4 w-full md:w-auto">
-          <Button variant="outline" onClick={fetchStats} className="flex-1 md:flex-none gap-2 h-14 px-6 font-sans uppercase tracking-widest text-[10px] font-bold border-primary/10 hover:bg-primary/5 rounded-2xl transition-all">
-            <RefreshCw className="w-3.5 h-3.5" /> Sync Data
-          </Button>
-          <Link to="/" target="_blank" className="flex-1 md:flex-none">
-            <Button className="w-full gap-3 font-serif text-xl h-14 px-8 rounded-2xl shadow-xl hover:shadow-primary/20 hover:-translate-y-1 transition-all">
-              <ExternalLink className="w-5 h-5" /> Live Site
-            </Button>
-          </Link>
-        </div>
+        <Button 
+          variant="outline" 
+          onClick={loadFiles} 
+          className="gap-2 h-14 px-6 font-sans uppercase tracking-widest text-[10px] font-bold border-primary/10 hover:bg-primary/5 rounded-2xl transition-all"
+        >
+          <RefreshCw className="w-3.5 h-3.5" /> Refresh
+        </Button>
       </div>
 
-      <div className="grid gap-8 md:grid-cols-3">
-        {cards.map((card, i) => (
-          <Card key={card.title} className="relative overflow-hidden group border-none shadow-[0_20px_50px_rgba(0,0,0,0.04)] bg-white/60 backdrop-blur-xl rounded-[2.5rem] hover:shadow-[0_30px_60px_rgba(0,0,0,0.08)] transition-all duration-700 hover:-translate-y-2 animate-in fade-in slide-in-from-bottom-8" style={{ animationDelay: `${i * 100}ms` }}>
-            <div className={`absolute top-0 left-0 w-full h-1.5 ${card.color} opacity-10 group-hover:opacity-100 transition-opacity duration-700`} />
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 pt-8 px-8">
-              <CardTitle className="text-[10px] font-sans uppercase tracking-[0.3em] font-bold text-muted-foreground/40">{card.title}</CardTitle>
-              <div className="p-3 rounded-2xl bg-primary/5 group-hover:bg-primary/10 transition-colors">
-                <card.icon className="h-5 w-5 text-primary/60 group-hover:text-primary transition-colors" />
-              </div>
-            </CardHeader>
-            <CardContent className="px-8 pb-8 pt-4">
-              <div className="text-6xl font-serif font-bold tracking-tighter group-hover:scale-105 transition-transform duration-700 origin-left">{card.count}</div>
-              <p className="text-xs text-muted-foreground mt-4 font-sans tracking-wide leading-relaxed opacity-60">{card.desc}</p>
-              <Button asChild variant="ghost" className="w-full mt-10 h-16 justify-between rounded-2xl bg-primary/5 hover:bg-primary hover:text-white transition-all duration-500 group/btn px-6 border border-primary/5">
-                <Link to={card.link} className="flex items-center justify-between w-full font-serif text-xl">
-                  Manage <Sparkles className="w-5 h-5 opacity-0 group-hover/btn:opacity-100 transition-all -translate-x-4 group-hover/btn:translate-x-0" />
-                </Link>
-              </Button>
-            </CardContent>
-          </Card>
-        ))}
+      <div className="relative max-w-md">
+        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground/40" />
+        <Input
+          placeholder="Search files..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="pl-12 h-14 bg-white/50 border-primary/10 rounded-2xl font-sans"
+        />
       </div>
 
-      <div className="grid gap-8 lg:grid-cols-5">
-        <Card className="lg:col-span-3 border-none shadow-[0_20px_50px_rgba(0,0,0,0.04)] bg-white/40 backdrop-blur-xl rounded-[3rem] overflow-hidden">
-          <CardHeader className="bg-primary/5 p-10 border-b border-primary/5">
-            <CardTitle className="font-serif text-3xl flex items-center gap-4">
-              <div className="p-2.5 rounded-xl bg-primary/10">
-                <Sparkles className="w-6 h-6 text-primary" />
-              </div>
-              Boutique Manager Tools
-            </CardTitle>
-            <CardDescription className="font-sans text-[10px] uppercase tracking-[0.4em] font-bold opacity-40 mt-2 ml-14">Refine your guest experience</CardDescription>
-          </CardHeader>
-          <CardContent className="p-10 grid sm:grid-cols-2 gap-8">
-            <div className="space-y-4 p-6 rounded-[2rem] bg-white/50 border border-primary/5 hover:border-primary/20 transition-all duration-500 hover:shadow-xl group">
-              <div className="bg-primary/5 p-4 rounded-2xl w-fit group-hover:bg-primary/10 transition-colors">
-                <ImageIcon className="h-6 w-6 text-primary/60" />
-              </div>
-              <div>
-                <p className="font-serif text-2xl font-bold">Cloud Assets</p>
-                <p className="text-sm text-muted-foreground mt-2 leading-relaxed opacity-70">Seamlessly upload and manage high-resolution photography without manual file handling.</p>
-              </div>
-            </div>
-            <div className="space-y-4 p-6 rounded-[2rem] bg-white/50 border border-primary/5 hover:border-primary/20 transition-all duration-500 hover:shadow-xl group">
-              <div className="bg-primary/5 p-4 rounded-2xl w-fit group-hover:bg-primary/10 transition-colors">
-                <FileText className="h-6 w-6 text-primary/60" />
-              </div>
-              <div>
-                <p className="font-serif text-2xl font-bold">Dynamic Copy</p>
-                <p className="text-sm text-muted-foreground mt-2 leading-relaxed opacity-70">Update your resort narrative and descriptions in real-time. Keep your story fresh and inviting.</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="lg:col-span-2 border-none shadow-[0_20px_50px_rgba(0,0,0,0.04)] bg-primary/5 rounded-[3rem] overflow-hidden border border-primary/5 flex flex-col">
-          <CardHeader className="p-10 pb-6">
-            <CardTitle className="text-primary font-serif text-3xl flex items-center gap-4">
-              <div className="p-2.5 rounded-xl bg-primary/10">
-                <ShieldCheck className="w-6 h-6 text-primary" />
-              </div>
-              Sanctuary Health
-            </CardTitle>
-            <CardDescription className="font-sans text-[10px] uppercase tracking-[0.4em] font-bold opacity-40 mt-2 ml-14">Operational Integrity</CardDescription>
-          </CardHeader>
-          <CardContent className="p-10 pt-4 flex-grow space-y-4">
-            <div className="space-y-4">
-              {[
-                { label: 'Database', status: 'Optimal', active: true },
-                { label: 'Media CDN', status: 'Active', active: true },
-                { label: 'Cloud Sync', status: 'Encrypted', active: true }
-              ].map((item) => (
-                <div key={item.label} className="flex items-center justify-between p-6 rounded-2xl bg-white/40 border border-white/20 shadow-sm">
-                  <span className="text-[10px] font-sans uppercase tracking-[0.3em] font-bold opacity-40">{item.label}</span>
-                  <span className="flex items-center gap-2.5 text-primary font-serif text-xl">
-                    <div className="w-2 h-2 rounded-full bg-primary animate-pulse shadow-[0_0_10px_rgba(var(--primary),0.5)]" /> 
-                    {item.status}
-                  </span>
-                </div>
-              ))}
-            </div>
-            <div className="pt-8 text-center">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/20 backdrop-blur-sm border border-white/10">
-                <span className="text-[9px] font-sans uppercase tracking-[0.5em] opacity-40">Secure Session Active</span>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+      <div className="space-y-8">
+        <FileSection 
+          title="Root Folder" 
+          description="Images in public/ directory"
+          files={rootFiles}
+          formatSize={formatSize}
+          onDelete={setDeleteTarget}
+          onReplace={handleReplaceClick}
+          replacing={replacing}
+        />
+        
+        <FileSection 
+          title="Rooms Folder" 
+          description="Images in public/Rooms/ directory"
+          files={roomsFiles}
+          formatSize={formatSize}
+          onDelete={setDeleteTarget}
+          onReplace={handleReplaceClick}
+          replacing={replacing}
+        />
       </div>
+
+      <AlertDialog open={!!deleteTarget} onOpenChange={() => setDeleteTarget(null)}>
+        <AlertDialogContent className="rounded-3xl border-none shadow-2xl">
+          <AlertDialogHeader>
+            <AlertDialogTitle className="font-serif text-2xl">Delete Image?</AlertDialogTitle>
+            <AlertDialogDescription className="font-sans">
+              Are you sure you want to delete <strong>{deleteTarget?.name}</strong>? This action cannot be undone.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel className="rounded-xl">Cancel</AlertDialogCancel>
+            <AlertDialogAction 
+              onClick={handleDelete}
+              className="bg-red-600 hover:bg-red-700 rounded-xl"
+            >
+              Delete
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
+  );
+}
+
+function FileSection({ 
+  title, 
+  description, 
+  files, 
+  formatSize, 
+  onDelete, 
+  onReplace,
+  replacing 
+}: { 
+  title: string;
+  description: string;
+  files: FileItem[];
+  formatSize: (bytes: number) => string;
+  onDelete: (file: FileItem) => void;
+  onReplace: (filename: string) => void;
+  replacing: string | null;
+}) {
+  if (files.length === 0) return null;
+
+  return (
+    <Card className="border-none shadow-[0_20px_50px_rgba(0,0,0,0.04)] bg-white/60 backdrop-blur-xl rounded-[2.5rem] overflow-hidden">
+      <CardHeader className="bg-primary/5 px-8 py-6 border-b border-primary/5">
+        <div className="flex items-center gap-3">
+          <FolderTree className="w-5 h-5 text-primary" />
+          <div>
+            <CardTitle className="font-serif text-xl">{title}</CardTitle>
+            <CardDescription className="font-sans text-[10px] uppercase tracking-widest opacity-60 mt-1">
+              {description} • {files.length} files
+            </CardDescription>
+          </div>
+        </div>
+      </CardHeader>
+      <CardContent className="p-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+          {files.map((file) => (
+            <div 
+              key={file.filename}
+              className="group relative aspect-square rounded-2xl overflow-hidden bg-muted/20 border-2 border-transparent hover:border-primary/20 transition-all duration-300"
+            >
+              <img
+                src={`/${file.filename}?t=${file.modified}`}
+                alt={file.name}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src = 'https://placehold.co/200x200?text=Error';
+                }}
+              />
+              
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-3">
+                <p className="text-white text-xs font-medium truncate mb-1">{file.name}</p>
+                <p className="text-white/60 text-[10px]">{formatSize(file.size)}</p>
+                
+                <div className="flex gap-2 mt-3">
+                  <Button
+                    size="sm"
+                    variant="secondary"
+                    className="flex-1 h-8 text-[10px] rounded-lg gap-1 bg-white/20 hover:bg-white/30 text-white border-none"
+                    onClick={() => onReplace(file.filename)}
+                    disabled={replacing === file.filename}
+                  >
+                    {replacing === file.filename ? (
+                      <Loader2 className="w-3 h-3 animate-spin" />
+                    ) : (
+                      <Replace className="w-3 h-3" />
+                    )}
+                    Replace
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="destructive"
+                    className="h-8 w-8 p-0 rounded-lg"
+                    onClick={() => onDelete(file)}
+                  >
+                    <Trash2 className="w-3 h-3" />
+                  </Button>
+                </div>
+              </div>
+
+              <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="bg-black/60 backdrop-blur-sm px-2 py-1 rounded-full">
+                  <ImageIcon className="w-3 h-3 text-white" />
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </CardContent>
+    </Card>
   );
 }

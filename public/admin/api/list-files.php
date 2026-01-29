@@ -1,8 +1,13 @@
 <?php
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: GET');
+header('Access-Control-Allow-Methods: GET, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
+
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit;
+}
 
 if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     http_response_code(405);
@@ -12,6 +17,9 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
 
 $publicRoot = realpath(__DIR__ . '/../../');
 $allowedExtensions = ['jpg', 'jpeg', 'png', 'webp', 'gif', 'svg'];
+
+clearstatcache();
+
 
 function getImageFiles($directory, $basePath = '') {
     global $allowedExtensions;
@@ -23,7 +31,7 @@ function getImageFiles($directory, $basePath = '') {
     
     $items = scandir($directory);
     foreach ($items as $item) {
-        if ($item === '.' || $item === '..') continue;
+        if ($item === '.' || $item === '..' || $item === 'admin') continue;
         
         $fullPath = $directory . '/' . $item;
         $relativePath = $basePath ? $basePath . '/' . $item : $item;
@@ -47,8 +55,13 @@ function getImageFiles($directory, $basePath = '') {
 
 $rootFiles = getImageFiles($publicRoot);
 $roomFiles = getImageFiles($publicRoot . '/Rooms', 'Rooms');
+$assetsGalleryFiles = [];
 
-$allFiles = array_merge($rootFiles, $roomFiles);
+if (is_dir($publicRoot . '/assets/gallery')) {
+    $assetsGalleryFiles = getImageFiles($publicRoot . '/assets/gallery', 'assets/gallery');
+}
+
+$allFiles = array_merge($rootFiles, $roomFiles, $assetsGalleryFiles);
 
 usort($allFiles, function($a, $b) {
     return strcmp($a['filename'], $b['filename']);

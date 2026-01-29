@@ -11,6 +11,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
+import { fetchFiles as fetchFilesApi, deleteFile, replaceFile } from '@/lib/adminApi';
 
 interface FileItem {
   filename: string;
@@ -30,18 +31,17 @@ export default function FileManager() {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    fetchFiles();
+    loadFiles();
   }, []);
 
-  const fetchFiles = async () => {
+  const loadFiles = async () => {
     setLoading(true);
     try {
-      const response = await fetch('/admin/api/list-files.php');
-      const data = await response.json();
+      const data = await fetchFilesApi();
       if (data.success) {
         setFiles(data.files || []);
       } else {
-        throw new Error(data.error || 'Failed to list files');
+        throw new Error('Failed to list files');
       }
     } catch (error: unknown) {
       const message = error instanceof Error ? error.message : 'Failed to fetch files';
@@ -62,12 +62,7 @@ export default function FileManager() {
     setDeleteDialogOpen(false);
     
     try {
-      const response = await fetch('/admin/api/delete-image.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ filename: fileToDelete.filename })
-      });
-      const result = await response.json();
+      const result = await deleteFile(fileToDelete.filename);
       
       if (result.success) {
         toast.success(`Deleted ${fileToDelete.name}`);
@@ -95,20 +90,13 @@ export default function FileManager() {
     }
 
     const file = event.target.files[0];
-    const formData = new FormData();
-    formData.append('target', replacing);
-    formData.append('replacement', file);
 
     try {
-      const response = await fetch('/admin/api/replace.php', {
-        method: 'POST',
-        body: formData
-      });
-      const result = await response.json();
+      const result = await replaceFile(replacing, file);
 
       if (result.success) {
         toast.success(`Replaced ${replacing}`);
-        fetchFiles();
+        loadFiles();
       } else {
         throw new Error(result.error || 'Replace failed');
       }
@@ -187,7 +175,7 @@ export default function FileManager() {
           <Button
             variant="outline"
             size="sm"
-            onClick={fetchFiles}
+            onClick={loadFiles}
             className="rounded-xl gap-2"
           >
             <RefreshCw className="w-4 h-4" />

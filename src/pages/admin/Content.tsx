@@ -8,6 +8,7 @@ import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
 import { Loader2, FileText, Type, Video, RefreshCw, Image as ImageIcon, Sparkles, ShieldCheck } from 'lucide-react';
 import ImageUpload from '@/components/admin/ImageUpload';
+import { fetchAdminData, saveAdminData } from '@/lib/adminApi';
 
 interface ContentItem {
   id: string;
@@ -28,11 +29,10 @@ export default function AdminContent() {
 
   const fetchContent = async () => {
     setLoading(true);
-      try {
-      const response = await fetch('/admin/api/list.php?type=site_content');
-      const data = await response.json();
+    try {
+      const data = await fetchAdminData<ContentItem>('site_content');
       setContent(data || []);
-    } catch (error) {
+    } catch {
       toast.error('Failed to fetch content');
     }
     setLoading(false);
@@ -40,18 +40,8 @@ export default function AdminContent() {
 
   const handleUpdate = async (id: string, newContent: string) => {
     setSaving(id);
-      try {
-      const response = await fetch('/admin/api/save.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          action: 'update',
-          type: 'site_content',
-          id: id,
-          updates: { content: newContent }
-        })
-      });
-      const result = await response.json();
+    try {
+      const result = await saveAdminData('update', 'site_content', { content: newContent }, id);
       
       if (result.success) {
         toast.success('Content updated');
